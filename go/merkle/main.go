@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha256"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 
@@ -36,8 +37,10 @@ func merkelize(leaves [][]byte) common.Hash {
 		return common.Hash{}
 	}
 
-	if len(leaves) == 1 {
-		return sha256Hash(leaves[0])
+	// Ensure the number of leaves is a power of two
+	targetSize := 1 << uint(math.Ceil(math.Log2(float64(len(leaves)))))
+	for len(leaves) < targetSize {
+		leaves = append(leaves, []byte{})
 	}
 
 	var level []common.Hash

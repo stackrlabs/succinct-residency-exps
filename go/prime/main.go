@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/sha256"
 	"fmt"
 	"os"
 	"strconv"
@@ -10,7 +9,7 @@ import (
 func main() {
 	// Parse command-line arguments
 	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run main.go <num-leaves>")
+		fmt.Println("Usage: go run main.go <number>")
 		return
 	}
 
@@ -27,35 +26,20 @@ func main() {
 	}
 }
 
-func merkelize(leaves []string) string {
-	// Check if the number of leaves is a power of 2
-	if len(leaves) <= 0 || (len(leaves)&(len(leaves)-1)) != 0 {
-		fmt.Println("Error: Number of leaves must be a positive power of 2")
-		return ""
+func isPrime(n int) bool {
+	if n <= 1 {
+		return false
 	}
-
-	// Build the Merkle tree
-	return buildMerkleTree(leaves)
-}
-
-func buildMerkleTree(nodes [][]byte) string {
-	if len(nodes) == 1 {
-		return nodes[0]
+	if n == 2 {
+		return true
 	}
-
-	var newLevel []string
-	for i := 0; i < len(nodes); i += 2 {
-		left := nodes[i]
-		right := nodes[i+1]
-		newNode := hashPair(left, right)
-		newLevel = append(newLevel, newNode)
+	if n%2 == 0 {
+		return false
 	}
-
-	return buildMerkleTree(newLevel)
-}
-
-func hashPair(left, right string) string {
-	combined := left + right
-	hash := sha256.Sum256([]byte(combined))
-	return fmt.Sprintf("%x", hash)
+	for i := 3; i*i <= n; i += 2 {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
 }
