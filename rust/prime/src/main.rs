@@ -17,6 +17,11 @@ fn is_prime(number: i32) -> bool {
     if number <= 1 {
         return false;
     }
+
+    if number == 2 {
+        return true;
+    }
+
     // Filter out even numbers
     if number % 2 == 0 {
         return false;
