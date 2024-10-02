@@ -23,9 +23,10 @@ function merkelize(leaves: Buffer[]): Buffer {
   if (leaves.length === 0) {
     return Buffer.alloc(32);
   }
-
-  if (leaves.length === 1) {
-    return sha256Hash(leaves[0]);
+  // Ensure the number of leaves is a power of two
+  const targetSize = Math.pow(2, Math.ceil(Math.log2(leaves.length)));
+  while (leaves.length < targetSize) {
+    leaves.push(Buffer.alloc(0));
   }
 
   let level: Buffer[] = leaves.map((leaf) => sha256Hash(leaf));
@@ -33,12 +34,8 @@ function merkelize(leaves: Buffer[]): Buffer {
   while (level.length > 1) {
     const nextLevel: Buffer[] = [];
     for (let i = 0; i < level.length; i += 2) {
-      if (i + 1 < level.length) {
-        const combined = Buffer.concat([level[i], level[i + 1]]);
-        nextLevel.push(sha256Hash(combined));
-      } else {
-        nextLevel.push(level[i]);
-      }
+      const combined = Buffer.concat([level[i], level[i + 1]]);
+      nextLevel.push(sha256Hash(combined));
     }
     level = nextLevel;
   }
