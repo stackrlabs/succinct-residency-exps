@@ -31,11 +31,10 @@ fn merkelize(leaves: Vec<Vec<u8>>) -> [u8; 32] {
         padded_leaves.push(Vec::new());
     }
 
-    let mut level: Vec<[u8; 32]> = padded_leaves.iter().map(|leaf| sha256_hash(leaf)).collect();
-
-    while level.len() > 1 {
-        let mut next_level = Vec::with_capacity((level.len() + 1) / 2);
-        for chunk in level.chunks(2) {
+    let mut curr_level: Vec<[u8; 32]> = padded_leaves.iter().map(|leaf| sha256_hash(leaf)).collect();
+    let mut next_level = Vec::with_capacity((curr_level.len() + 1) / 2);
+    while curr_level.len() > 1 {
+        for chunk in curr_level.chunks(2) {
             if chunk.len() == 2 {
                 let combined = [&chunk[0][..], &chunk[1][..]].concat();
                 next_level.push(sha256_hash(&combined));
@@ -43,10 +42,11 @@ fn merkelize(leaves: Vec<Vec<u8>>) -> [u8; 32] {
                 next_level.push(chunk[0]);
             }
         }
-        level = next_level;
+        std::mem::swap(&mut curr_level, &mut next_level);
+        next_level.clear();
     }
 
-    level[0]
+    curr_level[0]
 }
 
 fn sha256_hash(data: &[u8]) -> [u8; 32] {
