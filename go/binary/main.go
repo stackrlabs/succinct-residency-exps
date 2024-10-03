@@ -39,11 +39,29 @@ func main() {
 	fmt.Println("Generated list:", list)
 
 	// Perform binary search
-	index := sort.SearchInts(list, number)
+	index := binarySearch(list, number)
 
-	if index < len(list) && list[index] == number {
+	if index != -1 {
 		fmt.Printf("Number %d found at index %d\n", number, index)
 	} else {
 		fmt.Printf("Number %d not found in the list\n", number)
 	}
+}
+
+func binarySearch(list []int, target int) int {
+	left := 0
+	right := len(list) - 1
+
+	for left <= right {
+		mid := (left + right) / 2
+		if list[mid] == target {
+			return mid
+		}
+		if list[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+	return -1
 }
