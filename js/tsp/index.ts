@@ -5,46 +5,45 @@ function main(): void {
         [15, 35, 0, 30],
         [20, 25, 30, 0],
     ];
-    const n: number = 4;
+    const numCities: number = graph.length;
     // bitmask for visited cities
-    const visited: number = (1 << n) - 1;
-    const r: number = visited + 1;
-    const c: number = n;
+    const visited: number = (1 << numCities) - 1;
+    const rows: number = visited + 1;
     // Setup dp table
-    const dp: number[][] = Array(r).fill(null).map(() => Array(c).fill(-1));
+    const dp: number[][] = Array(rows).fill(null).map(() => Array(numCities).fill(-1));
 
-    const result: number = tsp(1, 0, graph, dp, n, visited);
+    const result: number = tsp(1, 0, graph, dp, numCities, visited);
     console.log(result);
 }
 
 // mask is the bitmask for visited cities
-// pos is the current city
-// graph is the adjacency matrix
+// currentCity is the current city
+// graph is the distance matrix
 // dp is the memoization table
-// n is the number of cities
+// numCities is the number of cities
 // visited is the bitmask for visited cities
-function tsp(mask: number, pos: number, graph: number[][], dp: number[][], n: number, visited: number): number {
+function tsp(mask: number, currentCity: number, graph: number[][], dp: number[][], numCities: number, visited: number): number {
     if (mask === visited) {
-        return graph[pos][0];
+        return graph[currentCity][0];
     }
     // If the result is already computed, return it
-    if (dp[mask][pos] !== -1) {
-        return dp[mask][pos];
+    if (dp[mask][currentCity] !== -1) {
+        return dp[mask][currentCity];
     }
 
     let ans: number = Number.MAX_SAFE_INTEGER;
-    for (let city = 0; city < n; city++) {
+    for (let city = 0; city < numCities; city++) {
         // If the city is not visited, compute the cost of visiting it
         if ((mask & (1 << city)) === 0) {
             // Compute the cost of visiting the city and the cost of returning to the starting city
-            const newCost: number = graph[pos][city] + tsp(mask | (1 << city), city, graph, dp, n, visited);
+            const newCost: number = graph[currentCity][city] + tsp(mask | (1 << city), city, graph, dp, numCities, visited);
             ans = Math.min(ans, newCost);
         }
     }
 
     // Store the result in the memoization table
-    dp[mask][pos] = ans;
-    return dp[mask][pos];
+    dp[mask][currentCity] = ans;
+    return dp[mask][currentCity];
 }
 
 main();
