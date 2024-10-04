@@ -33,7 +33,8 @@ fn main() {
     let input_json = json["list"].as_array().expect("Failed to parse list from JSON");
     let input_list: Vec<i32> = input_json.iter().map(|v| v.as_i64().expect("Failed to parse list from JSON") as i32).collect();
     let input_value = json["value"].as_i64().expect("Failed to parse value from JSON") as i32;
-
+    println!("Input list: {}", input_list.len());
+    println!("Input value: {}", input_value);
     let args = Args::parse();
     // Setup the prover client.
     let client = ProverClient::new();
