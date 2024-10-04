@@ -1,8 +1,10 @@
 [package]
-name = "binary"
+name = "merkle"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 clap = { version = "4.0", features = ["derive", "env"] }
 rand = "0.8.5"
+hex = "0.4.3"
+wasm = { version = "0.1.0", path = "../wasm" }

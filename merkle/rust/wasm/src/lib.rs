@@ -1,25 +1,6 @@
-use clap::Parser;
-use hex;
 use sha2::{Digest, Sha256};
 
-#[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
-struct Args {
-    #[arg(short, long)]
-    num_leaves: i32,
-}
-
-fn main() {
-    let args = Args::parse();
-    let leaves = (0..args.num_leaves)
-        .map(|i| i.to_string().as_bytes().to_vec())
-        .collect::<Vec<_>>();
-    let root = merkelize(leaves);
-
-    println!("Merkle Root: {:?}", hex::encode(root));
-}
-
-fn merkelize(leaves: Vec<Vec<u8>>) -> [u8; 32] {
+pub fn merkelize(leaves: Vec<Vec<u8>>) -> [u8; 32] {
     if leaves.is_empty() {
         return [0; 32];
     }
