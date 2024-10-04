@@ -1,0 +1,18 @@
+[package]
+name = "eth_verify"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+alloy-consensus = "0.4.2"
+alloy-primitives = "0.8.5"
+alloy-rlp = "0.3.8"
+alloy-rpc-types = "0.4.2"
+alloy-serde = "0.4.2"
+serde = "1.0.210"
+serde_json = "1.0.128"
+
+[lib]
+name = "eth_verify"
+path = "src/lib.rs"
+
