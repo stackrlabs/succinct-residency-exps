@@ -2,7 +2,6 @@ use alloy_rlp::{
     length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE,
 };
 use alloy_primitives::{keccak256, B256,  Bloom, Bytes, B64, U256, Address};
-use alloy_serde;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(serde::Serialize, serde::Deserialize)]
