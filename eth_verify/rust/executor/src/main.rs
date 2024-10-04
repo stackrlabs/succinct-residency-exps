@@ -2,7 +2,7 @@
 use serde_json;
 use serde;
 use alloy_primitives::B256;
-use eth_verify::{verify_block_hash, Header};
+use wasm::{verify_block_hash, Header};
 
 #[derive(serde::Deserialize)]
 struct InputBlock {
@@ -13,7 +13,7 @@ struct InputBlock {
 }
 
 fn main() {
-    let file_path = "../../inputs/block_data.json";
+    let file_path = "../../../inputs/block_data.json";
     let file_content = std::fs::read_to_string(file_path)
         .expect("Failed to read the file");
     let s = file_content.as_str();

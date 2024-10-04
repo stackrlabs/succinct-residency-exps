@@ -276,6 +276,7 @@ impl Encodable for Header {
     }
 }
 
+#[no_mangle]
 pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
     let recomputed_hash = keccak256(alloy_rlp::encode(header));
     assert_eq!(recomputed_hash, expected_hash);
