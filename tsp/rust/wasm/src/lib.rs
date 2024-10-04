@@ -1,29 +1,11 @@
-fn main() {
-    let graph = vec![
-        vec![0, 10, 15, 20],
-        vec![10, 0, 35, 25],
-        vec![15, 35, 0, 30],
-        vec![20, 25, 30, 0],
-    ];
-    let num_of_cities = graph.len();
-    // bitmask for visited cities
-    let visited = (1 << num_of_cities) - 1;
-    let rows: usize = visited + 1;
-    // Setup dp table
-    let mut dp = vec![vec![-1; num_of_cities]; rows];
-
-    let result = tsp(1, 0, &graph, &mut dp, num_of_cities, visited);
-    println!("{}", result);
-    println!("{:?}", dp);
-}
-
 // mask is the bitmask for visited cities
 // pos is the current city
 // graph is the distance matrix
 // dp is the memoization table
 // n is the number of cities
 // visited is the bitmask for visited cities
-fn tsp(mask: usize, current_city: usize, graph: &Vec<Vec<i32>>, dp: &mut Vec<Vec<i32>>, n: usize, visited: usize) -> i32 {
+#[no_mangle]
+pub fn tsp(mask: usize, current_city: usize, graph: &Vec<Vec<i32>>, dp: &mut Vec<Vec<i32>>, n: usize, visited: usize) -> i32 {
     if mask == visited {
         return graph[current_city][0];
     }
@@ -47,4 +29,3 @@ fn tsp(mask: usize, current_city: usize, graph: &Vec<Vec<i32>>, dp: &mut Vec<Vec
     dp[mask][current_city] = min_cost;
     dp[mask][current_city]
 }
-
