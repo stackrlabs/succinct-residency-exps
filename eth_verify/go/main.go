@@ -31,14 +31,14 @@ func main() {
 		log.Fatalf("Failed to unmarshal JSON: %v", err)
 	}
 
-	result := verifyHash(headerFromJSON.Header, headerFromJSON.Hash)
+	result := verifyBlock(headerFromJSON.Header, headerFromJSON.Hash)
 	fmt.Printf("Result: %v\n", result)
 }
 
-func verifyHash(header types.Header, compareHash common.Hash) bool {
+func verifyBlock(header types.Header, hash common.Hash) bool {
 	hw := sha3.NewLegacyKeccak256()
 	rlp.Encode(hw, &header)
 	recomputedHash := common.Hash(hw.Sum(nil))
 
-	return recomputedHash == compareHash
+	return recomputedHash == hash
 }
