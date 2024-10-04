@@ -1,5 +1,6 @@
 use sha2::{Digest, Sha256};
 
+#[no_mangle]
 pub fn merkelize(leaves: Vec<Vec<u8>>) -> [u8; 32] {
     if leaves.is_empty() {
         return [0; 32];
