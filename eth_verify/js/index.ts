@@ -35,33 +35,36 @@ async function main() {
     const jsonString = fileContent.toString();
 
     const headerFromJSON: HeaderFromJSON = JSON.parse(jsonString);
-    console.log(headerFromJSON.header)
+    const { parentHash, sha3Uncles, miner, stateRoot, transactionsRoot, receiptsRoot, logsBloom, difficulty, number, gasLimit, gasUsed, timestamp, extraData, mixHash, nonce } = headerFromJSON.header;
     const blockHeader = [
-        toBuffer(headerFromJSON.header.parentHash),
-        toBuffer(headerFromJSON.header.sha3Uncles),
-        toBuffer(headerFromJSON.header.miner),
-        toBuffer(headerFromJSON.header.stateRoot),
-        toBuffer(headerFromJSON.header.transactionsRoot),
-        toBuffer(headerFromJSON.header.receiptsRoot),
-        toBuffer(headerFromJSON.header.logsBloom),
-        toBuffer(parseInt(headerFromJSON.header.difficulty.slice(2), 16)),
-        toBuffer(parseInt(headerFromJSON.header.number.slice(2), 16)),
-        toBuffer(parseInt(headerFromJSON.header.gasLimit.slice(2), 16)),
-        toBuffer(parseInt(headerFromJSON.header.gasUsed.slice(2), 16)),
-        toBuffer(parseInt(headerFromJSON.header.timestamp.slice(2), 16)),
-        toBuffer(headerFromJSON.header.extraData),
-        toBuffer(headerFromJSON.header.mixHash),
-        toBuffer(headerFromJSON.header.nonce)
+        toBuffer(parentHash),
+        toBuffer(sha3Uncles),
+        toBuffer(miner),
+        toBuffer(stateRoot),
+        toBuffer(transactionsRoot),
+        toBuffer(receiptsRoot),
+        toBuffer(logsBloom),
+        Number(difficulty),
+        Number(number),
+        Number(gasLimit),
+        Number(gasUsed),
+        Number(timestamp),
+        toBuffer(extraData),
+        toBuffer(mixHash),
+        toBuffer(nonce)
     ];
+    verifyBlockHash(blockHeader, headerFromJSON.hash);
+}
 
+main().catch(error => console.error("An error occurred:", error));
+
+function verifyBlockHash(blockHeader: any[], compareHash: string) {
     const encodedBlockHeader = rlp.encode(blockHeader);
     const recomputedHash = "0x" + keccak256(encodedBlockHeader); 
 
-    if (recomputedHash !== headerFromJSON.hash) {
-        throw new Error(`Hash mismatch: recomputed ${recomputedHash}, block hash ${headerFromJSON.hash}`);
+    if (recomputedHash !== compareHash) {
+        throw new Error(`Hash meismatch: recomputed ${recomputedHash}, block hash ${compareHash}`);
     }
 
     console.log(`Recomputed hash: ${recomputedHash}`);
 }
-
-main().catch(error => console.error("An error occurred:", error));

@@ -10,8 +10,13 @@ fn main() {
         .expect("Failed to read the file");
     let s = file_content.as_str();
     let block = serde_json::from_str::<Block>(s).unwrap();
+    let result = verify_block_hash(block);
+    println!("Block hash verification result: {}", result);
+}
+
+fn verify_block_hash(block: Block) -> bool {
     let header: alloy_consensus::Header = block.clone().header.try_into().unwrap();
     let recomputed_hash = keccak256(alloy_rlp::encode(&header));
     assert_eq!(recomputed_hash, block.header.hash);
-    println!("Recomputed hash: {}", recomputed_hash);
+    recomputed_hash == block.header.hash
 }
