@@ -43,8 +43,13 @@ fn main() {
 
 fn generate_random_list(length: i32, range: i32) -> Vec<i32> {
     let mut list = Vec::new();
-    for _ in 0..length {
-        list.push(rand::random::<i32>() % range);
+    let mut used_values = std::collections::HashSet::new();
+    
+    while list.len() < length as usize {
+        let value = rand::random::<i32>(); 
+        if used_values.insert(value) {
+            list.push(value);
+        }
     }
     list
 }

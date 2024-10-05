@@ -4,7 +4,6 @@
 // dp is the memoization table
 // n is the number of cities
 // visited is the bitmask for visited cities
-#[no_mangle]
 pub fn tsp(mask: usize, current_city: usize, graph: &Vec<Vec<i32>>, dp: &mut Vec<Vec<i32>>, n: usize, visited: usize) -> i32 {
     if mask == visited {
         return graph[current_city][0];
@@ -29,8 +28,6 @@ pub fn tsp(mask: usize, current_city: usize, graph: &Vec<Vec<i32>>, dp: &mut Vec
     dp[mask][current_city] = min_cost;
     dp[mask][current_city]
 }
-<<<<<<<< HEAD:tsp/rust/wasm/src/lib.rs
-========
 
 pub fn run_tsp(graph: Vec<Vec<i32>>) -> i32 {
     let num_of_cities = graph.len();
@@ -41,5 +38,3 @@ pub fn run_tsp(graph: Vec<Vec<i32>>) -> i32 {
     let mut dp = vec![vec![-1; num_of_cities]; rows];
     tsp(1, 0, &graph, &mut dp, num_of_cities, visited)
 }
-
->>>>>>>> 048fe61 (reincarnate deleted files):tsp/rust/native/src/lib.rs
