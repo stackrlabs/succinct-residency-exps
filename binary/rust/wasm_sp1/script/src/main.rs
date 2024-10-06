@@ -28,6 +28,8 @@ fn main() {
 
     let list = (1..10000).collect::<Vec<i32>>();
     let number_to_check = 9999;
+    println!("Number to check: {}", number_to_check);
+    println!("List length: {}", list.len());
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
@@ -41,6 +43,7 @@ fn main() {
         println!("Program executed successfully.");
         let res = output.read::<i32>();
         println!("Element found?: {}", res);
+        println!("Program output: {}", report);
     } else {
         // Setup the program for proving.
         let (pk, vk) = client.setup(ELF);
