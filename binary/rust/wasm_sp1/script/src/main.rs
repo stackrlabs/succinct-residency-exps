@@ -24,20 +24,23 @@ fn main() {
 
     let args = Args::parse();
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
-    let number_to_check = 9999991;
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+
+    let list = (1..10000).collect::<Vec<i32>>();
+    let number_to_check = 9999;
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
+    stdin.write(&list);
     stdin.write(&number_to_check);
 
     if args.execute {
     // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let res = output.read::<u32>();
-        println!("res: {}", res);
+        let res = output.read::<i32>();
+        println!("Element found?: {}", res);
     } else {
         // Setup the program for proving.
         let (pk, vk) = client.setup(ELF);
