@@ -1,7 +1,8 @@
 use sha2::{Digest, Sha256};
 
 #[no_mangle]
-pub fn merkelize(leaves: Vec<Vec<u8>>) -> [u8; 32] {
+extern "C" fn merkelize(data_ptr: *const i32, count: i32) -> [u8; 32] {
+    let leaves = read_leaves(data_ptr, count);
     if leaves.is_empty() {
         return [0; 32];
     }
@@ -35,4 +36,12 @@ fn sha256_hash(data: &[u8]) -> [u8; 32] {
     let mut hasher = Sha256::new();
     hasher.update(data);
     hasher.finalize().into()
+}
+
+// Reads list from linear memory
+fn read_leaves(data_ptr: *const i32, count: i32) -> Vec<u8> {
+    use core::slice;
+    let ptr = data_ptr as *const u8;
+    let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, (count*4) as usize).to_vec() };
+    data
 }

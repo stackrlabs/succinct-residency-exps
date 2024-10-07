@@ -25,12 +25,12 @@ fn main() {
     let args = Args::parse();
     // Read in wasm file from disk
     let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
-    let number_to_check = 9999991;
+    let num_leaves = 1000;
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
-    stdin.write(&number_to_check);
+    stdin.write(&num_leaves);
 
     if args.execute {
     // Execute the program
