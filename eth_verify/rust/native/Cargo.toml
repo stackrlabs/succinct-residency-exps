@@ -18,8 +18,4 @@ tokio = { version = "1.39.0", features = ["full"] }
 bytes = "1.7.2"
 ethereum-types = "0.15.1"
 dotenv = "0.15.0"
-
-[lib]
-name = "eth_verify"
-path = "src/lib.rs"
-
+wasm = { version = "0.1.0", path = "../wasm" }

@@ -39,7 +39,6 @@ use alloy_trie::{HashBuilder, Nibbles};
 use bytes::BytesMut;
 use ethereum_types::U256 as U256_ETH;
 use hex;
-use reth_primitives::TransactionSigned;
 use rlp::RlpStream;
 use serde::{Deserialize, Serialize};
 
@@ -336,13 +335,6 @@ pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
     recomputed_hash == expected_hash
 }
 
-pub fn calculate_transaction_root<T>(transactions: &[T]) -> B256
-where
-    T: AsRef<TransactionSigned>,
-{
-    ordered_trie_root_with_encoder(transactions, |tx: &T, buf| tx.as_ref().encode_2718(buf))
-}
-
 /// Adjust the index of an item for rlp encoding.
 pub const fn adjust_index_for_rlp(i: usize, len: usize) -> usize {
     if i > 0x7f {
@@ -352,33 +344,6 @@ pub const fn adjust_index_for_rlp(i: usize, len: usize) -> usize {
     } else {
         i + 1
     }
-}
-
-/// Compute a trie root of the collection of items with a custom encoder.
-pub fn ordered_trie_root_with_encoder<T, F>(items: &[T], mut encode: F) -> B256
-where
-    F: FnMut(&T, &mut Vec<u8>),
-{
-    if items.is_empty() {
-        return alloy_trie::EMPTY_ROOT_HASH;
-    }
-
-    let mut value_buffer = Vec::new();
-
-    let mut hb = HashBuilder::default();
-    let items_len = items.len();
-    for i in 0..items_len {
-        let index = adjust_index_for_rlp(i, items_len);
-
-        let index_buffer = alloy_rlp::encode_fixed_size(&index);
-
-        value_buffer.clear();
-        encode(&items[index], &mut value_buffer);
-
-        hb.add_leaf(Nibbles::unpack(&index_buffer), &value_buffer);
-    }
-
-    hb.root()
 }
 
 // Struct representing the transaction data
@@ -460,11 +425,9 @@ pub async fn calculate_mpt_root(block: Block) -> bool {
         println!("rlp_encoded_tx: {:?}", hex::encode(&rlp_encoded_tx));
         // Encode the index as the key (RLP encoded)
         let index = i as u64;
-        println!("index: {:?}", index);
         let index_buffer = alloy_rlp::encode_fixed_size(&index);
 
         // let rlp_encoded_index = rlp::encode(&i);
-        println!("index_buffer: {:?}", hex::encode(&index_buffer));
         let key = Nibbles::unpack(&index_buffer);
         println!("key: {:?}", hex::encode(key.as_ref()));
 
