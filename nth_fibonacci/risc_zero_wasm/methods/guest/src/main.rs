@@ -20,7 +20,7 @@ fn main() {
     let engine = Engine::default();
 
     let wasm: Vec<u8> = env::read();
-    let iters: i32 = env::read();
+    let n: i32 = env::read();
 
     // Derived from the wasmi example: https://docs.rs/wasmi/0.29.0/wasmi/#example
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
@@ -39,11 +39,11 @@ fn main() {
         .expect("Failed to get typed_func");
 
     let fib_call_start = env::cycle_count();
-    let res = fib.call(&mut store, iters).expect("Failed to call");
+    let res = fib.call(&mut store, n).expect("Failed to call");
     let fib_call_end = env::cycle_count();
     eprintln!("fib_call_cycles: {}", fib_call_end - fib_call_start);
 
-    env::log(&format!("fib {} - {}", iters, res));
+    env::log(&format!("fib {} - {}", n, res));
     env::commit(&res);
     let end = env::cycle_count();
     eprintln!("total_cycles: {}", end - start);
