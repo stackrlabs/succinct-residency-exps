@@ -10,7 +10,7 @@ clap = { version = "4.0", features = ["derive", "env"] }
 serde_json = "1.0.128"
 hex = "0.4.3"
 rand = "0.8.5"
-eth_verify= { path = "../../native" }
+wasm = { path = "../../wasm" }
 serde = "1.0.210"
 alloy-primitives = "0.8.5"
 

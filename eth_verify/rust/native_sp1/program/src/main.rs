@@ -2,7 +2,7 @@
 
 #![no_main]
 sp1_zkvm::entrypoint!(main);
-use eth_verify::{verify_block_hash, Header};
+use wasm::{verify_block_hash, Header};
 use alloy_primitives::{B256};
 
 pub fn main() {

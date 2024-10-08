@@ -6,7 +6,7 @@ use std::fs::File;
 use std::io::BufReader;
 use serde_json::Value;
 use rand::Rng;
-use eth_verify::Header;
+use wasm::Header;
 use alloy_primitives::B256;
 use serde;
 
@@ -35,7 +35,7 @@ fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
 
-    let file_path = "/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/inputs/block_data.json";
+    let file_path = "../../../../inputs/block_data.json";
     let file_content = std::fs::read_to_string(file_path)
         .expect("Failed to read the file");
     let s = file_content.as_str();

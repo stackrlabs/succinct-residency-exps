@@ -1,0 +1,3 @@
+stdout: tsp-shortest-path: true
+Program executed successfully.
+shortest distance: true
