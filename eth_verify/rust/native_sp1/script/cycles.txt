@@ -1,3 +1,9 @@
+[2m2024-10-08T09:03:34.932387Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x204adc    
+[2m2024-10-08T09:03:34.932469Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
+[2m2024-10-08T09:03:34.932685Z[0m [32m INFO[0m [1mexecute[0m: └╴7,645 cycles    
+[2m2024-10-08T09:03:34.932702Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-08T09:03:34.934441Z[0m [32m INFO[0m [1mexecute[0m: └╴74,397 cycles    
 stdout: tsp-shortest-path: true
+[2m2024-10-08T09:03:34.935703Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m7.53ms [3mtime.idle[0m[2m=[0m9.58µs
 Program executed successfully.
 shortest distance: true

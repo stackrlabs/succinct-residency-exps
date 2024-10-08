@@ -1,11 +1,11 @@
 Input list: 300000
-Input value: -1351247139
-[2m2024-10-08T03:17:55.318113Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201bb8    
-[2m2024-10-08T03:17:55.318358Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
-[2m2024-10-08T03:17:55.479614Z[0m [32m INFO[0m [1mexecute[0m: └╴6,787,191 cycles    
-[2m2024-10-08T03:17:55.479649Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-08T03:17:55.479676Z[0m [32m INFO[0m [1mexecute[0m: └╴602 cycles    
-stdout: binary_search: found number: true
-[2m2024-10-08T03:17:55.512316Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m199ms [3mtime.idle[0m[2m=[0m13.0µs
+Input value: 374117190
+[2m2024-10-08T09:03:09.923633Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201bac    
+[2m2024-10-08T09:03:09.923705Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
+[2m2024-10-08T09:03:10.049227Z[0m [32m INFO[0m [1mexecute[0m: └╴6,787,191 cycles    
+[2m2024-10-08T09:03:10.049260Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-08T09:03:10.049278Z[0m [32m INFO[0m [1mexecute[0m: └╴579 cycles    
+stdout: binary_search: found number: 1
+[2m2024-10-08T09:03:10.073665Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m154ms [3mtime.idle[0m[2m=[0m11.8µs
 Program executed successfully.
 res: true
