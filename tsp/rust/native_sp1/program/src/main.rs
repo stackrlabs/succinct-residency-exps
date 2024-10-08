@@ -3,7 +3,7 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use tsp::run_tsp;
+use wasm::run_tsp;
 
 pub fn main() {
     println!("cycle-tracker-start: input");

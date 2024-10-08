@@ -1,4 +1,4 @@
-use tsp::run_tsp;
+use wasm::run_tsp;
 
 fn main() {
     let graph = vec![
