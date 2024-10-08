@@ -5,10 +5,10 @@ tsp-sp1 = tsp/rust/native_sp1/script
 eth-verify-sp1 = eth_verify/rust/native_sp1/script
 rust-sp1-bench:
 	@echo "Running Rust SP1 benchmark..."
-	# cd ${binary-sp1}; cargo run --release -- --execute > cycles.txt
-	# cd ${prime-sp1}; cargo run --release -- --execute > cycles.txt
-	# cd ${merkle-sp1}; cargo run --release -- --execute > cycles.txt
-	# cd ${tsp-sp1}; cargo run --release -- --execute > cycles.txt
+	cd ${binary-sp1}; cargo run --release -- --execute > cycles.txt
+	cd ${prime-sp1}; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-sp1}; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-sp1}; cargo run --release -- --execute > cycles.txt
 	cd ${eth-verify-sp1}; cargo run --release -- --execute > cycles.txt
 
 binary-native = binary/rust/native
