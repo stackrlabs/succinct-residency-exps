@@ -23,7 +23,7 @@ fn main() {
     let args = Args::parse();
     // Read in wasm file from disk
     let wasm = include_bytes!("../../../fib.wasm").to_vec();
-    let n = 5;
+    let n = 20;
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();

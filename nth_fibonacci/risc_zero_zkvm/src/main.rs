@@ -47,7 +47,7 @@ fn run_guest(n: i32) -> i32 {
 }
 
 fn main() {
-    let n: i32 = 10;
+    let n: i32 = 20;
     let _ = run_guest(n);
 }
 

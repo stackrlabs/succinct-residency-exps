@@ -36,7 +36,12 @@ fn main() {
     let fib = instance
         .get_typed_func::<i32, i32>(&store, "fib")
         .expect("Failed to get typed_func");
+    
+    let fib_call_start = env::cycle_count();
     let res = fib.call(&mut store, iters).expect("Failed to call");
+    let fib_call_end = env::cycle_count();
+    eprintln!("fib_call_cycles: {}", fib_call_end - fib_call_start);
+
     env::log(&format!("fib {} - {}", iters, res));
     env::commit(&res);
 }

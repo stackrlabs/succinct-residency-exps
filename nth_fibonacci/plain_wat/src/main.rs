@@ -12,7 +12,7 @@ fn main() -> Result<()> {
     let instance = Instance::new(&mut store, &module, &[])?;
     let nth_fibonacci = instance.get_typed_func::<u32, u32>(&mut store, "fib")?;
 
-    let results = nth_fibonacci.call(&mut store, 18)?;
+    let results = nth_fibonacci.call(&mut store, 20)?;
     println!("Result -> {}", results);
     Ok(())
 }
