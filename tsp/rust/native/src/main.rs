@@ -11,7 +11,3 @@ fn main() {
     let result = run_tsp(graph);
     println!("{}", result);
 }
-
-
-
-

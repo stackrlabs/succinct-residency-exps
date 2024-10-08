@@ -21,5 +21,3 @@ fn main() {
 
     println!("Merkle Root: {:?}", hex::encode(root));
 }
-
-
