@@ -1,8 +1,4 @@
 Input number read from JSON: 9999991
-[2m2024-10-08T03:13:44.589431Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2017a0    
-[2m2024-10-08T03:13:44.590306Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-08T03:13:44.590872Z[0m [32m INFO[0m [1mexecute[0m: └╴34,689 cycles    
 stdout: is_prime 9999991 - true
-[2m2024-10-08T03:13:44.591941Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m6.72ms [3mtime.idle[0m[2m=[0m10.4µs
 Program executed successfully.
 res: true

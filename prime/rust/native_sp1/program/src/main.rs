@@ -3,7 +3,7 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use prime::is_prime;
+use wasm::is_prime;
 
 pub fn main() {
     let input = sp1_zkvm::io::read::<i32>();

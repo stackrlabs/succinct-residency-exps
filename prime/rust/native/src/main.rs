@@ -1,15 +1,21 @@
 use clap::Parser;
-use prime::is_prime;
-
-#[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
-struct Args {
-    #[arg(short, long)]
-    number: i32,
-}
+use wasm::is_prime;
+use serde_json::Value;
+use std::fs::File;
+use std::io::BufReader;
 
 fn main() {
-    let args = Args::parse();
-    let is_prime = is_prime(args.number);
+    // Read the JSON file
+    let file = File::open("../../../inputs/prime.json").expect("Failed to open config file");
+    let reader = BufReader::new(file);
+    let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
+
+    // Extract the number from the JSON
+    let input = json["number"]
+        .as_i64()
+        .expect("Failed to parse number from JSON") as i32;
+
+    println!("Input number read from JSON: {}", input);
+    let is_prime = is_prime(input);
     println!("Is prime: {}", is_prime);
 }

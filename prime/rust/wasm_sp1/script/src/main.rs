@@ -24,7 +24,7 @@ fn main() {
 
     let args = Args::parse();
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
     let number_to_check = 9999991;
     // Setup the prover client.
     let client = ProverClient::new();
