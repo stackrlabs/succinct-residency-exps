@@ -6,6 +6,7 @@ sp1_zkvm::entrypoint!(main);
 use wasmi::{Engine, Linker, Module, Store};
 
 pub fn main() {
+    println!("cycle-tracker-start: total cycles");
     let wasm = sp1_zkvm::io::read::<Vec<u8>>();
     let input = sp1_zkvm::io::read::<i32>();
 
@@ -32,4 +33,5 @@ pub fn main() {
     println!("nth_fibonacci {} - {}", input, res);
 
     sp1_zkvm::io::commit(&res);
+    println!("cycle-tracker-end: total cycles");
 }

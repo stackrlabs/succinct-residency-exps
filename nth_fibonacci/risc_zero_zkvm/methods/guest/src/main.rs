@@ -16,6 +16,7 @@ use risc0_zkvm::guest::env;
 use wasmi::{Engine, Linker, Module, Store};
 
 fn main() {
+    let start = env::cycle_count();
     let engine = Engine::default();
 
     let wasm: Vec<u8> = env::read();
@@ -36,7 +37,7 @@ fn main() {
     let fib = instance
         .get_typed_func::<i32, i32>(&store, "fib")
         .expect("Failed to get typed_func");
-    
+
     let fib_call_start = env::cycle_count();
     let res = fib.call(&mut store, iters).expect("Failed to call");
     let fib_call_end = env::cycle_count();
@@ -44,4 +45,6 @@ fn main() {
 
     env::log(&format!("fib {} - {}", iters, res));
     env::commit(&res);
+    let end = env::cycle_count();
+    eprintln!("total_cycles: {}", end - start);
 }
