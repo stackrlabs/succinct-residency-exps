@@ -3,7 +3,7 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use binary::binary_search;
+use wasm::binary_search_impl;
 
 pub fn main() {
     println!("cycle-tracker-start: input");
@@ -11,7 +11,7 @@ pub fn main() {
     let search_value = sp1_zkvm::io::read::<i32>();
     println!("cycle-tracker-end: input");
     println!("cycle-tracker-start: execution");
-    let res = binary_search(search_list, search_value);
+    let res = binary_search_impl(search_list, search_value);
     println!("cycle-tracker-end: execution");
     println!("binary_search: found number: {}", res);
 
