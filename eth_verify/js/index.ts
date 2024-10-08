@@ -1,4 +1,4 @@
-import { rlp, toBuffer } from "ethereumjs-util";
+import { rlp } from "ethereumjs-util";
 import fs from "fs/promises";
 import { keccak256 } from "js-sha3";
 
