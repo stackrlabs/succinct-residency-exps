@@ -6,6 +6,6 @@ edition = "2021"
 
 [dependencies]
 sp1-zkvm = "2.0.0"
-merkle = { path = "../../native" }
+wasm = { path = "../../wasm" }
 sp1-derive = "2.0.0"
 

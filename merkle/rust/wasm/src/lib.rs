@@ -1,8 +1,6 @@
 use sha2::{Digest, Sha256};
 
-#[no_mangle]
-extern "C" fn merkelize(data_ptr: *const i32, count: i32) -> [u8; 32] {
-    let leaves = read_leaves(data_ptr, count);
+pub fn merkelize_impl(leaves: Vec<u8>) -> [u8; 32] {
     if leaves.is_empty() {
         return [0; 32];
     }
@@ -30,6 +28,12 @@ extern "C" fn merkelize(data_ptr: *const i32, count: i32) -> [u8; 32] {
     }
 
     curr_level[0]
+}
+
+#[no_mangle]
+extern "C" fn merkelize(data_ptr: *const i32, count: i32) -> [u8; 32] {
+    let leaves = read_leaves(data_ptr, count);
+    merkelize_impl(leaves)
 }
 
 fn sha256_hash(data: &[u8]) -> [u8; 32] {

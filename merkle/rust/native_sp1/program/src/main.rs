@@ -3,7 +3,7 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use merkle::merkelize;
+use wasm::merkelize_impl;
 
 pub fn main() {
     let num_leaves = sp1_zkvm::io::read::<i32>();
@@ -11,7 +11,7 @@ pub fn main() {
     let leaves = (0..num_leaves)
         .map(|i| i.to_string().as_bytes().to_vec())
         .collect::<Vec<_>>();
-    let res = merkelize(leaves);
+    let res = merkelize_impl(leaves);
     println!("cycle-tracker-end: execution");
     println!("merkelize: root: {:?}", res);
 
