@@ -1,8 +1,6 @@
 use bytemuck::cast_slice;
 
-#[no_mangle]
-extern "C" fn binary_search(data_ptr: *const i32, count: i32, target: i32) -> i32 {
-    let list = read_list(data_ptr, count);
+pub fn binary_search_impl(list: Vec<i32>, target: i32) -> i32 {
     let mut left = 0;
     let mut right = list.len() - 1;
     while left <= right {
@@ -17,6 +15,12 @@ extern "C" fn binary_search(data_ptr: *const i32, count: i32, target: i32) -> i3
         }
     }
     -1
+}
+
+#[no_mangle]
+extern "C" fn binary_search(data_ptr: *const i32, count: i32, target: i32) -> i32 {
+    let list = read_list(data_ptr, count);
+    binary_search_impl(list, target)
 }
 
 // Reads list from linear memory

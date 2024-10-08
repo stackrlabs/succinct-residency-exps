@@ -29,3 +29,14 @@ pub fn tsp(mask: usize, current_city: usize, graph: &Vec<Vec<i32>>, dp: &mut Vec
     dp[mask][current_city] = min_cost;
     dp[mask][current_city]
 }
+
+pub fn run_tsp(graph: Vec<Vec<i32>>) -> i32 {
+    let num_of_cities = graph.len();
+    // bitmask for visited cities
+    let visited = (1 << num_of_cities) - 1;
+    let rows: usize = visited + 1;
+    // Setup dp table
+    let mut dp = vec![vec![-1; num_of_cities]; rows];
+    tsp(1, 0, &graph, &mut dp, num_of_cities, visited)
+}
+
