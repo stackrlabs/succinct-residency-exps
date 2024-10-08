@@ -1,8 +1,9 @@
 use sha2::{Digest, Sha256};
+use bincode;
 
 pub fn merkelize_impl(leaves: Vec<Vec<u8>>) -> [u8; 32] {
     if leaves.is_empty() {
-        return [0; 32];
+        return 0;
     }
 
     // Ensure the number of leaves is a power of two
@@ -27,17 +28,27 @@ pub fn merkelize_impl(leaves: Vec<Vec<u8>>) -> [u8; 32] {
         next_level.clear();
     }
 
-    curr_level[0]
+    // curr_level[0]
+    1
 }
 
-// #[no_mangle]
-// extern "C" fn merkelize(data_ptr: *const i32, count: i32) -> [u8; 32] {
-//     let leaves = read_leaves(data_ptr, count);
-//     merkelize_impl(leaves)
-// }
+#[no_mangle]
+extern "C" fn merkelize(data_ptr: *const i32, count: i32) -> [u8; 32] {
+    let leaves = read_leaves(data_ptr, count);
+    merkelize_impl(leaves)
+}
 
 fn sha256_hash(data: &[u8]) -> [u8; 32] {
     let mut hasher = Sha256::new();
     hasher.update(data);
     hasher.finalize().into()
+}
+
+// Reads list from linear memory
+fn read_leaves(data_ptr: *const i32, count: i32) -> Vec<Vec<u8>> {
+    use core::slice;
+    let ptr = data_ptr as *const u8;
+    let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, (count*4) as usize).to_vec() };
+    let decoded: Vec<Vec<u8>> = bincode::deserialize(&data).unwrap();
+    decoded
 }

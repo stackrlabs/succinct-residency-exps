@@ -4,6 +4,7 @@
 sp1_zkvm::entrypoint!(main);
 
 use wasmi::{Engine, Linker, Module, Store};
+use bincode;
 
 pub fn main() {
     let wasm = sp1_zkvm::io::read::<Vec<u8>>();
@@ -25,17 +26,22 @@ pub fn main() {
     // write list to memory
     let memory = instance.get_memory(&store,"memory").expect("Failed to get memory");
     let ptr = memory.data_size(&mut store) as i32;
-    memory.grow(&mut store, leaves.len() as u32).expect("Failed to grow memory");
-    memory.write(&mut store, ptr as usize, bytemuck::cast_slice(&leaves)).expect("Failed to write to memory");
+
+    // grow memory to fit the leaves
+    let encoded_leaves = bincode::serialize(&leaves).expect("Failed to encode leaves");
+    let encoded_leaves_size = encoded_leaves.len();
+    println!("Size of encoded leaves: {}", encoded_leaves_size);
+    memory.grow(&mut store, encoded_leaves_size as u32).expect("Failed to grow memory");
+    memory.write(&mut store, ptr as usize, &encoded_leaves).expect("Failed to write to memory");
     println!("cycle-tracker-end: instantiate wasm");
 
     println!("cycle-tracker-start: call wasm");
     let binary_search = instance
-        .get_typed_func::<<Vec<Vec<u8>>, i32>, bool>(&mut store, "binary_search")
+        .get_typed_func::<(i32, i32), i32>(&mut store, "merkelize")
         .expect("Failed to get typed_func");
-    let res = binary_search.call(&mut store, leaves).expect("Failed to call");
+    let res = binary_search.call(&mut store, (ptr, encoded_leaves_size as i32)).expect("Failed to call");
     println!("cycle-tracker-end: call wasm");
-    println!("binary_search {} - {}", target, res);
+    println!("merkelized - {}", res);
 
     sp1_zkvm::io::commit(&res);
 }

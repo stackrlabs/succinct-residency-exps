@@ -24,7 +24,7 @@ fn main() {
 
     let args = Args::parse();
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
     let num_leaves = 1000;
     // Setup the prover client.
     let client = ProverClient::new();
@@ -36,7 +36,7 @@ fn main() {
     // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let res = output.read::<u32>();
+        let res = output.read::<i32>();
         println!("res: {}", res);
     } else {
         // Setup the program for proving.

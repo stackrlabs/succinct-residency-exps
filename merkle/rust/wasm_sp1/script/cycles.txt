@@ -1,0 +1,6 @@
+[2m2024-10-08T06:15:18.028451Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x21610c    
+stderr: thread '<unnamed>' panicked at /Users/prudhvirampey/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sp1-lib-2.0.0/src/io.rs:86:32:
+stderr: deserialization failed: Io(Kind(UnexpectedEof))
+stderr: stack backtrace:
+stderr: note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+[2m2024-10-08T06:15:18.071710Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m93.8ms [3mtime.idle[0m[2m=[0m51.8µs
