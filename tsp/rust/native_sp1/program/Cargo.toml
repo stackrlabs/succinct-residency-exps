@@ -1,11 +1,11 @@
 [workspace]
 [package]
 version = "0.1.0"
-name = "prime-native-program"
+name = "tsp-native-program"
 edition = "2021"
 
 [dependencies]
 sp1-zkvm = "2.0.0"
-binary = { path = "../../native" }
+tsp = { path = "../../native" }
 sp1-derive = "2.0.0"
 
