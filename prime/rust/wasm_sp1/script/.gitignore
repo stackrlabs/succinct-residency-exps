@@ -23,3 +23,5 @@ Cargo.lock
 
 # Ignore any local configuration files
 *.local.toml
+
+**/.env
