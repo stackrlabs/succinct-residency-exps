@@ -32,6 +32,7 @@ binary-wasm = binary/rust
 prime-wasm = prime/rust
 merkle-wasm = merkle/rust
 tsp-wasm = tsp/rust
+eth-verify-wasm = eth_verify/rust
 rust-wasm-sp1:
 	@echo "Running Rust wasm SP1 benchmark..."
 	cd ${binary-wasm}/wasm; wasm-pack build
@@ -42,3 +43,5 @@ rust-wasm-sp1:
 	cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute
 	cd ${tsp-wasm}/wasm; wasm-pack build
 	cd ${tsp-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${eth-verify-wasm}/wasm; wasm-pack build
+	cd ${eth-verify-wasm}/wasm_sp1/script; cargo run --release -- --execute
