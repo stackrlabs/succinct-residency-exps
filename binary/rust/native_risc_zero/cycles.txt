@@ -1,4 +1,0 @@
-[2m2024-10-09T10:18:58.364557Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::exec::executor[0m[2m:[0m execution time: 1.198602458s
-[2m2024-10-09T10:18:58.364954Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::session[0m[2m:[0m number of segments: 29
-[2m2024-10-09T10:18:58.364960Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::session[0m[2m:[0m total cycles: 30408704
-[2m2024-10-09T10:18:58.364963Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::session[0m[2m:[0m user cycles: 22991306

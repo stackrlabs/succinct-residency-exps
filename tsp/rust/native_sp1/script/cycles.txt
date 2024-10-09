@@ -1,15 +1,15 @@
-[2m2024-10-08T09:03:28.288839Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201d6c    
-[2m2024-10-08T09:03:28.288942Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
-[2m2024-10-08T09:03:28.289093Z[0m [32m INFO[0m [1mexecute[0m: └╴6,487 cycles    
-[2m2024-10-08T09:03:28.289107Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-08T09:03:28.486022Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x206464    
-[2m2024-10-08T09:03:28.676546Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x206460    
-[2m2024-10-08T09:03:28.864475Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x2063d8    
-[2m2024-10-08T09:03:29.052708Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x206340    
-[2m2024-10-08T09:03:29.239851Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x206350    
-[2m2024-10-08T09:03:29.426637Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x2063a8    
-[2m2024-10-08T09:03:29.544475Z[0m [32m INFO[0m [1mexecute[0m: └╴66,352,633 cycles    
-stdout: binary_search: found number: 238
-[2m2024-10-08T09:03:29.562636Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m1.28s [3mtime.idle[0m[2m=[0m9.79µs
+[2m2024-10-09T12:15:46.734504Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201d6c    
+[2m2024-10-09T12:15:46.734603Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
+[2m2024-10-09T12:15:46.734761Z[0m [32m INFO[0m [1mexecute[0m: └╴6,487 cycles    
+[2m2024-10-09T12:15:46.734774Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-09T12:15:46.925124Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x206194    
+[2m2024-10-09T12:15:47.107206Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x206168    
+[2m2024-10-09T12:15:47.293085Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x206278    
+[2m2024-10-09T12:15:47.475491Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x206170    
+[2m2024-10-09T12:15:47.658163Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x2061e0    
+[2m2024-10-09T12:15:47.841974Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x206274    
+[2m2024-10-09T12:15:47.955819Z[0m [32m INFO[0m [1mexecute[0m: └╴66,385,405 cycles    
+stdout: tsp: found path: 238
+[2m2024-10-09T12:15:47.973438Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m1.24s [3mtime.idle[0m[2m=[0m10.2µs
 Program executed successfully.
 Shortest path: 238

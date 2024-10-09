@@ -1,10 +1,10 @@
-[2m2024-10-09T07:39:00.330255Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x215650    
+[2m2024-10-09T12:18:39.528290Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x215650    
 stdout: WARNING: Using insecure random number generator.
-[2m2024-10-09T07:39:00.337270Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
-[2m2024-10-09T07:39:00.404363Z[0m [32m INFO[0m [1mexecute[0m: └╴2,784,316 cycles    
-[2m2024-10-09T07:39:00.413613Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
-[2m2024-10-09T07:39:00.439235Z[0m [32m INFO[0m [1mexecute[0m: └╴1,209,875 cycles    
+[2m2024-10-09T12:18:39.535013Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
+[2m2024-10-09T12:18:39.653074Z[0m [32m INFO[0m [1mexecute[0m: └╴2,784,316 cycles    
+[2m2024-10-09T12:18:39.741869Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
+[2m2024-10-09T12:18:39.769483Z[0m [32m INFO[0m [1mexecute[0m: └╴1,209,875 cycles    
 stdout: prime 9999991 - 1
-[2m2024-10-09T07:39:00.468682Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m161ms [3mtime.idle[0m[2m=[0m9.00µs
+[2m2024-10-09T12:18:39.794596Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m289ms [3mtime.idle[0m[2m=[0m10.2µs
 Program executed successfully.
 res: 1

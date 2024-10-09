@@ -1,9 +1,9 @@
 Input value: 1000
-[2m2024-10-08T09:03:22.670756Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2021bc    
-[2m2024-10-08T09:03:22.670864Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-08T09:03:22.895302Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x204ecc    
-[2m2024-10-08T09:03:22.986252Z[0m [32m INFO[0m [1mexecute[0m: └╴14,052,851 cycles    
+[2m2024-10-09T12:15:38.225154Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2021bc    
+[2m2024-10-09T12:15:38.225245Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-09T12:15:38.447551Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x205848    
+[2m2024-10-09T12:15:38.540228Z[0m [32m INFO[0m [1mexecute[0m: └╴14,139,856 cycles    
 stdout: merkelize: root: [178, 164, 170, 171, 217, 42, 41, 44, 98, 2, 132, 40, 25, 157, 11, 84, 85, 116, 128, 119, 17, 121, 218, 165, 88, 240, 80, 211, 107, 221, 66, 54]
-[2m2024-10-08T09:03:22.988830Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m322ms [3mtime.idle[0m[2m=[0m18.2µs
+[2m2024-10-09T12:15:38.542558Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m321ms [3mtime.idle[0m[2m=[0m10.6µs
 Program executed successfully.
 root: b2a4aaabd92a292c62028428199d0b54557480771179daa558f050d36bdd4236
