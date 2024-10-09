@@ -12,7 +12,7 @@ pub fn main() {
     println!("cycle-tracker-start: execution");
     let res = run_tsp(graph);
     println!("cycle-tracker-end: execution");
-    println!("binary_search: found number: {}", res);
+    println!("tsp: found path: {}", res);
 
     sp1_zkvm::io::commit(&res);
 }
