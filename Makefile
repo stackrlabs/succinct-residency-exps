@@ -28,20 +28,30 @@ rust-sp1:
 	cd ${tsp-sp1}; cargo run --release -- --execute > cycles.txt
 	cd ${eth-verify-sp1}; cargo run --release -- --execute > cycles.txt
 
-binary-wasm = binary/rust
-prime-wasm = prime/rust
-merkle-wasm = merkle/rust
-tsp-wasm = tsp/rust
-eth-verify-wasm = eth_verify/rust
+binary-rust = binary/rust
+prime-rust = prime/rust
+merkle-rust = merkle/rust
+tsp-rust = tsp/rust
+eth-verify-rust = eth_verify/rust
 rust-wasm-sp1:
 	@echo "Running Rust wasm SP1 benchmark..."
-	cd ${binary-wasm}/wasm; wasm-pack build
-	cd ${binary-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
-	cd ${prime-wasm}/wasm; wasm-pack build
-	cd ${prime-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
-	cd ${merkle-wasm}/wasm; wasm-pack build
-	cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
-	cd ${tsp-wasm}/wasm; wasm-pack build
-	cd ${tsp-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
-	cd ${eth-verify-wasm}/wasm; wasm-pack build
-	cd ${eth-verify-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${binary-rust}/wasm; wasm-pack build
+	cd ${binary-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${prime-rust}/wasm; wasm-pack build
+	cd ${prime-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/wasm; wasm-pack build
+	cd ${merkle-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-rust}/wasm; wasm-pack build
+	cd ${tsp-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${eth-verify-rust}/wasm; wasm-pack build
+	cd ${eth-verify-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+
+rust-risc-zero:
+	export RUST_LOG="[executor]=info" 
+	export RISC0_DEV_MODE=1
+	@echo "Running Rust RISC Zero benchmark..."
+	cd ${binary-rust}/native_risc_zero; cargo run
+	cd ${prime-rust}/native_risc_zero; cargo run
+	cd ${merkle-rust}/native_risc_zero; cargo run
+	# cd ${tsp-rust}/native_risc_zero; cargo run
+	# cd ${eth-verify-rust}/native_risc_zero; cargo run
