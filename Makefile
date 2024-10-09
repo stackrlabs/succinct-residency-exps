@@ -36,12 +36,12 @@ eth-verify-wasm = eth_verify/rust
 rust-wasm-sp1:
 	@echo "Running Rust wasm SP1 benchmark..."
 	cd ${binary-wasm}/wasm; wasm-pack build
-	cd ${binary-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${binary-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
 	cd ${prime-wasm}/wasm; wasm-pack build
-	cd ${prime-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${prime-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
 	cd ${merkle-wasm}/wasm; wasm-pack build
-	cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
 	cd ${tsp-wasm}/wasm; wasm-pack build
-	cd ${tsp-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${tsp-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
 	cd ${eth-verify-wasm}/wasm; wasm-pack build
-	cd ${eth-verify-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${eth-verify-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
