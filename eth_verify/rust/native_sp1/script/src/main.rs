@@ -6,7 +6,7 @@ use std::fs::File;
 use std::io::BufReader;
 use serde_json::Value;
 use rand::Rng;
-use wasm::Header;
+use wasm::{Header, Block};
 use alloy_primitives::B256;
 use serde;
 
@@ -23,37 +23,32 @@ struct Args {
     prove: bool,
 }
 
-#[derive(serde::Deserialize)]
-struct InputBlock {
-    #[serde(rename = "header")]
-    header: Header,
-    #[serde(rename = "hash")]
-    expected_hash: B256,
-}
-
 fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
+    let file = File::open("../../../../inputs/block.json").expect("Failed to open file");
+    let block_json: serde_json::Value = serde_json::from_reader(BufReader::new(file)).expect("Failed to parse JSON");
+    // Deserialize the response to get block and transaction data
+    let block: Block = serde_json::from_value(block_json.clone()).unwrap();
+    let header: Header = serde_json::from_value(block_json.clone()).unwrap();
 
-    let file_path = "../../../../inputs/block_data.json";
-    let file_content = std::fs::read_to_string(file_path)
-        .expect("Failed to read the file");
-    let s = file_content.as_str();
-    let input_block = serde_json::from_str::<InputBlock>(s).unwrap();
+    let hash_str = block_json["hash"].as_str().unwrap();
+    let expected_hash = hex::decode(&hash_str[2..]).unwrap();
 
     let args = Args::parse();
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
-    stdin.write(&input_block.header);
-    stdin.write(&input_block.expected_hash);
+    stdin.write(&block);
+    stdin.write(&header);
+    stdin.write(&expected_hash);
 
     if args.execute {
     // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let distance = output.read::<bool>();
-        println!("shortest distance: {}", distance);
+        let result = output.read::<bool>();
+        println!("block verification: {}", result);
     } else {
         // Setup the program for proving.
         let (pk, vk) = client.setup(ELF);

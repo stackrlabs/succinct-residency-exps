@@ -2,16 +2,20 @@ use alloy_primitives::{keccak256, B256, Bloom, Bytes, B64, U256, Address};
 use alloy_rlp::{
     length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE,
 };
+use alloy_trie::{HashBuilder, Nibbles};
+use bytes::BytesMut;
+use hex;
+use rlp::RlpStream;
+use serde::{Deserialize, Serialize};
 
-#[derive(PartialEq, Debug, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 struct BlockData {
-    #[serde(rename = "header")]
     header: Header,
+    block: Block,
     #[serde(rename = "hash")]
     expected_hash: B256,
 }
 
-#[no_mangle]
 pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
     let recomputed_hash = keccak256(alloy_rlp::encode(header));
     assert_eq!(recomputed_hash, expected_hash);
@@ -19,9 +23,15 @@ pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
 }
 
 #[no_mangle]
-extern "C" fn verify_block_wasm(data_ptr: *const i32, count: i32) -> u32 {
+pub fn verify_block_wasm(data_ptr: *const i32, count: i32) -> u32 {
     let block_data = read_block_data(data_ptr, count);
-    verify_block_hash(block_data.header, block_data.expected_hash) as u32
+    let res = verify_block_hash(block_data.header, block_data.expected_hash);
+    let res2 = check_mpt_root(block_data.block);
+    if res && res2 {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 // Reads list from linear memory
@@ -29,16 +39,24 @@ fn read_block_data(data_ptr: *const i32, count: i32) -> BlockData {
     use core::slice;
     let ptr = data_ptr as *const u8;
     let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, count as usize).to_vec() };
-    let decoded: BlockData = serde_json::from_slice(&data).unwrap();
-    decoded
+    let block_json: serde_json::Value = serde_json::from_slice(&data).expect("Failed to parse JSON");
+    // Deserialize the response to get block and transaction data
+    let block: Block = serde_json::from_value(block_json.clone()).unwrap();
+
+    let header: Header = serde_json::from_value(block_json.clone()).unwrap();
+
+    let hash_str = block_json["hash"].as_str().unwrap();
+    let hash_bytes = hex::decode(&hash_str[2..]).unwrap();
+    let expected_hash = B256::from_slice(&hash_bytes);
+    BlockData { header, block, expected_hash }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
-#[derive(serde::Serialize, serde::Deserialize)]
-#[ serde(rename_all = "camelCase")]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Header {
     /// The Keccak 256-bit hash of the parent
     /// block’s header, in its entirety; formally Hp.
+    #[serde(rename = "parentHash")]
     pub parent_hash: B256,
     /// The Keccak 256-bit hash of the ommers list portion of this block; formally Ho.
     #[serde(rename = "sha3Uncles")]
@@ -52,13 +70,17 @@ pub struct Header {
     pub state_root: B256,
     /// The Keccak 256-bit hash of the root node of the trie structure populated with each
     /// transaction in the transactions list portion of the block; formally Ht.
+    #[serde(rename = "transactionsRoot")]
     pub transactions_root: B256,
     /// The Keccak 256-bit hash of the root node of the trie structure populated with the receipts
     /// of each transaction in the transactions list portion of the block; formally He.
     pub receipts_root: B256,
     /// The Keccak 256-bit hash of the withdrawals list portion of this block.
     /// <https://eips.ethereum.org/EIPS/eip-4895>
-    #[cfg_attr(feature = "serde", serde(default, skip_serializing_if = "Option::is_none"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, skip_serializing_if = "Option::is_none")
+    )]
     pub withdrawals_root: Option<B256>,
     /// The Bloom filter composed from indexable information (logger address and log topics)
     /// contained in each log entry from the receipt of each transaction in the transactions list;
@@ -133,13 +155,19 @@ pub struct Header {
     /// and more.
     ///
     /// The beacon roots contract handles root storage, enhancing Ethereum's functionalities.
-    #[cfg_attr(feature = "serde", serde(default, skip_serializing_if = "Option::is_none"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, skip_serializing_if = "Option::is_none")
+    )]
     pub parent_beacon_block_root: Option<B256>,
     /// The Keccak 256-bit hash of the root node of the trie structure populated with each
     /// [EIP-7685] request in the block body.
     ///
     /// [EIP-7685]: https://eips.ethereum.org/EIPS/eip-7685
-    #[cfg_attr(feature = "serde", serde(default, skip_serializing_if = "Option::is_none"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, skip_serializing_if = "Option::is_none")
+    )]
     pub requests_root: Option<B256>,
     /// An arbitrary byte array containing data relevant to this block. This must be 32 bytes or
     /// fewer; formally Hx.
@@ -218,11 +246,12 @@ impl Header {
     }
 }
 
-
 impl Encodable for Header {
     fn encode(&self, out: &mut dyn BufMut) {
-        let list_header =
-            alloy_rlp::Header { list: true, payload_length: self.header_payload_length() };
+        let list_header = alloy_rlp::Header {
+            list: true,
+            payload_length: self.header_payload_length(),
+        };
         list_header.encode(out);
         self.parent_hash.encode(out);
         self.ommers_hash.encode(out);
@@ -303,5 +332,118 @@ impl Encodable for Header {
         length += self.header_payload_length();
         length += length_of_length(length);
         length
+    }
+}
+
+/// Adjust the index of an item for rlp encoding.
+pub const fn adjust_index_for_rlp(i: usize, len: usize) -> usize {
+    if i > 0x7f {
+        i
+    } else if i == 0x7f || i + 1 == len {
+        0
+    } else {
+        i + 1
+    }
+}
+
+// Struct representing the transaction data
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Transaction {
+    nonce: String,
+    gasPrice: String,
+    gas: String,
+    to: String,
+    value: String,
+    input: String,
+    v: String,
+    r: String,
+    s: String,
+}
+
+// Struct representing the block containing transactions
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Block {
+    #[serde(rename = "transactionsRoot")]
+    transactions_root: String,
+    transactions: Vec<Transaction>,
+}
+
+pub fn rlp_encode_transaction(tx: &Transaction) -> BytesMut {
+    let mut rlp_stream = RlpStream::new_list(9);
+
+    // Handle potential large values by using BigUint
+    // Convert nonce, gasPrice, gasLimit, value, and v to U256 for large number support
+    let nonce = u128::from_str_radix(&tx.nonce[2..], 16).unwrap();
+    let gas_price = u128::from_str_radix(&tx.gasPrice[2..], 16).unwrap();
+    let gas_limit = u128::from_str_radix(&tx.gas[2..], 16).unwrap(); // Corrected to "gasLimit"
+    let to = hex::decode(&tx.to[2..]).unwrap();
+    let value = u128::from_str_radix(&tx.value[2..], 16).unwrap();
+    let input = hex::decode(&tx.input[2..]).unwrap();
+    let v = u128::from_str_radix(&tx.v[2..], 16).unwrap();
+    let r = hex::decode(&tx.r[2..]).unwrap();
+    let s = hex::decode(&tx.s[2..]).unwrap();
+
+    // Append nonce, gasPrice, gas, value, v (big numbers)
+    // Append the fields in the correct order
+    println!("nonce: {:?}", nonce);
+    println!("gas_price: {:?}", gas_price);
+    println!("gas_limit: {:?}", gas_limit);
+    println!("to: {:?}", to);
+    println!("value: {:?}", value);
+    println!("input: {:?}", input);
+    println!("v: {:?}", v);
+    println!("r: {:?}", r);
+    println!("s: {:?}", s);
+
+    rlp_stream.append(&nonce); // nonce
+    rlp_stream.append(&gas_price); // gasPrice
+    rlp_stream.append(&gas_limit); // gasLimit
+    rlp_stream.append(&to); // to (address)
+    rlp_stream.append(&value); // value
+    rlp_stream.append(&input); // input (data)
+    rlp_stream.append(&v); // v (signature recovery)
+    rlp_stream.append(&r); // r (signature part)
+    rlp_stream.append(&s); // s (signature part)s
+
+    // Return RLP-encoded transaction
+    rlp_stream.out()
+}
+
+// Function to calculate the MPT root of transactions
+pub fn check_mpt_root(block: Block) -> bool {
+    let mut hb = HashBuilder::default();
+
+    // Iterate over transactions, RLP encode and insert into the trie
+    for (i, tx) in block.transactions.iter().enumerate().rev() {
+        println!("i: {:?}", i);
+        let rlp_encoded_tx = rlp_encode_transaction(tx);
+        println!("rlp_encoded_tx: {:?}", hex::encode(&rlp_encoded_tx));
+        // Encode the index as the key (RLP encoded)
+        let index = i as u64;
+        let index_buffer = alloy_rlp::encode(&index);
+
+        // let rlp_encoded_index = rlp::encode(&i);
+        let key = Nibbles::unpack(&index_buffer);
+        println!("key: {:?}", hex::encode(key.as_ref()));
+
+        // Insert the transaction into the trie
+        hb.add_leaf(key, &rlp_encoded_tx);
+        // trie.insert(&rlp_encoded_index, &rlp_encoded_tx)?;
+    }
+
+    // Calculate the root of the trie
+    // let trie_root= trie.root()?;
+    let trie_root = hb.root();
+    // Print the calculated root
+    println!("Calculated MPT Root: 0x{}", hex::encode(trie_root));
+
+    // Compare with the block's official transactionsRoot
+    println!("Block's transactionsRoot: {}", block.transactions_root);
+
+    // Check if the roots match
+    if hex::encode(trie_root) == block.transactions_root[2..] {
+        return true;
+    } else {
+        return false;
     }
 }

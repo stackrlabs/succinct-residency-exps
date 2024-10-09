@@ -9,11 +9,11 @@ tsp-native = tsp/rust/native
 eth-verify-native = eth_verify/rust/native
 rust-native:
 	@echo "Running Rust native benchmark..."
-	cd ${binary-native}; cargo run --release -- --execute > cycles.txt
-	cd ${prime-native}; cargo run --release -- --execute > cycles.txt
-	cd ${merkle-native}; cargo run --release -- --execute > cycles.txt
-	cd ${tsp-native}; cargo run --release -- --execute > cycles.txt
-	cd ${eth-verify-native}; cargo run --release -- --execute > cycles.txt
+	cd ${binary-native}; cargo run --release -- --execute
+	cd ${prime-native}; cargo run --release -- --execute
+	cd ${merkle-native}; cargo run --release -- --execute
+	cd ${tsp-native}; cargo run --release -- --execute
+	cd ${eth-verify-native}; cargo run --release -- --execute 
 
 binary-sp1 = binary/rust/native_sp1/script
 prime-sp1 = prime/rust/native_sp1/script

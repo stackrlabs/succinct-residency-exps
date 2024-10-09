@@ -1,3 +1,5 @@
+import { Trie } from "@ethereumjs/trie";
+import dotenv from "dotenv";
 import { rlp } from "ethereumjs-util";
 import fs from "fs/promises";
 import { keccak256 } from "js-sha3";
@@ -30,12 +32,17 @@ interface HeaderFromJSON {
 }
 
 async function main() {
-  const filePath = "../../inputs/block_data.json";
-  const fileContent = await fs.readFile(filePath, "utf-8");
-  const jsonString = fileContent.toString();
+  dotenv.config();
+  const filePath = "../../inputs/block.json";
+  const blockData = JSON.parse(await fs.readFile(filePath, "utf8"));
 
-  const headerFromJSON: HeaderFromJSON = JSON.parse(jsonString);
-  const { header, hash } = headerFromJSON;
+  const mptRoot = await calculateMptRoot(blockData);
+  console.log("Calculated MPT Root: " + mptRoot);
+  console.log("Block's MPT Root (TxHash): " + blockData.transactionsRoot);
+  if (mptRoot !== blockData.transactionsRoot) {
+    throw new Error("MPT Root does not match");
+  }
+
   const {
     parentHash,
     sha3Uncles,
@@ -52,8 +59,7 @@ async function main() {
     extraData,
     mixHash,
     nonce,
-  } = header;
-
+  } = blockData;
   const blockHeader = [
     parentHash,
     sha3Uncles,
@@ -71,7 +77,7 @@ async function main() {
     mixHash,
     nonce,
   ];
-  verifyBlock(blockHeader, hash);
+  verifyBlock(blockHeader, blockData.hash);
 }
 
 main().catch((error) => console.error("An error occurred:", error));
@@ -86,5 +92,38 @@ function verifyBlock(blockHeader: any[], hash: string) {
     );
   }
 
-  console.log(`✅ Block Verified\nRecomputed hash: ${recomputedHash}`);
+  console.log(`Recomputed hash: ${recomputedHash}`);
+}
+
+async function calculateMptRoot(block: any) {
+  // Create a new trie
+  const trie = new Trie();
+
+  // Iterate over the transactions in the block
+  for (let i = 0; i < block.transactions.length; i++) {
+    const tx = block.transactions[i];
+
+    // Use transaction index as the key (RLP encoded)
+    const key = rlp.encode(i);
+
+    // RLP encode the transaction itself
+    const txData = rlp.encode([
+      tx.nonce,
+      tx.gasPrice,
+      tx.gas,
+      tx.to,
+      tx.value,
+      tx.input,
+      tx.v,
+      tx.r,
+      tx.s,
+    ]);
+
+    // Insert the transaction into the trie
+    await trie.put(key, txData);
+  }
+
+  // Get the root hash of the trie
+  const mptRoot = trie.root();
+  return "0x" + Buffer.from(mptRoot).toString("hex");
 }
