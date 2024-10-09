@@ -2,7 +2,9 @@
 
 use sp1_sdk::{ProverClient, SP1Stdin};
 use clap::Parser;
-
+use serde_json::Value;
+use std::fs::File;
+use std::io::BufReader;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -24,13 +26,19 @@ fn main() {
 
     let args = Args::parse();
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
-    let number_to_check = 9999991;
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+    // Read the JSON file
+     // Read the JSON file
+     let file = File::open("../../../../inputs/tsp.json").expect("Failed to open config file");
+     let reader = BufReader::new(file);
+     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
+    let graph: Vec<Vec<i32>> = serde_json::from_value(json["graph"].clone()).expect("Failed to parse graph from JSON");
+
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
-    stdin.write(&number_to_check);
+    stdin.write(&graph);
 
     if args.execute {
     // Execute the program

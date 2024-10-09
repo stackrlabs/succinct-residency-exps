@@ -38,5 +38,7 @@ rust-wasm-sp1:
 	cd ${binary-wasm}/wasm_sp1/script; cargo run --release -- --execute
 	cd ${prime-wasm}/wasm; wasm-pack build
 	cd ${prime-wasm}/wasm_sp1/script; cargo run --release -- --execute
-	# cd ${merkle-wasm}/wasm; wasm-pack build
-	# cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${merkle-wasm}/wasm; wasm-pack build
+	cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${tsp-wasm}/wasm; wasm-pack build
+	cd ${tsp-wasm}/wasm_sp1/script; cargo run --release -- --execute
