@@ -34,21 +34,16 @@ interface HeaderFromJSON {
 
 async function main() {
   dotenv.config();
-  const web3 = new Web3(process.env.RPC_URL);
   const filePath = "../../inputs/block.json";
-  const fileContent = await fs.readFile(filePath, "utf-8");
-  const jsonString = fileContent.toString();
+  const blockData = JSON.parse(await fs.readFile(filePath, "utf8"));
 
-  const blockData: { number: string; hash: string } = JSON.parse(jsonString);
-  const block = await web3.eth.getBlock(blockData.number, true);
-
-  const mptRoot = await calculateMptRoot(block);
+  const mptRoot = await calculateMptRoot(blockData);
   console.log("Calculated MPT Root: " + mptRoot);
-  console.log("Block's MPT Root (TxHash): " + block.transactionsRoot);
-  if (mptRoot !== block.transactionsRoot) {
+  console.log("Block's MPT Root (TxHash): " + blockData.transactionsRoot);
+  if (mptRoot !== blockData.transactionsRoot) {
     throw new Error("MPT Root does not match");
   }
-  console.log("Block's MPT Root (TxHash): " + block.transactionsRoot);
+  console.log("Block's MPT Root (TxHash): " + blockData.transactionsRoot);
 
   const {
     parentHash,
@@ -66,7 +61,7 @@ async function main() {
     extraData,
     mixHash,
     nonce,
-  } = block;
+  } = blockData;
   const blockHeader = [
     parentHash,
     sha3Uncles,

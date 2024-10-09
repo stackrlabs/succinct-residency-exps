@@ -2,6 +2,12 @@ use alloy_primitives::{keccak256, B256, Bloom, Bytes, B64, U256, Address};
 use alloy_rlp::{
     length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE,
 };
+use alloy_trie::{HashBuilder, Nibbles};
+use bytes::BytesMut;
+use ethereum_types::U256 as U256_ETH;
+use hex;
+use rlp::RlpStream;
+use serde::{Deserialize, Serialize};
 
 #[derive(PartialEq, Debug, serde::Serialize, serde::Deserialize)]
 struct BlockData {
@@ -32,17 +38,6 @@ fn read_block_data(data_ptr: *const i32, count: i32) -> BlockData {
     let decoded: BlockData = serde_json::from_slice(&data).unwrap();
     decoded
 }
-use alloy_eips::eip2718::Encodable2718;
-use alloy_primitives::{keccak256, Address, Bloom, Bytes, B256, B64, U256};
-use alloy_rlp::{length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE};
-use alloy_trie::{HashBuilder, Nibbles};
-use bytes::BytesMut;
-use ethereum_types::U256 as U256_ETH;
-use hex;
-use rlp::RlpStream;
-use serde::{Deserialize, Serialize};
-
-// use patricia_trie::memdb::MemoryDB;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -328,13 +323,6 @@ impl Encodable for Header {
     }
 }
 
-#[no_mangle]
-pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
-    let recomputed_hash = keccak256(alloy_rlp::encode(header));
-    assert_eq!(recomputed_hash, expected_hash);
-    recomputed_hash == expected_hash
-}
-
 /// Adjust the index of an item for rlp encoding.
 pub const fn adjust_index_for_rlp(i: usize, len: usize) -> usize {
     if i > 0x7f {
@@ -410,7 +398,7 @@ pub fn rlp_encode_transaction(tx: &Transaction) -> BytesMut {
 }
 
 // Function to calculate the MPT root of transactions
-pub async fn calculate_mpt_root(block: Block) -> bool {
+pub fn calculate_mpt_root(block: Block) -> bool {
     // Initialize a memory-backed database for the trie
     // let mut memdb = MemoryDB::<Keccak256Hasher>::default();
     // let mut root = Default::default();
@@ -425,7 +413,7 @@ pub async fn calculate_mpt_root(block: Block) -> bool {
         println!("rlp_encoded_tx: {:?}", hex::encode(&rlp_encoded_tx));
         // Encode the index as the key (RLP encoded)
         let index = i as u64;
-        let index_buffer = alloy_rlp::encode_fixed_size(&index);
+        let index_buffer = alloy_rlp::encode(&index);
 
         // let rlp_encoded_index = rlp::encode(&i);
         let key = Nibbles::unpack(&index_buffer);
