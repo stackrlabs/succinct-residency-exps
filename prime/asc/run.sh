@@ -13,5 +13,5 @@ asc is_prime.ts -O --noAssert -o prime-zk.wasm
 cd ../../zkWasm || exit
 
 RUST_LOG=info cargo run --release -- --params ./params testwasm setup --host standard -k 18 --wasm ../prime/asc/prime-zk.wasm
-RUST_LOG=info cargo run --release -- --params ./params testwasm prove --output ./output --ctxout ctxout --wasm ../prime/asc/prime-zk.wasm --public 9999991:i64 --private 1:i64
+RUST_LOG=info cargo run --release -- --params ./params testwasm prove --output ./output --ctxout ctxout --wasm ../prime/asc/prime-zk.wasm --public 9999991:i64 --private 1:i64 &>../prime/asc/prove.log
 RUST_LOG=info cargo run --release -- --params ./params testwasm verify --output ./output
