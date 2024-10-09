@@ -53,3 +53,10 @@ rust-risc-zero:
 	cd ${merkle-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${tsp-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${eth-verify-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+
+# go benchmarks
+binary-go = binary/go
+go-wasm-sp1:
+	@echo "Running Go wasm SP1 benchmark..."
+	cd ${binary-go}/wasm; tinygo build -o main.wasm -target=wasm-unknown main.go
+	cd ${binary-go}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
