@@ -22,7 +22,3 @@ hex = "0.4.3"
 rlp = "0.6.1"
 bytes = "1.7.2"
 wasm-bindgen = "0.2"
-
-# https://docs.succinct.xyz/writing-programs/patched-crates.html
-[patch.crates-io]
-ecdsa-core = { git = "https://github.com/sp1-patches/signatures", package = "ecdsa", branch = "patch-ecdsa-v0.16.9" }
