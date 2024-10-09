@@ -4,19 +4,20 @@
 sp1_zkvm::entrypoint!(main);
 
 use wasmi::{Engine, Linker, Module, Store};
+use bincode;
 
 pub fn main() {
+    println!("cycle-tracker-start: read inputs");
     let wasm = sp1_zkvm::io::read::<Vec<u8>>();
-    let list = sp1_zkvm::io::read::<Vec<i32>>();
-    let target = sp1_zkvm::io::read::<i32>();
+    let graph = sp1_zkvm::io::read::<Vec<Vec<i32>>>();
+    println!("cycle-tracker-end: read inputs");
 
-    let engine = Engine::default();
     println!("cycle-tracker-start: instantiate wasm");
+    let engine = Engine::default();
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
-    println!("cycle-tracker-end: instantiate wasm");
 
-    let mut linker = <Linker<Vec<i32>, i32>>::new(&engine);
-    let mut store = Store::new(&engine, target.clone());
+    let linker = <Linker<()>>::new(&engine);
+    let mut store = Store::new(&engine, ());
 
     let instance = linker
         .instantiate(&mut store, &module)
@@ -24,13 +25,26 @@ pub fn main() {
         .start(&mut store)
         .unwrap();
 
+    // write list to memory
+    let memory = instance.get_memory(&store,"memory").expect("Failed to get memory");
+    let ptr = memory.data_size(&mut store) as i32;
+
+    // grow memory to fit the graph
+    let encoded_graph = bincode::serialize(&graph).expect("Failed to encode graph");
+    let encoded_graph_size = encoded_graph.len();
+    println!("Size of encoded graph: {}", encoded_graph_size);
+    let memory_size = (encoded_graph_size as u32 + 65535) / 65536; // round up to the nearest 64KiB page range
+    memory.grow(&mut store, memory_size).expect("Failed to grow memory");
+    memory.write(&mut store, ptr as usize, &encoded_graph).expect("Failed to write to memory");
+    println!("cycle-tracker-end: instantiate wasm");
+
     println!("cycle-tracker-start: call wasm");
-    let binary_search = instance
-        .get_typed_func::<<Vec<i32>, i32>, bool>(&mut store, "binary_search")
+    let tsp = instance
+        .get_typed_func::<(i32, i32), u32>(&mut store, "tsp_wasm")
         .expect("Failed to get typed_func");
-    let res = binary_search.call(&mut store, list, target).expect("Failed to call");
+    let res = tsp.call(&mut store, (ptr, encoded_graph_size as i32)).expect("Failed to call");
     println!("cycle-tracker-end: call wasm");
-    println!("binary_search {} - {}", target, res);
+    println!("tsp - {}", res);
 
     sp1_zkvm::io::commit(&res);
 }

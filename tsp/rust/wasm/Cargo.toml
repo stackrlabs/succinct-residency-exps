@@ -8,4 +8,5 @@ name = "wasm"
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
+bincode = "1.3.3"
 wasm-bindgen = "0.2"

@@ -9,11 +9,11 @@ tsp-native = tsp/rust/native
 eth-verify-native = eth_verify/rust/native
 rust-native:
 	@echo "Running Rust native benchmark..."
-	cd ${binary-native}; cargo run --release -- --execute
-	cd ${prime-native}; cargo run --release -- --execute
-	cd ${merkle-native}; cargo run --release -- --execute
-	cd ${tsp-native}; cargo run --release -- --execute
-	cd ${eth-verify-native}; cargo run --release -- --execute
+	cd ${binary-native}; cargo run --release -- --execute > cycles.txt
+	cd ${prime-native}; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-native}; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-native}; cargo run --release -- --execute > cycles.txt
+	cd ${eth-verify-native}; cargo run --release -- --execute > cycles.txt
 
 binary-sp1 = binary/rust/native_sp1/script
 prime-sp1 = prime/rust/native_sp1/script
@@ -32,11 +32,16 @@ binary-wasm = binary/rust
 prime-wasm = prime/rust
 merkle-wasm = merkle/rust
 tsp-wasm = tsp/rust
+eth-verify-wasm = eth_verify/rust
 rust-wasm-sp1:
 	@echo "Running Rust wasm SP1 benchmark..."
 	cd ${binary-wasm}/wasm; wasm-pack build
-	cd ${binary-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${binary-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
 	cd ${prime-wasm}/wasm; wasm-pack build
-	cd ${prime-wasm}/wasm_sp1/script; cargo run --release -- --execute
-	# cd ${merkle-wasm}/wasm; wasm-pack build
-	# cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute
+	cd ${prime-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-wasm}/wasm; wasm-pack build
+	cd ${merkle-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-wasm}/wasm; wasm-pack build
+	cd ${tsp-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${eth-verify-wasm}/wasm; wasm-pack build
+	cd ${eth-verify-wasm}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt

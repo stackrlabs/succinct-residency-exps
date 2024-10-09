@@ -40,3 +40,16 @@ pub fn run_tsp(graph: Vec<Vec<i32>>) -> i32 {
     tsp(1, 0, &graph, &mut dp, num_of_cities, visited)
 }
 
+#[no_mangle]
+extern "C" fn tsp_wasm(data_ptr: *const i32, count: i32) -> u32 {
+    let graph = read_graph(data_ptr, count);
+    run_tsp(graph) as u32
+}
+// Reads list from linear memory
+fn read_graph(data_ptr: *const i32, count: i32) -> Vec<Vec<i32>> {
+    use core::slice;
+    let ptr = data_ptr as *const u8;
+    let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, count as usize).to_vec() };
+    let decoded: Vec<Vec<i32>> = bincode::deserialize(&data).unwrap();
+    decoded
+}

@@ -2,7 +2,12 @@
 
 use sp1_sdk::{ProverClient, SP1Stdin};
 use clap::Parser;
-
+use std::fs::File;
+use std::io::BufReader;
+use serde_json::Value;
+use wasm::Header;
+use alloy_primitives::B256;
+use serde;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -18,26 +23,31 @@ struct Args {
 }
 
 fn main() {
-    
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
 
-    let args = Args::parse();
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
-    let number_to_check = 9999991;
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+
+    let file_path = "../../../../inputs/block_data.json";
+    let file_content = std::fs::read_to_string(file_path)
+        .expect("Failed to read the file");
+    let block = file_content.as_bytes().to_vec();
+    // let input_block = serde_json::from_str::<InputBlock>(s).unwrap();
+
+    let args = Args::parse();
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
-    stdin.write(&number_to_check);
+    stdin.write(&block);
 
     if args.execute {
     // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let res = output.read::<u32>();
-        println!("res: {}", res);
+        let result = output.read::<bool>();
+        println!("block verified: {}", result);
     } else {
         // Setup the program for proving.
         let (pk, vk) = client.setup(ELF);

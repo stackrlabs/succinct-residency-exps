@@ -2,7 +2,9 @@
 
 use sp1_sdk::{ProverClient, SP1Stdin};
 use clap::Parser;
-
+use serde_json::Value;
+use std::fs::File;
+use std::io::BufReader;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -24,19 +26,27 @@ fn main() {
 
     let args = Args::parse();
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
-    let num_leaves = 1000;
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+    // Read the JSON file
+    let file = File::open("../../../../inputs/merkle.json").expect("Failed to open config file");
+    let reader = BufReader::new(file);
+    let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
+    let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
+    println!("Input value: {}", input_value);
+    let leaves = (0..input_value)
+        .map(|i| i.to_string().as_bytes().to_vec())
+        .collect::<Vec<_>>();
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
-    stdin.write(&num_leaves);
+    stdin.write(&leaves);
 
     if args.execute {
     // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let res = output.read::<u32>();
+        let res = output.read::<i32>();
         println!("res: {}", res);
     } else {
         // Setup the program for proving.
