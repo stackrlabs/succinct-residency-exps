@@ -58,6 +58,8 @@ rust-wasm-risc-zero:
 	@echo "Running Rust wasm RISC Zero benchmark..."
 	cd ${prime-rust}/wasm; wasm-pack build
 	cd ${prime-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${binary-rust}/wasm; wasm-pack build
+	cd ${binary-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
 
 # go benchmarks
 binary-go = binary/go
