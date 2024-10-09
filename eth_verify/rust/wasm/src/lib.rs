@@ -1,7 +1,37 @@
+use alloy_primitives::{keccak256, B256, Bloom, Bytes, B64, U256, Address};
 use alloy_rlp::{
     length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE,
 };
-use alloy_primitives::{keccak256, B256,  Bloom, Bytes, B64, U256, Address};
+
+#[derive(PartialEq, Debug, serde::Serialize, serde::Deserialize)]
+struct BlockData {
+    #[serde(rename = "header")]
+    header: Header,
+    #[serde(rename = "hash")]
+    expected_hash: B256,
+}
+
+#[no_mangle]
+pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
+    let recomputed_hash = keccak256(alloy_rlp::encode(header));
+    assert_eq!(recomputed_hash, expected_hash);
+    recomputed_hash == expected_hash
+}
+
+#[no_mangle]
+extern "C" fn verify_block_wasm(data_ptr: *const i32, count: i32) -> u32 {
+    let block_data = read_block_data(data_ptr, count);
+    verify_block_hash(block_data.header, block_data.expected_hash) as u32
+}
+
+// Reads list from linear memory
+fn read_block_data(data_ptr: *const i32, count: i32) -> BlockData {
+    use core::slice;
+    let ptr = data_ptr as *const u8;
+    let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, count as usize).to_vec() };
+    let decoded: BlockData = serde_json::from_slice(&data).unwrap();
+    decoded
+}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -274,11 +304,4 @@ impl Encodable for Header {
         length += length_of_length(length);
         length
     }
-}
-
-#[no_mangle]
-pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
-    let recomputed_hash = keccak256(alloy_rlp::encode(header));
-    assert_eq!(recomputed_hash, expected_hash);
-    recomputed_hash == expected_hash
 }

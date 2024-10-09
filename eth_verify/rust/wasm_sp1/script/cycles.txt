@@ -1,0 +1,16 @@
+[2m2024-10-09T06:44:44.463179Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x215838    
+[2m2024-10-09T06:44:44.463371Z[0m [32m INFO[0m [1mexecute[0m: ┌╴read inputs    
+[2m2024-10-09T06:44:44.593686Z[0m [32m INFO[0m [1mexecute[0m: └╴3,186,431 cycles    
+[2m2024-10-09T06:44:44.593761Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
+stdout: WARNING: Using insecure random number generator.
+[2m2024-10-09T06:44:44.993429Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x259f98    
+[2m2024-10-09T06:44:45.490168Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x215570    
+stdout: Size of encoded block: 1671
+[2m2024-10-09T06:44:45.924181Z[0m [32m INFO[0m [1mexecute[0m: └╴25,777,085 cycles    
+[2m2024-10-09T06:44:45.924231Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
+[2m2024-10-09T06:44:45.970890Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x201194    
+[2m2024-10-09T06:44:46.114633Z[0m [32m INFO[0m [1mexecute[0m: └╴4,305,641 cycles    
+stdout: verify_block - 1
+[2m2024-10-09T06:44:46.253946Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m1.85s [3mtime.idle[0m[2m=[0m46.8µs
+Program executed successfully.
+block verified: true
