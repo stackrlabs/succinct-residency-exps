@@ -22,14 +22,6 @@ struct Args {
     prove: bool,
 }
 
-#[derive(serde::Deserialize)]
-struct InputBlock {
-    #[serde(rename = "header")]
-    header: Header,
-    #[serde(rename = "hash")]
-    expected_hash: B256,
-}
-
 fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
