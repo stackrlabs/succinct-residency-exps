@@ -1,7 +1,7 @@
 [workspace]
 [package]
 version = "0.1.0"
-name = "eth_verify-rust-script"
+name = "binary-rust-script"
 edition = "2021"
 
 [dependencies]
