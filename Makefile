@@ -54,6 +54,11 @@ rust-risc-zero:
 	cd ${tsp-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${eth-verify-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 
+rust-wasm-risc-zero:
+	@echo "Running Rust wasm RISC Zero benchmark..."
+	cd ${prime-rust}/wasm; wasm-pack build
+	cd ${prime-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+
 # go benchmarks
 binary-go = binary/go
 go-wasm-sp1:
