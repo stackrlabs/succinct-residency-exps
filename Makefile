@@ -54,4 +54,4 @@ rust-risc-zero:
 	cd ${prime-rust}/native_risc_zero; cargo run
 	cd ${merkle-rust}/native_risc_zero; cargo run
 	# cd ${tsp-rust}/native_risc_zero; cargo run
-	# cd ${eth-verify-rust}/native_risc_zero; cargo run
+	cd ${eth-verify-rust}/native_risc_zero; cargo run
