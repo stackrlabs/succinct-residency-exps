@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "eth_verify/rust/native",
+    "eth_verify/rust/wasm",
+]
