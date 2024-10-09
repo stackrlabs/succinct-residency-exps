@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import { rlp } from "ethereumjs-util";
 import fs from "fs/promises";
 import { keccak256 } from "js-sha3";
-import Web3 from "web3";
 
 interface Header {
   parentHash: string;
@@ -43,7 +42,6 @@ async function main() {
   if (mptRoot !== blockData.transactionsRoot) {
     throw new Error("MPT Root does not match");
   }
-  console.log("Block's MPT Root (TxHash): " + blockData.transactionsRoot);
 
   const {
     parentHash,

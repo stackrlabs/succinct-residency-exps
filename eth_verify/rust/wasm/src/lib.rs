@@ -26,7 +26,7 @@ pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
 pub fn verify_block_wasm(data_ptr: *const i32, count: i32) -> u32 {
     let block_data = read_block_data(data_ptr, count);
     let res = verify_block_hash(block_data.header, block_data.expected_hash);
-    let res2 = calculate_mpt_root(block_data.block);
+    let res2 = check_mpt_root(block_data.block);
     if res && res2 {
         return 1;
     } else {
@@ -410,12 +410,7 @@ pub fn rlp_encode_transaction(tx: &Transaction) -> BytesMut {
 }
 
 // Function to calculate the MPT root of transactions
-pub fn calculate_mpt_root(block: Block) -> bool {
-    // Initialize a memory-backed database for the trie
-    // let mut memdb = MemoryDB::<Keccak256Hasher>::default();
-    // let mut root = Default::default();
-    // let mut trie = TrieDBMut::new(&mut memdb, &mut root);
-
+pub fn check_mpt_root(block: Block) -> bool {
     let mut hb = HashBuilder::default();
 
     // Iterate over transactions, RLP encode and insert into the trie

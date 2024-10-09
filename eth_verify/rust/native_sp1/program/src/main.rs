@@ -2,7 +2,7 @@
 
 #![no_main]
 sp1_zkvm::entrypoint!(main);
-use wasm::{calculate_mpt_root, verify_block_hash, Header, Block};
+use wasm::{check_mpt_root, verify_block_hash, Header, Block};
 use alloy_primitives::{B256};
 
 pub fn main() {
@@ -13,7 +13,7 @@ pub fn main() {
     println!("cycle-tracker-end: input");
     println!("cycle-tracker-start: execution");
     let res = verify_block_hash(block_header, block_hash);
-    let res2 = calculate_mpt_root(block);
+    let res2 = check_mpt_root(block);
     println!("cycle-tracker-end: execution");
     let full_result = res && res2;
     println!("Block verification: {:?}", full_result);

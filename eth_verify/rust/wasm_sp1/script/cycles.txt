@@ -1,16 +1,19 @@
-[2m2024-10-09T07:40:28.589618Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x215838    
-[2m2024-10-09T07:40:28.589713Z[0m [32m INFO[0m [1mexecute[0m: ┌╴read inputs    
-[2m2024-10-09T07:40:28.654428Z[0m [32m INFO[0m [1mexecute[0m: └╴3,173,055 cycles    
-[2m2024-10-09T07:40:28.654446Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
+[2m2024-10-09T10:56:38.911205Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x215838    
+[2m2024-10-09T10:56:38.911825Z[0m [32m INFO[0m [1mexecute[0m: ┌╴read inputs    
+[2m2024-10-09T10:56:39.130213Z[0m [32m INFO[0m [1mexecute[0m: └╴5,501,983 cycles    
+[2m2024-10-09T10:56:39.130258Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
 stdout: WARNING: Using insecure random number generator.
-[2m2024-10-09T07:40:28.817007Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x29b39c    
-[2m2024-10-09T07:40:29.057077Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x2b98ac    
-stdout: Size of encoded block: 1671
-[2m2024-10-09T07:40:29.268355Z[0m [32m INFO[0m [1mexecute[0m: └╴25,661,305 cycles    
-[2m2024-10-09T07:40:29.268378Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
-[2m2024-10-09T07:40:29.293084Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x228c5c    
-[2m2024-10-09T07:40:29.362626Z[0m [32m INFO[0m [1mexecute[0m: └╴4,305,642 cycles    
+[2m2024-10-09T10:56:39.342984Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x28d3a4    
+[2m2024-10-09T10:56:39.839136Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x2b5e7c    
+[2m2024-10-09T10:56:40.322743Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x2c612c    
+[2m2024-10-09T10:56:40.806407Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x26d508    
+stdout: Size of encoded block: 3046
+[2m2024-10-09T10:56:41.182161Z[0m [32m INFO[0m [1mexecute[0m: └╴42,446,772 cycles    
+[2m2024-10-09T10:56:41.182200Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
+[2m2024-10-09T10:56:41.272869Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x22c574    
+[2m2024-10-09T10:56:41.715385Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x203748    
+[2m2024-10-09T10:56:42.073228Z[0m [32m INFO[0m [1mexecute[0m: └╴20,000,756 cycles    
 stdout: verify_block - 1
-[2m2024-10-09T07:40:29.407095Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m841ms [3mtime.idle[0m[2m=[0m10.2µs
+[2m2024-10-09T10:56:42.177143Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m3.32s [3mtime.idle[0m[2m=[0m183µs
 Program executed successfully.
 block verified: true
