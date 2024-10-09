@@ -1,0 +1,4 @@
+github.com/fxamacker/cbor/v2 v2.7.1-0.20240908165221-a01272272f50 h1:iemH2m/b3HaVfawY01ejxufY78+HWKrTP4vR+9aE5OM=
+github.com/fxamacker/cbor/v2 v2.7.1-0.20240908165221-a01272272f50/go.mod h1:pxXPTn3joSm21Gbwsv0w9OSA2y1HFR9qXEeXQVeNoDQ=
+github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
+github.com/x448/float16 v0.8.4/go.mod h1:14CWIYCyZA/cWjXOioeEpHeN/83MdbZDRQHoFcYsOfg=
