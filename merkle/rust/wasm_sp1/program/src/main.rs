@@ -7,11 +7,13 @@ use wasmi::{Engine, Linker, Module, Store};
 use bincode;
 
 pub fn main() {
+    println!("cycle-tracker-start: read inputs");
     let wasm = sp1_zkvm::io::read::<Vec<u8>>();
     let leaves = sp1_zkvm::io::read::<Vec<Vec<u8>>>();
+    println!("cycle-tracker-end: read inputs");
 
-    let engine = Engine::default();
     println!("cycle-tracker-start: instantiate wasm");
+    let engine = Engine::default();
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
 
     let mut linker = <Linker<()>>::new(&engine);
@@ -31,7 +33,8 @@ pub fn main() {
     let encoded_leaves = bincode::serialize(&leaves).expect("Failed to encode leaves");
     let encoded_leaves_size = encoded_leaves.len();
     println!("Size of encoded leaves: {}", encoded_leaves_size);
-    memory.grow(&mut store, encoded_leaves_size as u32).expect("Failed to grow memory");
+    let memory_size = (encoded_leaves_size as u32 + 65535) / 65536; // round up to the nearest 64KiB page range
+    memory.grow(&mut store, memory_size).expect("Failed to grow memory");
     memory.write(&mut store, ptr as usize, &encoded_leaves).expect("Failed to write to memory");
     println!("cycle-tracker-end: instantiate wasm");
 
