@@ -1,0 +1,2 @@
+Input number read from JSON: 9999991
+Is prime: true

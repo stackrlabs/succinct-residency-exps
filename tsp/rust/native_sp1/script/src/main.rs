@@ -23,18 +23,6 @@ struct Args {
 fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
-    // let mut graph = vec![vec![0; 15]; 15];
-    // for i in 0..15 {
-    //     for j in i+1..15 {
-    //         let distance = rand::random::<u32>() % 100; // Random distance calculation
-    //         graph[i][j] = distance;
-    //         graph[j][i] = distance; // Ensure distance between i and j and j and i are the same
-    //     }
-    // }
-    // Write the graph to disk as JSON
-    // let graph_file = File::create("../../../../inputs/tsp.json").expect("Failed to create graph file");
-    // serde_json::to_writer(graph_file, &graph).expect("Failed to write graph to JSON");
-    // println!("Graph has been written to ../../../../inputs/generated_graph.json");
 
     // Read the JSON file
     let file = File::open("../../../../inputs/tsp.json").expect("Failed to open config file");
