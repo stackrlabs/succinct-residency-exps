@@ -1,0 +1,3 @@
+input load cycles: 22986768
+search cycles: 228
+total cycles: 22988274
