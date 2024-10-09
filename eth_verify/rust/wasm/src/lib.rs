@@ -1,12 +1,11 @@
-use alloy_primitives::{keccak256, B256, Bloom, Bytes, B64, U256, Address};
-use alloy_rlp::{
-    length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE,
+use alloy_primitives::{
+    hex::FromHex, keccak256, Address, Bloom, Bytes, Parity, Signature, B256, B64, U256,
 };
+use alloy_rlp::{length_of_length, BufMut, Encodable, EMPTY_LIST_CODE, EMPTY_STRING_CODE};
 use alloy_trie::{HashBuilder, Nibbles};
 use bytes::BytesMut;
 use hex;
 use rlp::RlpStream;
-use serde::{Deserialize, Serialize};
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 struct BlockData {
@@ -25,9 +24,10 @@ pub fn verify_block_hash(header: Header, expected_hash: B256) -> bool {
 #[no_mangle]
 pub fn verify_block_wasm(data_ptr: *const i32, count: i32) -> u32 {
     let block_data = read_block_data(data_ptr, count);
-    let res = verify_block_hash(block_data.header, block_data.expected_hash);
-    let res2 = check_mpt_root(block_data.block);
-    if res && res2 {
+    let res = check_mpt_root(block_data.block.clone());
+    let res2 = verify_block_txs_sigs(block_data.block.clone());
+    let res3 = verify_block_hash(block_data.header, block_data.expected_hash);
+    if res && res2 && res3 {
         return 1;
     } else {
         return 0;
@@ -39,7 +39,8 @@ fn read_block_data(data_ptr: *const i32, count: i32) -> BlockData {
     use core::slice;
     let ptr = data_ptr as *const u8;
     let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, count as usize).to_vec() };
-    let block_json: serde_json::Value = serde_json::from_slice(&data).expect("Failed to parse JSON");
+    let block_json: serde_json::Value =
+        serde_json::from_slice(&data).expect("Failed to parse JSON");
     // Deserialize the response to get block and transaction data
     let block: Block = serde_json::from_value(block_json.clone()).unwrap();
 
@@ -48,7 +49,11 @@ fn read_block_data(data_ptr: *const i32, count: i32) -> BlockData {
     let hash_str = block_json["hash"].as_str().unwrap();
     let hash_bytes = hex::decode(&hash_str[2..]).unwrap();
     let expected_hash = B256::from_slice(&hash_bytes);
-    BlockData { header, block, expected_hash }
+    BlockData {
+        header,
+        block,
+        expected_hash,
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
@@ -347,10 +352,15 @@ pub const fn adjust_index_for_rlp(i: usize, len: usize) -> usize {
 }
 
 // Struct representing the transaction data
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
 pub struct Transaction {
+    hash: String,
     nonce: String,
-    gasPrice: String,
+    from: String,
+    #[serde(rename = "transactionIndex")]
+    transaction_index: String,
+    #[serde(rename = "gasPrice")]
+    gas_price: String,
     gas: String,
     to: String,
     value: String,
@@ -361,7 +371,7 @@ pub struct Transaction {
 }
 
 // Struct representing the block containing transactions
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
 pub struct Block {
     #[serde(rename = "transactionsRoot")]
     transactions_root: String,
@@ -374,7 +384,7 @@ pub fn rlp_encode_transaction(tx: &Transaction) -> BytesMut {
     // Handle potential large values by using BigUint
     // Convert nonce, gasPrice, gasLimit, value, and v to U256 for large number support
     let nonce = u128::from_str_radix(&tx.nonce[2..], 16).unwrap();
-    let gas_price = u128::from_str_radix(&tx.gasPrice[2..], 16).unwrap();
+    let gas_price = u128::from_str_radix(&tx.gas_price[2..], 16).unwrap();
     let gas_limit = u128::from_str_radix(&tx.gas[2..], 16).unwrap(); // Corrected to "gasLimit"
     let to = hex::decode(&tx.to[2..]).unwrap();
     let value = u128::from_str_radix(&tx.value[2..], 16).unwrap();
@@ -385,15 +395,15 @@ pub fn rlp_encode_transaction(tx: &Transaction) -> BytesMut {
 
     // Append nonce, gasPrice, gas, value, v (big numbers)
     // Append the fields in the correct order
-    println!("nonce: {:?}", nonce);
-    println!("gas_price: {:?}", gas_price);
-    println!("gas_limit: {:?}", gas_limit);
-    println!("to: {:?}", to);
-    println!("value: {:?}", value);
-    println!("input: {:?}", input);
-    println!("v: {:?}", v);
-    println!("r: {:?}", r);
-    println!("s: {:?}", s);
+    // println!("nonce: {:?}", nonce);
+    // println!("gas_price: {:?}", gas_price);
+    // println!("gas_limit: {:?}", gas_limit);
+    // println!("to: {:?}", to);
+    // println!("value: {:?}", value);
+    // println!("input: {:?}", input);
+    // println!("v: {:?}", v);
+    // println!("r: {:?}", r);
+    // println!("s: {:?}", s);
 
     rlp_stream.append(&nonce); // nonce
     rlp_stream.append(&gas_price); // gasPrice
@@ -409,22 +419,23 @@ pub fn rlp_encode_transaction(tx: &Transaction) -> BytesMut {
     rlp_stream.out()
 }
 
-// Function to calculate the MPT root of transactions
+/// Function to calculate the MPT root of transactions in a block
+/// and compare it with the transactionsRoot field in the block.
 pub fn check_mpt_root(block: Block) -> bool {
     let mut hb = HashBuilder::default();
 
     // Iterate over transactions, RLP encode and insert into the trie
     for (i, tx) in block.transactions.iter().enumerate().rev() {
-        println!("i: {:?}", i);
+        // println!("i: {:?}", i);
         let rlp_encoded_tx = rlp_encode_transaction(tx);
-        println!("rlp_encoded_tx: {:?}", hex::encode(&rlp_encoded_tx));
+        // println!("rlp_encoded_tx: {:?}", hex::encode(&rlp_encoded_tx));
         // Encode the index as the key (RLP encoded)
         let index = i as u64;
         let index_buffer = alloy_rlp::encode(&index);
 
         // let rlp_encoded_index = rlp::encode(&i);
         let key = Nibbles::unpack(&index_buffer);
-        println!("key: {:?}", hex::encode(key.as_ref()));
+        // println!("key: {:?}", hex::encode(key.as_ref()));
 
         // Insert the transaction into the trie
         hb.add_leaf(key, &rlp_encoded_tx);
@@ -432,18 +443,72 @@ pub fn check_mpt_root(block: Block) -> bool {
     }
 
     // Calculate the root of the trie
-    // let trie_root= trie.root()?;
     let trie_root = hb.root();
-    // Print the calculated root
-    println!("Calculated MPT Root: 0x{}", hex::encode(trie_root));
-
-    // Compare with the block's official transactionsRoot
-    println!("Block's transactionsRoot: {}", block.transactions_root);
 
     // Check if the roots match
     if hex::encode(trie_root) == block.transactions_root[2..] {
         return true;
     } else {
+        println!("Block's transactionsRoot: {}", block.transactions_root);
+        println!("Calculated MPT Root: 0x{}", hex::encode(trie_root));
+        return false;
+    }
+}
+
+/// Function to verify the signature of all transactions in a block.
+pub fn verify_block_txs_sigs(block: Block) -> bool {
+    for tx in &block.transactions {
+        if !verify_tx_sig(tx) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// Function to verify the signature of a transaction
+/// by recovering the address from the signature
+/// and comparing it with the sender's address.
+fn verify_tx_sig(tx: &Transaction) -> bool {
+    let from = Address::from_hex(&tx.from[2..]).unwrap();
+
+    // RLP encode the raw transaction fields
+    let mut rlp_stream = RlpStream::new_list(6);
+    let nonce = u128::from_str_radix(&tx.nonce[2..], 16).unwrap();
+    let gas_price = u128::from_str_radix(&tx.gas_price[2..], 16).unwrap();
+    let gas_limit = u128::from_str_radix(&tx.gas[2..], 16).unwrap(); // Corrected to "gasLimit"
+    let to = hex::decode(&tx.to[2..]).unwrap();
+    let value = u128::from_str_radix(&tx.value[2..], 16).unwrap();
+    let v = u64::from_str_radix(&tx.v[2..], 16).unwrap();
+    let parity = Parity::Eip155(v);
+    let r = U256::from_str_radix(&tx.r[2..], 16).unwrap();
+    let s = U256::from_str_radix(&tx.s[2..], 16).unwrap();
+
+    rlp_stream.append(&nonce); // nonce
+    rlp_stream.append(&gas_price); // gasPrice
+    rlp_stream.append(&gas_limit); // gasLimit
+    rlp_stream.append(&to); // to (address)
+    rlp_stream.append(&value); // value
+    if parity.chain_id().is_some() {
+        rlp_stream.append(&parity.chain_id());
+    } else {
+        rlp_stream.append_empty_data();
+    }
+
+    // Get the address from the signature
+    let msg = keccak256(rlp_stream.as_raw());
+    let sig = Signature::from_rs_and_parity(r, s, parity).unwrap();
+    let addr = sig.recover_address_from_prehash(&msg).unwrap();
+
+    // Check if the recovered address matches the sender's address
+    if addr == from {
+        return true;
+    } else {
+        println!(
+            "Transaction index: {}",
+            u64::from_str_radix(&tx.transaction_index[2..], 16).unwrap()
+        );
+        println!("Transaction sender: {:?}", from);
+        println!("Recovered address: {:?}", addr);
         return false;
     }
 }

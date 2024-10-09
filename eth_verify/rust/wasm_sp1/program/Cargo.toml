@@ -8,5 +8,3 @@ edition = "2021"
 sp1-zkvm = "2.0.0"
 wasmi = "0.36.1"
 sp1-derive = "2.0.0"
-
-

@@ -8,7 +8,11 @@ name = "wasm"
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
-alloy-primitives = { version = "0.8.5", default-features = false }
+# Patch getrandom to a dummy implementation since it's not used but breaks the Wasm build
+# ref: https://github.com/rust-random/getrandom/issues/208#issuecomment-791896409
+# ref: https://stackoverflow.com/a/72447475
+getrandom = { version = "0.2", default-features = false, features = ["custom"] }
+alloy-primitives = { version = "0.8.5", default-features = false, features = ["k256"] }
 alloy-rlp = "0.3.8"
 alloy-serde = "0.4.2"
 serde = "1.0.210"
@@ -18,4 +22,3 @@ hex = "0.4.3"
 rlp = "0.6.1"
 bytes = "1.7.2"
 wasm-bindgen = "0.2"
-
