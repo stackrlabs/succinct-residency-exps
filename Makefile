@@ -60,6 +60,12 @@ rust-wasm-risc-zero:
 	cd ${prime-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
 	cd ${binary-rust}/wasm; wasm-pack build
 	cd ${binary-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/wasm; wasm-pack build
+	cd ${merkle-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-rust}/wasm; wasm-pack build
+	cd ${tsp-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${eth-verify-rust}/wasm; wasm-pack build
+	cd ${eth-verify-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
 
 # go benchmarks
 binary-go = binary/go
