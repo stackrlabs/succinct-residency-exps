@@ -9,11 +9,11 @@ tsp-native = tsp/rust/native
 eth-verify-native = eth_verify/rust/native
 rust-native:
 	@echo "Running Rust native benchmark..."
-	cd ${binary-native}; cargo run --release -- --execute
-	cd ${prime-native}; cargo run --release -- --execute
-	cd ${merkle-native}; cargo run --release -- --execute
-	cd ${tsp-native}; cargo run --release -- --execute
-	cd ${eth-verify-native}; cargo run --release -- --execute 
+	cd ${binary-native}; cargo run --release -- --execute > cycles.txt
+	cd ${prime-native}; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-native}; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-native}; cargo run --release -- --execute > cycles.txt
+	cd ${eth-verify-native}; cargo run --release -- --execute > cycles.txt
 
 binary-sp1 = binary/rust/native_sp1/script
 prime-sp1 = prime/rust/native_sp1/script
@@ -50,8 +50,8 @@ rust-risc-zero:
 	export RUST_LOG="[executor]=info" 
 	export RISC0_DEV_MODE=1
 	@echo "Running Rust RISC Zero benchmark..."
-	cd ${binary-rust}/native_risc_zero; cargo run
-	cd ${prime-rust}/native_risc_zero; cargo run
-	cd ${merkle-rust}/native_risc_zero; cargo run
-	cd ${tsp-rust}/native_risc_zero; cargo run
-	cd ${eth-verify-rust}/native_risc_zero; cargo run
+	cd ${binary-rust}/native_risc_zero; cargo run > cycles.txt
+	cd ${prime-rust}/native_risc_zero; cargo run > cycles.txt
+	cd ${merkle-rust}/native_risc_zero; cargo run > cycles.txt
+	cd ${tsp-rust}/native_risc_zero; cargo run > cycles.txt
+	cd ${eth-verify-rust}/native_risc_zero; cargo run > cycles.txt

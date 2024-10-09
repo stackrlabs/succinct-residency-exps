@@ -12,8 +12,6 @@ fn main() {
     let list: Vec<i32> = serde_json::from_value(json["list"].clone()).expect("Unable to parse list");
     let number: i32 = serde_json::from_value(json["value"].clone()).expect("Unable to parse value");
 
-    println!("List: {:?}", list);
-
     let found = binary_search_impl(list, number);
     println!("Element found?: {}", found);
 }
