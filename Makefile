@@ -86,10 +86,10 @@ go-wasm-sp1:
 
 merklize:
 	@echo "Running Merkle benchmark..."
-	# cd ${merkle-rust}/native; cargo run --release -- --execute > cycles.txt
-	cd ${merkle-rust}/native_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/native_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
 	cd ${merkle-rust}/wasm; wasm-pack build
-	cd ${merkle-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
 	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-rust}/delphinus; make build && ./test.sh > cycles.txt
