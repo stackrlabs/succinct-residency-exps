@@ -17,7 +17,7 @@ pub fn main() {
         .collect::<Vec<_>>();
     // let (prove_merkelize_wrapper, verify_merkelize_wrapper) = guest::build_merkelize_wrapper();
     let summary = guest::analyze_merkelize_wrapper(leaves);
-    println!("summary: {:?}", summary.trace_len());
+    println!("Trace length: {:?}", summary.trace_len());
 
     // let (output, proof) = prove_merkelize_wrapper(leaves);
     // let is_valid = verify_merkelize_wrapper(proof);

@@ -17,7 +17,7 @@ pub fn main() {
 
     // let (prove_binary_search_wrapper, verify_binary_search_wrapper) = guest::build_binary_search_wrapper();
     let summary = guest::analyze_binary_search_wrapper(input_list, input_value);
-    println!("summary: {:?}", summary.trace_len());
+    println!("Trace length: {:?}", summary.trace_len());
 
     // let (output, proof) = prove_binary_search_wrapper(input_list, input_value);
     // let is_valid = verify_binary_search_wrapper(proof);
