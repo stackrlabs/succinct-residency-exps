@@ -15,6 +15,6 @@ pub fn main() {
     let input_list: Vec<i32> = input_json.iter().map(|v| v.as_i64().expect("Failed to parse list from JSON") as i32).collect();
     let input_value = json["value"].as_i64().expect("Failed to parse value from JSON") as i32;
     // let (prove_merkelize_wrapper, verify_merkelize_wrapper) = guest::build_merkelize_wrapper();
-    let summary = guest::analyze_is_prime(input_value, input_list[..1000].to_vec(), &wasm);
+    let summary = guest::analyze_binary_search(input_value, input_list[..1000].to_vec(), &wasm);
     println!("Trace length: {:?}", summary.trace_len());
 }

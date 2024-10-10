@@ -5,7 +5,7 @@ use bytemuck;
 
 const PAGE_SIZE: u32 = 64 * 1024;
 #[jolt::provable(stack_size = 100000, memory_size = 10000000, max_input_size = 10000000)]
-fn is_prime(target: i32, list: Vec<i32>, wasm: &[u8]) -> i32 {
+fn binary_search(target: i32, list: Vec<i32>, wasm: &[u8]) -> i32 {
     let engine = Engine::default();
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
 
