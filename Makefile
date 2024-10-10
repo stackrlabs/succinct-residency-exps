@@ -73,9 +73,9 @@ prove-risc-zero:
 	@echo "BONSAI_API_KEY: ${BONSAI_API_KEY}"
 	@echo "BONSAI_API_URL: ${BONSAI_API_URL}"
 	@echo "Proving RISC Zero benchmarks..."
-	cd ${merkle-rust}/native_risc_zero; time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release &> prove.log
-	# cd ${merkle-rust}/wasm; wasm-pack build
-	# cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${merkle-rust}/wasm; wasm-pack build
+	cd ${merkle-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
 
 # go benchmarks
 binary-go = binary/go
