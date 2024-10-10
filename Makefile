@@ -1,3 +1,4 @@
+# TODO: Separate out run and build, store run logs in prove.log instead of cycles.txt
 export RUST_LOG=info
 
 all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wasm-sp1
