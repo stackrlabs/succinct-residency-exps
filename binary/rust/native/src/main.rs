@@ -5,7 +5,7 @@ use std::io::BufReader;
 use serde_json::Value;
 
 fn main() {
-    let file = File::open("../../../inputs/binary.json").expect("Failed to open config file");    
+    let file = File::open("../../../inputs/binary.json").expect("Failed to open input file");    
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Unable to parse JSON");
 

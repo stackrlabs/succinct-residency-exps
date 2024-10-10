@@ -15,7 +15,7 @@ fn main() {
         .with_env_filter(tracing_subscriber::filter::EnvFilter::from_default_env())
         .init();
 
-    let file = File::open("../../../inputs/merkle.json").expect("Failed to open config file");
+    let file = File::open("../../../inputs/merkle.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     let input_value = json["numLeaves"]

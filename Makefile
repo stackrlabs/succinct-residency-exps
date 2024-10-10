@@ -1,7 +1,7 @@
 # TODO: Separate out run and build, store run logs in prove.log instead of cycles.txt
 export RUST_LOG=info
 
-all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wasm-sp1
+all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wasm-sp1 rust-jolt
 
 binary-native = binary/rust/native
 prime-native = prime/rust/native
@@ -58,15 +58,15 @@ rust-risc-zero:
 rust-wasm-risc-zero:
 	@echo "Running Rust wasm RISC Zero benchmark..."
 	cd ${prime-rust}/wasm; wasm-pack build
-	cd ${prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${binary-rust}/wasm; wasm-pack build
-	cd ${binary-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${binary-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${merkle-rust}/wasm; wasm-pack build
-	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${tsp-rust}/wasm; wasm-pack build
-	cd ${tsp-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${tsp-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${eth-verify-rust}/wasm; wasm-pack build
-	cd ${eth-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${eth-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 
 prove-risc-zero:
 	@echo "Reading environment variables..."
@@ -76,6 +76,14 @@ prove-risc-zero:
 	cd ${merkle-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 	cd ${merkle-rust}/wasm; wasm-pack build
 	cd ${merkle-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
+
+rust-jolt:
+	@echo "Running Rust Jolt benchmark..."
+	cd ${prime-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${binary-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${merkle-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${tsp-rust}/native_jolt; cargo run --release > cycles.txt
+	# cd ${eth-verify-rust}/native_jolt; cargo run --release > cycles.txt
 
 # go benchmarks
 binary-go = binary/go
