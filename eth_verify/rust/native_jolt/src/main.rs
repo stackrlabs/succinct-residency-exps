@@ -17,7 +17,7 @@ pub fn main() {
     let expected_hash = B256::from_slice(&expected_hash);
 
     let summary = guest::analyze_verify_block(expected_hash, header);
-    println!("summary: {:?}", summary.trace_len());
+    println!("Trace length: {:?}", summary.trace_len());
 
     // let (output, proof) = prove_merkelize_wrapper(leaves);   
     // let is_valid = verify_merkelize_wrapper(proof);
