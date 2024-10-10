@@ -1,7 +1,10 @@
+
 Input list: 300000
 Input value: 374117190
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 24627616
+instantiate wasm cycles: 4629062
+is_binary_search cycles: 203611158
 binary_search 374117190 - 1
-[2m2024-10-09T22:21:39.826714Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::exec::executor[0m[2m:[0m execution time: 7.12812675s
-[2m2024-10-09T22:21:39.826750Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::session[0m[2m:[0m number of segments: 289
-[2m2024-10-09T22:21:39.826754Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::session[0m[2m:[0m total cycles: 303038464
-[2m2024-10-09T22:21:39.826757Z[0m [32m INFO[0m [2mrisc0_zkvm::host::server::session[0m[2m:[0m user cycles: 232877979
+total cycles: 232871841
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.

@@ -1,6 +1,6 @@
 export RUST_LOG=info
 
-all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero
+all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wasm-sp1
 
 binary-native = binary/rust/native
 prime-native = prime/rust/native
@@ -57,15 +57,15 @@ rust-risc-zero:
 rust-wasm-risc-zero:
 	@echo "Running Rust wasm RISC Zero benchmark..."
 	cd ${prime-rust}/wasm; wasm-pack build
-	cd ${prime-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${binary-rust}/wasm; wasm-pack build
-	cd ${binary-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${binary-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-rust}/wasm; wasm-pack build
-	cd ${merkle-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${tsp-rust}/wasm; wasm-pack build
-	cd ${tsp-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${tsp-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${eth-verify-rust}/wasm; wasm-pack build
-	cd ${eth-verify-rust}/wasm_risc_zero/; cargo run --release -- --execute > cycles.txt
+	cd ${eth-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 
 # go benchmarks
 binary-go = binary/go
