@@ -1,9 +1,11 @@
-Input value: 1000
+   Compiling methods v0.1.0 (/Users/aashutosh/stackr/succinct-residency-exps/merkle/rust/wasm_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/aashutosh/stackr/succinct-residency-exps/merkle/rust/wasm_risc_zero/host)
+    Finished `dev` profile [optimized + debuginfo] target(s) in 1.28s
+     Running `target/debug/host`
+Input value: 10
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 4650328
-Size of encoded leaves: 10898
-instantiate wasm cycles: 7132268
-merkelize cycles: 396600624
-merkelized 1
-total cycles: 408386400
+input load cycles: 4215948
+instantiate wasm cycles: 5992722
+merkelize cycles: 399999181
+total cycles: 410209990
 WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.

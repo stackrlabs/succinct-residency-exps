@@ -1,2 +1,2 @@
-Input value: 1000
-Merkle Root: "b2a4aaabd92a292c62028428199d0b54557480771179daa558f050d36bdd4236"
+Input value: 10
+Merkle Root: 1

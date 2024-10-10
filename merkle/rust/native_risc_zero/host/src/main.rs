@@ -20,7 +20,7 @@ fn main() {
         .expect("Failed to parse value from JSON") as i32;
 
     let leaves = (0..input_value)
-        .map(|i| i.to_string().as_bytes().to_vec())
+        .map(|_| vec![0; 32])
         .collect::<Vec<_>>();
 
     let env = ExecutorEnv::builder()

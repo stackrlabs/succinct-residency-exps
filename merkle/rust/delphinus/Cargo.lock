@@ -227,6 +227,7 @@ name = "wasm"
 version = "0.1.0"
 dependencies = [
  "bincode",
+ "hex",
  "sha2",
  "wasm-bindgen",
 ]

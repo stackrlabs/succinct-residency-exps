@@ -1,6 +1,6 @@
 use clap::Parser;
 use hex;
-use wasm::merkelize_impl;
+use wasm::merkelize;
 use serde_json::Value;
 use std::fs::File;
 use std::io::BufReader;
@@ -13,11 +13,8 @@ fn main() {
 
     let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", input_value);
-    let leaves = (0..input_value)
-        .map(|i| i.to_string().as_bytes().to_vec())
-        .collect::<Vec<_>>();
     
-    let root = merkelize_impl(leaves);
+    let root = merkelize(input_value);
 
-    println!("Merkle Root: {:?}", hex::encode(root));
+    println!("Merkle Root: {:?}", root);
 }
