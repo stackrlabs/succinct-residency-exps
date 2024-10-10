@@ -57,6 +57,10 @@ fn main() {
 
         println!("Successfully generated proof!");
 
+        proof
+        .save("proof-with-pis.bin")
+        .expect("saving proof failed");
+
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
         println!("Successfully verified proof!");

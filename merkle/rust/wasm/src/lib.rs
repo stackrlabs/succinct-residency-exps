@@ -1,7 +1,7 @@
 use sha2::{Digest, Sha256};
 use hex;
 
-pub fn merkelize_impl(leaves: Vec<Vec<u8>>) -> [u8; 32] {
+pub fn merkelize_impl(leaves: Vec<[u8; 32]>) -> [u8; 32] {
     if leaves.is_empty() {
         return [0; 32];
     }
@@ -28,7 +28,7 @@ pub fn merkelize_impl(leaves: Vec<Vec<u8>>) -> [u8; 32] {
 pub fn merkelize(leaves_base_2: i32) -> u32 {
     let total_leaves = 2_usize.pow(leaves_base_2 as u32);
     let leaves = (0..total_leaves)
-        .map(|_| vec![0; 32])
+        .map(|_| [0u8; 32])
         .collect::<Vec<_>>();
     let root = merkelize_impl(leaves);
     println!("Merkle root: {:?}", hex::encode(root));
@@ -36,7 +36,7 @@ pub fn merkelize(leaves_base_2: i32) -> u32 {
 }
 
 fn sha256_hash(data: &[u8]) -> [u8; 32] {
-    let mut hasher = Sha256::new();
-    hasher.update(data);
-    hasher.finalize().into()
+    let hasher = Sha256::new();
+    let result = hasher.finalize();
+    Into::<[u8; 32]>::into(result)
 }

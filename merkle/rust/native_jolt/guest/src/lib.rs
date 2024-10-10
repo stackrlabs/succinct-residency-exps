@@ -1,8 +1,9 @@
+#![cfg_attr(feature = "guest", no_std)]
 #![no_main]
 
-use wasm::merkelize_impl;
+use wasm::merkelize;
 
-#[jolt::provable]
-fn merkelize_wrapper(leaves: Vec<Vec<u8>>) -> [u8; 32] {
-    merkelize_impl(leaves)
+#[jolt::provable(stack_size = 100000000000, memory_size = 100000000000)]
+fn merkelize_wrapper(leaves_count: i32) -> u32 {
+    merkelize(leaves_count)
 }
