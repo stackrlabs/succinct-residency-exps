@@ -1,7 +1,8 @@
 Input value: 10
-[2m2024-10-10T19:36:42.516601Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x20179c    
-[2m2024-10-10T19:36:42.516679Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-10T19:36:42.734548Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x203e1c    
-[2m2024-10-10T19:36:42.816356Z[0m [32m INFO[0m [1mexecute[0m: └╴13,763,867 cycles    
-[2m2024-10-10T19:36:42.818069Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m305ms [3mtime.idle[0m[2m=[0m9.21µs
+[2m2024-10-10T20:09:32.506343Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x20179c    
+[2m2024-10-10T20:09:32.506450Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-10T20:09:32.747141Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x204314    
+stdout: Merkle root: "86e76e201c2ead88b8bded0b23912e431a1babc89ef151e505438622350bd991"
+[2m2024-10-10T20:09:32.833271Z[0m [32m INFO[0m [1mexecute[0m: └╴13,767,933 cycles    
+[2m2024-10-10T20:09:32.835083Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m341ms [3mtime.idle[0m[2m=[0m10.2µs
 Program executed successfully.

@@ -1,7 +1,3 @@
-   Compiling methods v0.1.0 (/Users/aashutosh/stackr/succinct-residency-exps/merkle/rust/native_risc_zero/methods)
-   Compiling host v0.1.0 (/Users/aashutosh/stackr/succinct-residency-exps/merkle/rust/native_risc_zero/host)
-    Finished `dev` profile [optimized + debuginfo] target(s) in 1.07s
-     Running `target/debug/host`
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
 input load cycles: 86
 Merkle root: "86e76e201c2ead88b8bded0b23912e431a1babc89ef151e505438622350bd991"

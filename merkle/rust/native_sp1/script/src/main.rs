@@ -41,8 +41,7 @@ fn main() {
     // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let root = output.read::<[u8; 32]>();
-        println!("root: {}", hex::encode(root));
+        let root = output.read::<i32>();
     } else {
         // Setup the program for proving.
         let (pk, vk) = client.setup(ELF);
