@@ -1,5 +1,4 @@
 use clap::Parser;
-use hex;
 use wasm::merkelize;
 use serde_json::Value;
 use std::fs::File;
@@ -13,8 +12,8 @@ fn main() {
 
     let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", input_value);
-    
-    let root = merkelize(input_value);
-
-    println!("Merkle Root: {:?}", root);
+    let start = std::time::Instant::now();
+    merkelize(input_value);
+    let duration = start.elapsed();
+    println!("Time elapsed: {:?}", duration);
 }

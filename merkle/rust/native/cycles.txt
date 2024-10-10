@@ -1,2 +1,3 @@
 Input value: 10
-Merkle Root: 1
+Merkle root: "86e76e201c2ead88b8bded0b23912e431a1babc89ef151e505438622350bd991"
+Time elapsed: 497.792µs
