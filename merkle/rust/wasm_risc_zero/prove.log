@@ -13,4 +13,7 @@ warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` t
      Running `target/release/host`
 Input value: 10
 Merkelized: 1
-BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG= =  0.34s user 0.19s system 0% cpu 4:16.06 total
+
+real	4m16.353s
+user	0m0.315s
+sys	0m0.197s
