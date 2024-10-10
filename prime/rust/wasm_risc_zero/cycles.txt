@@ -1,0 +1,6 @@
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 1498002
+instantiate wasm cycles: 2254003
+is_prime cycles: 1496347
+total cycles: 5250436
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
