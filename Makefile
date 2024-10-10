@@ -77,6 +77,14 @@ prove-risc-zero:
 	cd ${merkle-rust}/wasm; wasm-pack build
 	cd ${merkle-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
 
+rust-jolt:
+	@echo "Running Rust Jolt benchmark..."
+	cd ${prime-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${binary-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${merkle-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${tsp-rust}/native_jolt; cargo run --release > cycles.txt
+	# cd ${eth-verify-rust}/native_jolt; cargo run --release > cycles.txt
+
 # go benchmarks
 binary-go = binary/go
 go-wasm-sp1:
