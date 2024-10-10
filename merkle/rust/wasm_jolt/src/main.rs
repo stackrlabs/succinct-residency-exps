@@ -11,13 +11,9 @@ pub fn main() {
     // let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     // let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
     // FIXME: using a lower value cz of memory issues
-    let input_value = 10;
+    let input_value = 5;
     println!("Input value: {}", input_value);
-    // Construct leaves for input
-    let leaves = (0..input_value)
-        .map(|i| i.to_string().as_bytes().to_vec())
-        .collect::<Vec<_>>();
 
-    let summary = guest::analyze_merkelize(leaves, &wasm);
+    let summary = guest::analyze_merkelize(input_value, &wasm);
     println!("Trace length: {:?}", summary.trace_len());
 }
