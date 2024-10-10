@@ -13,11 +13,15 @@ pub fn is_prime(number: i32) -> bool {
         return false;
     }
     // Only need to check up to the square root of the number
-    let limit = (number as f64).sqrt() as i32;
-    for i in (3..=limit).step_by(2) {
+    // let limit = (number as f64).sqrt() as i32;
+    // sqrt on f64 throws 'not yet implemented', so we can break the loop when i * i > number
+    for i in (3..=number).step_by(2) {
         if number % i == 0 {
             return false;
-        }   
+        }
+        if i * i > number {
+            break;
+        }
     }
     true
 }
