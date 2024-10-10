@@ -1,0 +1,19 @@
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/merkle/rust/wasm_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/merkle/rust/wasm_risc_zero/host)
+warning: unused import: `GUEST_CODE_FOR_MERKEL_TREE_ID`
+ --> host/src/main.rs:3:47
+  |
+3 | use methods::{GUEST_CODE_FOR_MERKEL_TREE_ELF, GUEST_CODE_FOR_MERKEL_TREE_ID};
+  |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` to apply 1 suggestion)
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 03s
+     Running `target/release/host`
+Input value: 10
+Merkelized: 1
+
+real	4m16.353s
+user	0m0.315s
+sys	0m0.197s

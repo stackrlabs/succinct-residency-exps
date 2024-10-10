@@ -5,6 +5,9 @@ use risc0_zkvm::{default_prover, ExecutorEnv};
 use serde_json::Value;
 use std::fs::File;
 use std::io::BufReader;
+use std::path::PathBuf;
+use bincode;
+use std::fs;
 
 fn main() {
     // Initialize tracing. In order to view logs, run `RUST_LOG=info cargo run`
@@ -39,9 +42,11 @@ fn main() {
     // extract the receipt.
     let receipt = prove_info.receipt;
 
-    let _output: u32 = receipt.journal.decode().unwrap();
+    let res: i32 = receipt.journal.decode().unwrap();
+    println!("Output: {}", res);
 
-    // The receipt was verified at the end of proving, but the below code is an
-    // example of how someone else could verify this receipt.
-    receipt.verify(GUEST_CODE_FOR_MERKELIZATION_ID).unwrap();
+    // Save the receipt to disk
+    let output_path = PathBuf::from("proof.bin");
+    let receipt_data = bincode::serialize(&receipt).unwrap();
+    fs::write(output_path, receipt_data).expect("Failed to write to output file");
 }
