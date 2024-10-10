@@ -3,6 +3,8 @@ use wasmi::{Engine, Linker, Module, Store};
 use wasmi::core::Pages;
 use bincode;
 
+const PAGE_SIZE: u32 = 65536;
+
 fn main() {
     let total_cycles = env::cycle_count();
 
@@ -27,12 +29,12 @@ fn main() {
 
     // write list to memory
     let memory = instance.get_memory(&store,"memory").expect("Failed to get memory");
-    let ptr = u32::from(memory.current_pages(&mut store)) * 64 * 1024;
+    let ptr = u32::from(memory.current_pages(&mut store)) * PAGE_SIZE;
     // grow memory to fit the graph
     let encoded_graph = bincode::serialize(&graph).expect("Failed to encode graph");
     let encoded_graph_size = encoded_graph.len();
     println!("Size of encoded graph: {}", encoded_graph_size);
-    let pages_to_grow = (encoded_graph_size as u32 + 65535) / 65536;
+    let pages_to_grow = (encoded_graph_size as u32 + PAGE_SIZE - 1) / PAGE_SIZE;
     memory.grow(&mut store, Pages::new(pages_to_grow).expect("Failed to grow memory")).unwrap();
     memory.write(&mut store, ptr as usize, &encoded_graph).expect("Failed to write to memory");
     let init_end = env::cycle_count();

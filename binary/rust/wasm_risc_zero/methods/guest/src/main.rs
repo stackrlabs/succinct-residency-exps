@@ -2,6 +2,7 @@ use risc0_zkvm::guest::env;
 use wasmi::{Engine, Linker, Module, Store};
 use wasmi::core::Pages;
 use bytemuck;
+const PAGE_SIZE: u32 = 65536;
 
 fn main() {
     let total_cycles = env::cycle_count();
@@ -28,9 +29,9 @@ fn main() {
 
     // write list to memory
     let memory = instance.get_memory(&store,"memory").expect("Failed to get memory");
-    let ptr = u32::from(memory.current_pages(&mut store)) * 64 * 1024;
+    let ptr = u32::from(memory.current_pages(&mut store)) * PAGE_SIZE;
     let encoded_list = bytemuck::cast_slice(&list);
-    let pages_to_grow = (encoded_list.len() as u32 + 65535) / 65536;
+    let pages_to_grow = (encoded_list.len() as u32 + PAGE_SIZE - 1) / PAGE_SIZE;
     memory.grow(&mut store, Pages::new(pages_to_grow).expect("Failed to grow memory")).unwrap();
     memory.write(&mut store, ptr as usize, encoded_list).expect("Failed to write to memory");
     let init_end = env::cycle_count();

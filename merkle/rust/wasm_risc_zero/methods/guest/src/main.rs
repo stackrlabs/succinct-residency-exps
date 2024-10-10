@@ -3,6 +3,7 @@ use wasmi::{Engine, Linker, Module, Store};
 use wasmi::core::Pages;
 use bincode;
 
+const PAGE_SIZE: u32 = 65536;
 fn main() {
     let total_cycles = env::cycle_count();
 
@@ -27,12 +28,12 @@ fn main() {
 
     // write list to memory
     let memory = instance.get_memory(&store,"memory").expect("Failed to get memory");
-    let ptr = u32::from(memory.current_pages(&mut store)) * 64 * 1024;
+    let ptr = u32::from(memory.current_pages(&mut store)) * PAGE_SIZE;
     // grow memory to fit the leaves
     let encoded_leaves = bincode::serialize(&leaves).expect("Failed to encode leaves");
     let encoded_leaves_size = encoded_leaves.len();
     println!("Size of encoded leaves: {}", encoded_leaves_size);
-    let pages_to_grow = (encoded_leaves_size as u32 + 65535) / 65536;
+    let pages_to_grow = (encoded_leaves_size as u32 + PAGE_SIZE - 1) / PAGE_SIZE;
     memory.grow(&mut store, Pages::new(pages_to_grow).expect("Failed to grow memory")).unwrap();
     memory.write(&mut store, ptr as usize, &encoded_leaves).expect("Failed to write to memory");
     let init_end = env::cycle_count();
