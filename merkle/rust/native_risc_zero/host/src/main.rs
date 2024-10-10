@@ -8,7 +8,6 @@ use std::io::BufReader;
 use std::path::PathBuf;
 use bincode;
 use std::fs;
-use hex;
 
 fn main() {
     // Initialize tracing. In order to view logs, run `RUST_LOG=info cargo run`
@@ -43,8 +42,8 @@ fn main() {
     // extract the receipt.
     let receipt = prove_info.receipt;
 
-    let root: [u8; 32] = receipt.journal.decode().unwrap();
-    println!("Output: {}", hex::encode(root));
+    let res: i32 = receipt.journal.decode().unwrap();
+    println!("Output: {}", res);
 
     // Save the receipt to disk
     let output_path = PathBuf::from("proof.bin");
