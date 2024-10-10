@@ -58,15 +58,15 @@ rust-risc-zero:
 rust-wasm-risc-zero:
 	@echo "Running Rust wasm RISC Zero benchmark..."
 	cd ${prime-rust}/wasm; wasm-pack build
-	cd ${prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${binary-rust}/wasm; wasm-pack build
-	cd ${binary-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${binary-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${merkle-rust}/wasm; wasm-pack build
-	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${tsp-rust}/wasm; wasm-pack build
-	cd ${tsp-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${tsp-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${eth-verify-rust}/wasm; wasm-pack build
-	cd ${eth-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${eth-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 
 prove-risc-zero:
 	@echo "Reading environment variables..."
