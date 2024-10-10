@@ -5,7 +5,7 @@ use std::io::BufReader;
 pub fn main() {
     // Read in wasm file from disk
     let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
-    // Read the JSON file
+    // Read the input JSON file
     // let file = File::open("../../../inputs/merkle.json").expect("Failed to open input file");
     // let reader = BufReader::new(file);
     // let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");

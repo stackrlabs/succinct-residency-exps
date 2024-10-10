@@ -77,6 +77,8 @@ rust-wasm-jolt:
 	cd ${binary-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
 	cd ${merkle-rust}/wasm; wasm-pack build
 	cd ${merkle-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
+	cd ${tsp-rust}/wasm; wasm-pack build
+	cd ${tsp-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
 
 prove-risc-zero:
 	@echo "Reading environment variables..."
