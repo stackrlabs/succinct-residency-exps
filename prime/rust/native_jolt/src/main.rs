@@ -11,13 +11,13 @@ pub fn main() {
     let input = json["number"].as_i64().expect("Failed to parse number from JSON") as i32;
 
     println!("Input number read from JSON: {}", input);
-    let (prove_is_prime_wrapper, verify_is_prime_wrapper) = guest::build_is_prime_wrapper();
-    // let summary = guest::analyze_is_prime_wrapper(input);
-    // println!("summary: {:?}", summary.trace_len());
+    // let (prove_is_prime_wrapper, verify_is_prime_wrapper) = guest::build_is_prime_wrapper();
+    let summary = guest::analyze_is_prime_wrapper(input);
+    println!("Trace length: {:?}", summary.trace_len());
 
-    let (output, proof) = prove_is_prime_wrapper(input);
-    let is_valid = verify_is_prime_wrapper(proof);
+    // let (output, proof) = prove_is_prime_wrapper(input);
+    // let is_valid = verify_is_prime_wrapper(proof);
 
-    println!("output: {}", output);
-    println!("valid: {}", is_valid);
+    // println!("output: {}", output);
+    // println!("valid: {}", is_valid);
 }

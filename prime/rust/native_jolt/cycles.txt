@@ -1,4 +1,2 @@
 Input number read from JSON: 9999991
 Trace length: 43806
-output: true
-valid: true

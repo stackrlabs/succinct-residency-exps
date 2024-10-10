@@ -1,2 +1,2 @@
 Input value: 1000
-summary: 13807459
+Trace length: 13807459
