@@ -1,8 +1,6 @@
 use wasm_bindgen::prelude::*;
-use sha2::{Sha256, Digest};
 use zkwasm_rust_sdk::{
     wasm_input,
-    require,
     dbg,
 };
 use wasm::is_prime;
