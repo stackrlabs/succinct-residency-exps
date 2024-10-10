@@ -36,7 +36,10 @@ function binary_search(list: i64[], number: i64): i32 {
 
 export function zkmain(): void {
   let number = read_public_input();
-  // read from inputs like this 1:i64,0:i64 one by one
-  let list: i64[] = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+  let list: i64[] = [];
+  let length = read_private_input();
+  for (let i = 0; i < length; i++) {
+    list.push(read_private_input());
+  }
   require(binary_search(list, number));
 }
