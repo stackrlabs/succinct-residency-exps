@@ -39,10 +39,10 @@ pub fn main() {
     println!("cycle-tracker-end: instantiate wasm");
 
     println!("cycle-tracker-start: call wasm");
-    let binary_search = instance
+    let merkelize = instance
         .get_typed_func::<(i32, i32), i32>(&mut store, "merkelize")
         .expect("Failed to get typed_func");
-    let res = binary_search.call(&mut store, (ptr, encoded_leaves_size as i32)).expect("Failed to call");
+    let res = merkelize.call(&mut store, (ptr, encoded_leaves_size as i32)).expect("Failed to call");
     println!("cycle-tracker-end: call wasm");
     println!("merkelized - {}", res);
 

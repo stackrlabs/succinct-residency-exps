@@ -1,0 +1,2 @@
+Input value: 10
+Trace length: 11735982
