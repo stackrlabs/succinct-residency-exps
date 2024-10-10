@@ -74,3 +74,13 @@ go-wasm-sp1:
 	@echo "Running Go wasm SP1 benchmark..."
 	cd ${binary-go}/wasm; tinygo build -o main.wasm -target=wasm-unknown main.go
 	cd ${binary-go}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+
+merklize:
+	@echo "Running Merkle benchmark..."
+	# cd ${merkle-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/native_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/wasm; wasm-pack build
+	cd ${merkle-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-rust}/delphinus; make build && ./test.sh > cycles.txt

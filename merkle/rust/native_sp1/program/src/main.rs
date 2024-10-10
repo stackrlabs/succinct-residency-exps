@@ -3,15 +3,14 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use wasm::merkelize_impl;
+use wasm::merkelize;
 
 pub fn main() {
-    let leaves = sp1_zkvm::io::read::<Vec<Vec<u8>>>();
+    let leaves_count = sp1_zkvm::io::read::<i32>();
     println!("cycle-tracker-start: execution");
 
-    let res = merkelize_impl(leaves);
+    let res = merkelize(leaves_count);
     println!("cycle-tracker-end: execution");
-    println!("merkelize: root: {:?}", res);
 
     sp1_zkvm::io::commit(&res);
 }

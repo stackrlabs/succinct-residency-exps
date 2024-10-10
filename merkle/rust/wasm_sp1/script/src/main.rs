@@ -33,14 +33,11 @@ fn main() {
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", input_value);
-    let leaves = (0..input_value)
-        .map(|i| i.to_string().as_bytes().to_vec())
-        .collect::<Vec<_>>();
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
-    stdin.write(&leaves);
+    stdin.write(&input_value);
 
     if args.execute {
     // Execute the program
