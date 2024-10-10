@@ -4,7 +4,8 @@
 sp1_zkvm::entrypoint!(main);
 
 use wasmi::{Caller, Engine, Instance, Linker, Memory, Module, Store};
-use bytemuck::cast_slice;
+use bytemuck;
+const PAGE_SIZE: u32 = 65536;
 
 pub fn main() {
     println!("cycle-tracker-start: read inputs");
@@ -20,18 +21,6 @@ pub fn main() {
     let mut linker = <Linker<String>>::new(&engine);
     let mut store = Store::new(&engine, "42".to_string());
 
-
-    linker.func_wrap(
-        "host", 
-        "read_array", 
-        move |mut caller: Caller<'_, String>, ptr: i32, len: i32| {
-            let mem = caller.get_export("memory").unwrap().into_memory().unwrap();
-            let mut buf = vec![0u8; len as usize];
-            let data = mem.read(&mut caller, ptr as usize, &mut buf).expect("Failed to read memory");
-            println!("data: {:?}", data);
-        },
-    ).unwrap();
-
     let instance = linker
         .instantiate(&mut store, &module)
         .unwrap()
@@ -41,8 +30,10 @@ pub fn main() {
     // write list to memory
     let memory = instance.get_memory(&store,"memory").expect("Failed to get memory");
     let ptr = memory.data_size(&mut store) as i32;
-    memory.grow(&mut store, list.len() as u32).expect("Failed to grow memory");
-    memory.write(&mut store, ptr as usize, bytemuck::cast_slice(&list)).expect("Failed to write to memory");
+    let encoded_list = bytemuck::cast_slice(&list);
+    let pages_to_grow = (encoded_list.len() as u32 + PAGE_SIZE - 1) / PAGE_SIZE;
+    memory.grow(&mut store, pages_to_grow).expect("Failed to grow memory");
+    memory.write(&mut store, ptr as usize, encoded_list).expect("Failed to write to memory");
     println!("cycle-tracker-end: instantiate wasm");
 
     println!("cycle-tracker-start: call wasm");

@@ -31,11 +31,14 @@ fn main() {
 
     let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", input_value);
+    let leaves = (0..input_value)
+        .map(|i| i.to_string().as_bytes().to_vec())
+        .collect::<Vec<_>>();
     let args = Args::parse();
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
-    stdin.write(&input_value);
+    stdin.write(&leaves);
 
     if args.execute {
     // Execute the program

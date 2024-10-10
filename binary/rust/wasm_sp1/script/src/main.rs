@@ -2,7 +2,9 @@
 
 use sp1_sdk::{ProverClient, SP1Stdin};
 use clap::Parser;
-
+use std::fs::File;
+use std::io::BufReader;
+use serde_json::Value;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -25,16 +27,23 @@ fn main() {
     let args = Args::parse();
     // Read in wasm file from disk
     let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+    // Read the JSON file
+    let file = File::open("../../../../inputs/binary.json").expect("Failed to open config file");
+    let reader = BufReader::new(file);
+    let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
 
-    let list = (1..10000).collect::<Vec<i32>>();
-    let number_to_check = 9999;
-    println!("Number to check: {}", number_to_check);
-    println!("List length: {}", list.len());
+    // Extract the number from the JSON
+    let input_json = json["list"].as_array().expect("Failed to parse list from JSON");
+    let input_list: Vec<i32> = input_json.iter().map(|v| v.as_i64().expect("Failed to parse list from JSON") as i32).collect();
+    let number_to_check = json["value"].as_i64().expect("Failed to parse value from JSON") as i32;
+    println!("Input list: {}", input_list.len());
+    println!("Input value: {}", number_to_check);
+
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
     stdin.write(&wasm);
-    stdin.write(&list);
+    stdin.write(&input_list);
     stdin.write(&number_to_check);
 
     if args.execute {
