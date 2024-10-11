@@ -1,0 +1,8 @@
+Input n read from JSON: 100
+[2m2024-10-11T10:12:40.816655Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x20183c    
+[2m2024-10-11T10:12:40.816739Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-11T10:12:40.817160Z[0m [32m INFO[0m [1mexecute[0m: └╴14,172 cycles    
+stdout: The 100th prime is 541.
+[2m2024-10-11T10:12:40.818556Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m6.34ms [3mtime.idle[0m[2m=[0m11.1µs
+Program executed successfully.
+res: 541

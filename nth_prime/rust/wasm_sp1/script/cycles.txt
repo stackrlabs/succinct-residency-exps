@@ -1,0 +1,11 @@
+Input n read from JSON: 100
+[2m2024-10-11T10:23:04.494532Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2156b0    
+stdout: WARNING: Using insecure random number generator.
+[2m2024-10-11T10:23:04.512967Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
+[2m2024-10-11T10:23:04.702333Z[0m [32m INFO[0m [1mexecute[0m: └╴6,529,034 cycles    
+[2m2024-10-11T10:23:04.718526Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
+[2m2024-10-11T10:23:04.750670Z[0m [32m INFO[0m [1mexecute[0m: └╴1,038,078 cycles    
+stdout: The 100th prime is 541.
+[2m2024-10-11T10:23:04.805983Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m342ms [3mtime.idle[0m[2m=[0m21.7µs
+Program executed successfully.
+res: 541

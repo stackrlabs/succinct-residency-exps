@@ -1,0 +1,9 @@
+Input: 100
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 3806067
+instantiate wasm cycles: 5165888
+nth_prime cycles: 1037550
+The 100th prime is 541.
+total cycles: 10013559
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Output: 541
