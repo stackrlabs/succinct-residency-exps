@@ -1,0 +1,21 @@
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/wasm_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/wasm_risc_zero/host)
+warning: unused import: `GUEST_CODE_FOR_MERKEL_TREE_ID`
+ --> host/src/main.rs:3:47
+  |
+3 | use methods::{GUEST_CODE_FOR_MERKEL_TREE_ELF, GUEST_CODE_FOR_MERKEL_TREE_ID};
+  |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` to apply 1 suggestion)
+    Finished `release` profile [optimized + debuginfo] target(s) in 36.64s
+     Running `target/release/host`
+Input value: 1
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 12272106
+instantiate wasm cycles: 17021464
+bls_aggregate cycles: 4547688819
+total cycles: 4576984631
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Merkelized: 1
