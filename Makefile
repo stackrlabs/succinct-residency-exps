@@ -3,6 +3,7 @@ export RUST_LOG=info
 
 all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wasm-sp1 rust-jolt
 
+# Rust benchmarks
 binary-native = binary/rust/native
 prime-native = prime/rust/native
 merkle-native = merkle/rust/native
@@ -67,6 +68,20 @@ rust-wasm-risc-zero:
 	cd ${tsp-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${eth-verify-rust}/wasm; wasm-pack build
 	cd ${eth-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
+
+rust-wasm-jolt:
+	@echo "Running Rust Wasm Jolt benchmark..."
+	cd ${prime-rust}/wasm; wasm-pack build
+	cd ${prime-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
+	cd ${binary-rust}/wasm; wasm-pack build
+	cd ${binary-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
+	cd ${merkle-rust}/wasm; wasm-pack build
+	cd ${merkle-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
+	cd ${tsp-rust}/wasm; wasm-pack build
+	cd ${tsp-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
+	cd ${eth-verify-rust}/wasm; wasm-pack build
+	cd ${eth-verify-rust}/wasm_jolt/; RUST_LOG="[executor]=info" cargo run &> cycles.txt
+
 
 prove-risc-zero:
 	@echo "Reading environment variables..."
