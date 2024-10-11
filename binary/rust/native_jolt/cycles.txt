@@ -1,0 +1,3 @@
+Input list: 300000
+Input value: 374117190
+Trace length: 15561317

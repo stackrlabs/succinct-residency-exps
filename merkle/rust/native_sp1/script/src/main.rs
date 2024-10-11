@@ -1,11 +1,10 @@
 //! A simple script to generate and verify the proof of a given program.
 
-use sp1_sdk::{ProverClient, SP1Stdin};
+use sp1_sdk::{ProverClient, SP1Stdin, SP1ProofWithPublicValues};
 use clap::Parser;
 use std::fs::File;
 use std::io::BufReader;
 use serde_json::Value;
-use hex;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -25,7 +24,7 @@ fn main() {
     sp1_sdk::utils::setup_logger();
 
     // Read the JSON file
-    let file = File::open("../../../../inputs/merkle.json").expect("Failed to open config file");
+    let file = File::open("../../../../inputs/merkle.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
 
@@ -59,6 +58,14 @@ fn main() {
         .expect("saving proof failed");
     
         println!("Successfully generated proof!");
+
+        proof
+        .save("proof-with-pis.bin")
+        .expect("saving proof failed");
+        let deserialized_proof = SP1ProofWithPublicValues::load("proof-with-pis.bin").expect("loading proof failed");
+        println!("deserialized_proof.public_values: {:?}", deserialized_proof.public_values);
+        println!("deserialized_proof.stdin: {:?}", deserialized_proof.stdin);
+        println!("deserialized_proof.sp1_version: {:?}", deserialized_proof.sp1_version);
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
