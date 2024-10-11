@@ -12,5 +12,4 @@ guest = []
 
 [dependencies]
 jolt = { package = "jolt-sdk", git = "https://github.com/a16z/jolt", features = ["guest-std"]}
-wasm = { path = "../../wasm" }
 wasmi = "0.31.0"
