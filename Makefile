@@ -4,6 +4,13 @@ export RUST_LOG=info
 all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wasm-sp1 rust-jolt
 
 # Rust benchmarks
+binary-rust = binary/rust
+prime-rust = prime/rust
+merkle-rust = merkle/rust
+tsp-rust = tsp/rust
+eth-verify-rust = eth_verify/rust
+nth-prime-rust = nth_prime/rust
+
 binary-native = binary/rust/native
 prime-native = prime/rust/native
 merkle-native = merkle/rust/native
@@ -30,11 +37,6 @@ rust-sp1:
 	cd ${tsp-sp1}; cargo run --release -- --execute > cycles.txt
 	cd ${eth-verify-sp1}; cargo run --release -- --execute > cycles.txt
 
-binary-rust = binary/rust
-prime-rust = prime/rust
-merkle-rust = merkle/rust
-tsp-rust = tsp/rust
-eth-verify-rust = eth_verify/rust
 rust-wasm-sp1:
 	@echo "Running Rust wasm SP1 benchmark..."
 	cd ${binary-rust}/wasm; wasm-pack build
@@ -87,10 +89,14 @@ prove-risc-zero:
 	@echo "Reading environment variables..."
 	@echo "BONSAI_API_KEY: ${BONSAI_API_KEY}"
 	@echo "BONSAI_API_URL: ${BONSAI_API_URL}"
-	@echo "Proving RISC Zero benchmarks..."
+	@echo "Proving RISC Zero benchmarks [merkle]..."
 	cd ${merkle-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 	cd ${merkle-rust}/wasm; wasm-pack build
 	cd ${merkle-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
+	@echo "Proving RISC Zero benchmarks [nth-prime]..."
+	cd ${nth-prime-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${nth-prime-rust}/wasm; wasm-pack build
+	cd ${nth-prime-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
 
 rust-jolt:
 	@echo "Running Rust Jolt benchmark..."
@@ -116,3 +122,14 @@ merklize:
 	cd ${merkle-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-rust}/delphinus; make build && ./test.sh > cycles.txt
+
+nth-prime:
+	@echo "Running nth-prime benchmark..."
+	cd ${nth-prime-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${nth-prime-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${nth-prime-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${nth-prime-rust}/native_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${nth-prime-rust}/wasm; wasm-pack build
+	cd ${nth-prime-rust}/wasm_jolt; cargo run --release > cycles.txt
+	cd ${nth-prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${nth-prime-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
