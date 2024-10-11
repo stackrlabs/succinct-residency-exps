@@ -1,0 +1,18 @@
+Input value: 1
+[2m2024-10-11T21:09:03.127832Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201744    
+[2m2024-10-11T21:09:03.128552Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-11T21:09:03.517243Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x20ed60    
+[2m2024-10-11T21:09:03.834771Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x20e238    
+[2m2024-10-11T21:09:04.142878Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x216234    
+[2m2024-10-11T21:09:04.446922Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x20e0c8    
+[2m2024-10-11T21:09:04.751526Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x20e434    
+[2m2024-10-11T21:09:05.095657Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x216138    
+[2m2024-10-11T21:09:05.402563Z[0m [32m INFO[0m [1mexecute[0m: clk = 70000000 pc = 0x20e6f0    
+[2m2024-10-11T21:09:05.705367Z[0m [32m INFO[0m [1mexecute[0m: clk = 80000000 pc = 0x20ddf4    
+[2m2024-10-11T21:09:06.008284Z[0m [32m INFO[0m [1mexecute[0m: clk = 90000000 pc = 0x20e46c    
+[2m2024-10-11T21:09:06.312125Z[0m [32m INFO[0m [1mexecute[0m: clk = 100000000 pc = 0x20e078    
+[2m2024-10-11T21:09:06.618874Z[0m [32m INFO[0m [1mexecute[0m: clk = 110000000 pc = 0x21aacc    
+stdout: aggregated_signature: Signature(G2Affine { x: 0x0af9afa0f990e4f558297215551de348644bd79f99732cfa6c0444191eacbfe52b6daecda0c63433cae56e2e6cf96065 + 0x0a93b2a349b475d50bb8b4c2a1194794764e477aab0736b95a433350f506d6e093844d9bd65200449295146ecadf2eb7*u, y: 0x1165631335cc2ac8050a96e024c554aededca46f11b82adb6134543f962970ea978164ae2a49628f9856e320fd843817 + 0x172cf623691b8ff3d396d618b4100d5fe77a4b7233806823ad6152c5a362a453138042b1d7e625e037e6eac9dcb00d0e*u, infinity: Choice(0) })
+[2m2024-10-11T21:09:06.730985Z[0m [32m INFO[0m [1mexecute[0m: └╴113,528,361 cycles    
+[2m2024-10-11T21:09:06.734541Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m3.61s [3mtime.idle[0m[2m=[0m12.7µs
+Program executed successfully.
