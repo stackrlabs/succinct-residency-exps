@@ -1,0 +1,18 @@
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/native_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/native_risc_zero/host)
+warning: unused import: `GUEST_CODE_FOR_MERKELIZATION_ID`
+ --> host/src/main.rs:3:49
+  |
+3 | use methods::{GUEST_CODE_FOR_MERKELIZATION_ELF, GUEST_CODE_FOR_MERKELIZATION_ID};
+  |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` to apply 1 suggestion)
+    Finished `release` profile [optimized + debuginfo] target(s) in 38.93s
+     Running `target/release/host`
+Output: 1
+
+real	1m43.494s
+user	0m0.157s
+sys	0m0.106s

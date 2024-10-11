@@ -1,0 +1,6 @@
+input load cycles: 86
+aggregated_signature: Signature(G2Affine { x: 0x0af9afa0f990e4f558297215551de348644bd79f99732cfa6c0444191eacbfe52b6daecda0c63433cae56e2e6cf96065 + 0x0a93b2a349b475d50bb8b4c2a1194794764e477aab0736b95a433350f506d6e093844d9bd65200449295146ecadf2eb7*u, y: 0x1165631335cc2ac8050a96e024c554aededca46f11b82adb6134543f962970ea978164ae2a49628f9856e320fd843817 + 0x172cf623691b8ff3d396d618b4100d5fe77a4b7233806823ad6152c5a362a453138042b1d7e625e037e6eac9dcb00d0e*u, infinity: Choice(0) })
+bls aggregation cycles: 120780635
+total cycles: 120782026
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Output: 1
