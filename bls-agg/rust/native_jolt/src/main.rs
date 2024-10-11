@@ -3,16 +3,16 @@ use std::fs::File;
 use std::io::BufReader;
 pub fn main() {
     // Read the JSON file
-    let file = File::open("../../../inputs/merkle.json").expect("Failed to open input file");
+    let file = File::open("../../../inputs/bls_agg.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
 
-    let num_leaves = json["numLeaves"]
-        .as_i64()
-        .expect("Failed to parse value from JSON") as i32;
-    println!("Input value: {}", num_leaves);
+    let num_signers = json["numSigners"]
+        .as_u64()
+        .expect("Failed to parse value from JSON") as u32;
+    println!("Input value: {}", num_signers);
     
-    let summary = guest::analyze_merkelize_wrapper(num_leaves);
+    let summary = guest::analyze_bls_aggregate_wrapper(num_signers);
     println!("Trace length: {:?}", summary.trace_len());
 
     // let (prove_merkelize_wrapper, verify_merkelize_wrapper) = guest::build_merkelize_wrapper();

@@ -1,10 +1,9 @@
-// #![cfg_attr(feature = "guest")]
 #![no_main]
 
-use wasm::merkelize;
+use wasm::bls_aggregate;
 
-#[jolt::provable(stack_size = 10000000)]
-fn merkelize_wrapper(leaves_count: i32) -> u32 {
-    merkelize(leaves_count)
+#[jolt::provable(stack_size = 1_000_000, memory_size = 1_000_000)]
+fn bls_aggregate_wrapper(num_signers: u32) -> u32 {
+    bls_aggregate(num_signers)
 }
 
