@@ -45,7 +45,7 @@ fn main() {
         // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
-        let res = output.read::<u64>();
+        let res = output.read::<u32>();
         println!("res: {}", res);
     } else {
         // Setup the program for proving.
