@@ -12,5 +12,8 @@ fn main() {
 
     let input_value = json["numSigners"].as_i64().expect("Failed to parse value from JSON") as u32;
     println!("Input value: {}", input_value);
+    let start = std::time::Instant::now();
     bls_aggregate(input_value);
+    let duration = start.elapsed();
+    println!("Time elapsed: {:?}", duration);
 }
