@@ -12,16 +12,11 @@ pub fn bls_aggregate(num_signers: u32) -> u32 {
             .map(|i| PrivateKey::new(&[i as u8; 32]))
             .collect();
 
-        // generate messages
-        let messages: Vec<Vec<u8>> = (0..num_signers)
-            .map(|_| "message".as_bytes().to_vec())
-            .collect();
-
+        let message = "message".as_bytes().to_vec();
         // sign messages
-        let sigs = messages
+        let sigs = private_keys
             .iter()
-            .zip(&private_keys)
-            .map(|(message, pk)| pk.sign(message))
+            .map(|pk| pk.sign(&message))
             .collect::<Vec<Signature>>();
 
         let aggregated_signature = aggregate(&sigs).expect("failed to aggregate");
