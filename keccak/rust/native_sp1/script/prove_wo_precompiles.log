@@ -1,5 +1,5 @@
    Compiling keccak-native_sp1-script v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/native_sp1/script)
-warning: keccak-native_sp1-script@0.1.0: keccak-native_sp1-program built at 2024-10-11 18:03:58
+warning: keccak-native_sp1-script@0.1.0: keccak-native_sp1-program built at 2024-10-13 13:39:01
 warning: unused variable: `report`
   --> src/main.rs:42:26
    |
@@ -9,22 +9,25 @@ warning: unused variable: `report`
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `keccak-native_sp1-script` (bin "keccak-native_sp1-script") generated 1 warning
-    Finished `release` profile [optimized] target(s) in 7.44s
+    Finished `release` profile [optimized] target(s) in 3.37s
      Running `target/release/keccak-native_sp1-script --prove`
-Input num_iterations read from JSON: 1
-[2m2024-10-12T01:04:02.440754Z[0m [32m INFO[0m Client circuit version: v2.0.0    
-[2m2024-10-12T01:04:13.062826Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m5.39ms [3mtime.idle[0m[2m=[0m4.25µs
-[2m2024-10-12T01:04:13.068924Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201784    
-[2m2024-10-12T01:04:13.069042Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-12T01:04:13.070026Z[0m [32m INFO[0m [1mexecute[0m: └╴19,746 cycles    
+Input num_iterations read from JSON: 100
+[2m2024-10-13T20:39:04.330139Z[0m [32m INFO[0m Client circuit version: v2.0.0    
+[2m2024-10-13T20:39:14.417528Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m4.11ms [3mtime.idle[0m[2m=[0m2.83µs
+[2m2024-10-13T20:39:14.423105Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201784    
+[2m2024-10-13T20:39:14.423221Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-13T20:39:14.512582Z[0m [32m INFO[0m [1mexecute[0m: └╴1,932,030 cycles    
 stdout: keccak_n result: 1
-[2m2024-10-12T01:04:13.071871Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m7.81ms [3mtime.idle[0m[2m=[0m917ns
-[2m2024-10-12T01:04:13.071883Z[0m [32m INFO[0m Simulation complete, cycles: 26122    
-[2m2024-10-12T01:04:15.170433Z[0m [32m INFO[0m Created proofrequest_01j9z42bcqf77t7h4wwve3ttez    
-[2m2024-10-12T01:04:15.170606Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01j9z42bcqf77t7h4wwve3ttez    
-[2m2024-10-12T01:04:17.668957Z[0m [32m INFO[0m Proof request claimed, proving...    
-[2m2024-10-12T01:04:37.481727Z[0m [32m INFO[0m Proof request fulfilled    
+[2m2024-10-13T20:39:14.514398Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m95.6ms [3mtime.idle[0m[2m=[0m500ns
+[2m2024-10-13T20:39:14.514411Z[0m [32m INFO[0m Simulation complete, cycles: 1938406    
+[2m2024-10-13T20:39:16.536903Z[0m [32m INFO[0m Created proofrequest_01ja3spkate03sdjecmzh403at    
+[2m2024-10-13T20:39:16.537068Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja3spkate03sdjecmzh403at    
+[2m2024-10-13T20:39:18.873620Z[0m [32m INFO[0m Proof request claimed, proving...    
+[2m2024-10-13T20:39:49.541245Z[0m [32m INFO[0m Proof request fulfilled    
 Successfully generated proof!
-[2m2024-10-12T01:04:38.435115Z[0m [32m INFO[0m [1mverify[0m: close [3mtime.busy[0m[2m=[0m240ms [3mtime.idle[0m[2m=[0m7.38µs
+[2m2024-10-13T20:39:52.096627Z[0m [32m INFO[0m [1mverify[0m: close [3mtime.busy[0m[2m=[0m199ms [3mtime.idle[0m[2m=[0m3.83µs
 Successfully verified proof!
-SP1_PROVER=network SP1_PRIVATE_KEY= RUST_LOG=info cargo run --release --   38.46s user 1.51s system 89% cpu 44.562 total
+
+real	0m51.961s
+user	0m38.103s
+sys	0m1.303s

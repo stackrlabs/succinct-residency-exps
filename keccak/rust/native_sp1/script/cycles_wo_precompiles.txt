@@ -1,8 +1,21 @@
-Input num_iterations read from JSON: 1
-[2m2024-10-12T00:52:52.458634Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201784    
-[2m2024-10-12T00:52:52.459226Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-12T00:52:52.460213Z[0m [32m INFO[0m [1mexecute[0m: └╴19,746 cycles    
+   Compiling keccak-native_sp1-script v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/native_sp1/script)
+warning: keccak-native_sp1-script@0.1.0: keccak-native_sp1-program built at 2024-10-13 13:38:46
+warning: unused variable: `report`
+  --> src/main.rs:42:26
+   |
+42 |         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
+   |                          ^^^^^^ help: if this is intentional, prefix it with an underscore: `_report`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `keccak-native_sp1-script` (bin "keccak-native_sp1-script") generated 1 warning
+    Finished `release` profile [optimized] target(s) in 6.50s
+     Running `target/release/keccak-native_sp1-script --execute`
+Input num_iterations read from JSON: 100
+[2m2024-10-13T20:39:00.076348Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201784    
+[2m2024-10-13T20:39:00.076712Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-13T20:39:00.166237Z[0m [32m INFO[0m [1mexecute[0m: └╴1,932,030 cycles    
 stdout: keccak_n result: 1
-[2m2024-10-12T00:52:52.462020Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m19.3ms [3mtime.idle[0m[2m=[0m18.6µs
+[2m2024-10-13T20:39:00.168099Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m98.6ms [3mtime.idle[0m[2m=[0m19.9µs
 Program executed successfully.
 res: 1
