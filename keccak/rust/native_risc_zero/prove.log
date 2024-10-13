@@ -1,10 +1,10 @@
    Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/native_risc_zero/methods)
    Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/native_risc_zero/host)
-    Finished `release` profile [optimized + debuginfo] target(s) in 1m 03s
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 30s
      Running `target/release/host`
-Input: 1
+Input: 100
 Output: 1
 
-real	1m15.789s
-user	0m0.250s
-sys	0m0.139s
+real	1m47.494s
+user	0m0.232s
+sys	0m0.138s

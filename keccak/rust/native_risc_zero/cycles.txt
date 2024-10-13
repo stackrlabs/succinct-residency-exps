@@ -1,7 +1,11 @@
-Input: 1
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/native_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/native_risc_zero/host)
+    Finished `dev` profile [optimized + debuginfo] target(s) in 3.92s
+     Running `target/debug/host`
+Input: 100
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
 input load cycles: 86
-keccak cycles: 28340
-total cycles: 29651
+keccak cycles: 2827862
+total cycles: 2829198
 WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
 Output: 1

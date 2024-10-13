@@ -1,25 +1,25 @@
-warning: keccak-wasm_sp1-script@0.1.0: keccak-wasm_sp1-program built at 2024-10-13 12:24:44
-warning: unused variable: `report`
-  --> src/main.rs:46:26
-   |
-46 |         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
-   |                          ^^^^^^ help: if this is intentional, prefix it with an underscore: `_report`
-   |
-   = note: `#[warn(unused_variables)]` on by default
-
-warning: `keccak-wasm_sp1-script` (bin "keccak-wasm_sp1-script") generated 1 warning
-    Finished `release` profile [optimized] target(s) in 1.71s
-     Running `target/release/keccak-wasm_sp1-script --execute`
-Input num_iterations read from JSON: 1
-[2m2024-10-13T19:26:42.528814Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2156b0    
-[2m2024-10-13T19:26:42.532064Z[0m [32m INFO[0m [1mexecute[0m: ┌╴wasm input    
-[2m2024-10-13T19:26:42.634569Z[0m [32m INFO[0m [1mexecute[0m: └╴593,255 cycles    
-[2m2024-10-13T19:26:42.635750Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
+Input num_iterations read from JSON: 100
+[2m2024-10-13T20:23:21.641608Z[0m [32m INFO[0m Client circuit version: v2.0.0    
+[2m2024-10-13T20:23:37.625841Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m10.4ms [3mtime.idle[0m[2m=[0m211µs
+[2m2024-10-13T20:23:37.690577Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2156b0    
+[2m2024-10-13T20:23:37.691176Z[0m [32m INFO[0m [1mexecute[0m: ┌╴wasm input    
+[2m2024-10-13T20:23:37.719672Z[0m [32m INFO[0m [1mexecute[0m: └╴593,255 cycles    
+[2m2024-10-13T20:23:37.719709Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
 stdout: WARNING: Using insecure random number generator.
-[2m2024-10-13T19:26:43.395215Z[0m [32m INFO[0m [1mexecute[0m: └╴5,122,856 cycles    
-[2m2024-10-13T19:26:43.395319Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
-[2m2024-10-13T19:26:43.539076Z[0m [32m INFO[0m [1mexecute[0m: └╴1,293,932 cycles    
+[2m2024-10-13T20:23:37.962811Z[0m [32m INFO[0m [1mexecute[0m: └╴5,122,856 cycles    
+[2m2024-10-13T20:23:37.962845Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
+[2m2024-10-13T20:23:38.145466Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x229f38    
+[2m2024-10-13T20:23:38.570951Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x229270    
+[2m2024-10-13T20:23:38.999192Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x200c6c    
+[2m2024-10-13T20:23:39.423963Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x205f68    
+[2m2024-10-13T20:23:39.810318Z[0m [32m INFO[0m [1mexecute[0m: └╴43,348,538 cycles    
 stdout: keccak_n result: 1
-[2m2024-10-13T19:26:43.793187Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m1.43s [3mtime.idle[0m[2m=[0m1.61ms
-Program executed successfully.
-res: 1
+[2m2024-10-13T20:23:39.881643Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m2.25s [3mtime.idle[0m[2m=[0m43.5µs
+[2m2024-10-13T20:23:39.883880Z[0m [32m INFO[0m Simulation complete, cycles: 49073375    
+[2m2024-10-13T20:23:45.529557Z[0m [32m INFO[0m Created proofrequest_01ja3rt2nsf4kr10bkqf2py97q    
+[2m2024-10-13T20:23:45.530803Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja3rt2nsf4kr10bkqf2py97q    
+[2m2024-10-13T20:23:47.873453Z[0m [32m INFO[0m Proof request claimed, proving...    
+[2m2024-10-13T20:25:17.634062Z[0m [32m INFO[0m Proof request fulfilled    
+Successfully generated proof!
+[2m2024-10-13T20:25:18.657522Z[0m [32m INFO[0m [1mverify[0m: close [3mtime.busy[0m[2m=[0m195ms [3mtime.idle[0m[2m=[0m4.46µs
+Successfully verified proof!
