@@ -6,13 +6,14 @@ sp1_zkvm::entrypoint!(main);
 use wasmi::{Engine, Linker, Module, Store};
 
 pub fn main() {
+    println!("cycle-tracker-start: wasm input");
     let wasm = sp1_zkvm::io::read::<Vec<u8>>();
     let input = sp1_zkvm::io::read::<u32>();
+    println!("cycle-tracker-end: wasm input");
 
-    let engine = Engine::default();
     println!("cycle-tracker-start: instantiate wasm");
+    let engine = Engine::default();
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
-    println!("cycle-tracker-end: instantiate wasm");
 
     let linker = <Linker<u32>>::new(&engine);
     let mut store = Store::new(&engine, input.clone());
@@ -22,6 +23,7 @@ pub fn main() {
         .unwrap()
         .start(&mut store)
         .unwrap();
+    println!("cycle-tracker-end: instantiate wasm");
 
     println!("cycle-tracker-start: call wasm");
     let keccak_n = instance
