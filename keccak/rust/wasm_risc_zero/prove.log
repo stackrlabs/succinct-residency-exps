@@ -1,0 +1,10 @@
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/wasm_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/wasm_risc_zero/host)
+    Finished `release` profile [optimized + debuginfo] target(s) in 38.97s
+     Running `target/release/host`
+Input: 1
+Output: 1
+
+real	1m1.306s
+user	0m0.192s
+sys	0m0.106s

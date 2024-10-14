@@ -1,0 +1,13 @@
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/wasm_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/keccak/rust/wasm_risc_zero/host)
+    Finished `release` profile [optimized + debuginfo] target(s) in 40.38s
+     Running `target/release/host`
+Input: 1
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 2740906
+instantiate wasm cycles: 3789812
+keccak_n cycles: 1275021
+keccak_n result: 1
+total cycles: 7808955
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Output: 1

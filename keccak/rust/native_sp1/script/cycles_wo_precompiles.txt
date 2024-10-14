@@ -1,0 +1,8 @@
+Input num_iterations read from JSON: 1
+[2m2024-10-12T00:52:52.458634Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201784    
+[2m2024-10-12T00:52:52.459226Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-12T00:52:52.460213Z[0m [32m INFO[0m [1mexecute[0m: └╴19,746 cycles    
+stdout: keccak_n result: 1
+[2m2024-10-12T00:52:52.462020Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m19.3ms [3mtime.idle[0m[2m=[0m18.6µs
+Program executed successfully.
+res: 1

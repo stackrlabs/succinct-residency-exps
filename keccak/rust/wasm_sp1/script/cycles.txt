@@ -1,0 +1,25 @@
+warning: keccak-wasm_sp1-script@0.1.0: keccak-wasm_sp1-program built at 2024-10-13 12:24:44
+warning: unused variable: `report`
+  --> src/main.rs:46:26
+   |
+46 |         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
+   |                          ^^^^^^ help: if this is intentional, prefix it with an underscore: `_report`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `keccak-wasm_sp1-script` (bin "keccak-wasm_sp1-script") generated 1 warning
+    Finished `release` profile [optimized] target(s) in 1.71s
+     Running `target/release/keccak-wasm_sp1-script --execute`
+Input num_iterations read from JSON: 1
+[2m2024-10-13T19:26:42.528814Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2156b0    
+[2m2024-10-13T19:26:42.532064Z[0m [32m INFO[0m [1mexecute[0m: ┌╴wasm input    
+[2m2024-10-13T19:26:42.634569Z[0m [32m INFO[0m [1mexecute[0m: └╴593,255 cycles    
+[2m2024-10-13T19:26:42.635750Z[0m [32m INFO[0m [1mexecute[0m: ┌╴instantiate wasm    
+stdout: WARNING: Using insecure random number generator.
+[2m2024-10-13T19:26:43.395215Z[0m [32m INFO[0m [1mexecute[0m: └╴5,122,856 cycles    
+[2m2024-10-13T19:26:43.395319Z[0m [32m INFO[0m [1mexecute[0m: ┌╴call wasm    
+[2m2024-10-13T19:26:43.539076Z[0m [32m INFO[0m [1mexecute[0m: └╴1,293,932 cycles    
+stdout: keccak_n result: 1
+[2m2024-10-13T19:26:43.793187Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m1.43s [3mtime.idle[0m[2m=[0m1.61ms
+Program executed successfully.
+res: 1
