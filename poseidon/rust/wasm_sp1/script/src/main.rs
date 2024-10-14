@@ -1,10 +1,10 @@
 //! A simple script to generate and verify the proof of a given program.
 
-use sp1_sdk::{ProverClient, SP1Stdin};
 use clap::Parser;
+use serde_json::Value;
+use sp1_sdk::{ProverClient, SP1Stdin};
 use std::fs::File;
 use std::io::BufReader;
-use serde_json::Value;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -24,14 +24,17 @@ fn main() {
     sp1_sdk::utils::setup_logger();
 
     // Read in wasm file from disk
-    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+    let wasm =
+        include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
 
     // Read the JSON file
     let file = File::open("../../../../inputs/poseidon.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     // Extract the number from the JSON
-    let input = json["arrayLength"].as_u64().expect("Failed to parse arrayLength from JSON") as u32;
+    let input = json["arrayLength"]
+        .as_u64()
+        .expect("Failed to parse arrayLength from JSON") as u32;
     println!("Input arrayLength read from JSON: {}", input);
 
     let args = Args::parse();
@@ -54,16 +57,15 @@ fn main() {
         // Generate the proof
         let proof = client
             .prove(&pk, stdin)
-            .compressed()
+            .groth16()
             .run()
             .expect("failed to generate proof");
 
         println!("Successfully generated proof!");
 
-        proof
-        .save("proof-with-pis.bin")
-        .expect("saving proof failed");
-        
+        let proof_bytes = proof.bytes();
+        println!("Proof Size: {}", proof_bytes.len());
+
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
         println!("Successfully verified proof!");
