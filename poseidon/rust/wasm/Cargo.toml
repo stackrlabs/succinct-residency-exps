@@ -1,0 +1,14 @@
+[package]
+name = "wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "wasm"
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+poseidon-ark = { git = "https://github.com/arnaucube/poseidon-ark" }
+ark-bn254 = "0.4.0"
+ark-std = "0.4.0"
