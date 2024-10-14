@@ -60,9 +60,8 @@ fn main() {
 
         println!("Successfully generated proof!");
 
-        proof
-        .save("proof-with-pis.bin")
-        .expect("saving proof failed");
+        let proof_bytes = proof.bytes();
+        println!("Proof Size: {}", proof_bytes.len());
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
