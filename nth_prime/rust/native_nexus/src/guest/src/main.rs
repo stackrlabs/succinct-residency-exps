@@ -1,6 +1,7 @@
 #![cfg_attr(target_arch = "riscv32", no_std, no_main)]
 extern crate alloc;
 use alloc::vec;
+use nexus_rt::{read_private_input};
 
 #[nexus_rt::profile]
 fn nth_prime_exec(n: u32) -> u64 {
@@ -26,7 +27,7 @@ fn nth_prime(n: u32) -> u64 {
  
 #[nexus_rt::main]
 fn main() {
-    let n = 100;
+    let n = read_private_input::<u32>().expect("failed to read input");
     let result = nth_prime_exec(n);
-    assert_eq!(541, result);
+    assert_eq!(2, result);
 }
