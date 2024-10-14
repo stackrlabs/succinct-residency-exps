@@ -3313,6 +3313,7 @@ name = "wasm_nexus"
 version = "0.1.0"
 dependencies = [
  "nexus-sdk",
+ "serde_json",
 ]
 
 [[package]]
