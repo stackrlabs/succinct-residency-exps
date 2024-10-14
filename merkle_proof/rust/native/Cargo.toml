@@ -1,0 +1,9 @@
+[package]
+name = "merkle_proof-native"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wasm = { path = "../wasm" }
+serde_json = "1.0"
+

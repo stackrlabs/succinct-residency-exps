@@ -54,10 +54,15 @@ fn main() {
         // Generate the proof
         let proof = client
             .prove(&pk, stdin)
+            .compressed()
             .run()
             .expect("failed to generate proof");
 
         println!("Successfully generated proof!");
+
+        proof
+        .save("proof-with-pis.bin")
+        .expect("saving proof failed");
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
