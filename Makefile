@@ -15,6 +15,7 @@ keccak-rust = keccak/rust
 poseidon-rust = poseidon/rust
 bls-agg-rust = bls-agg/rust
 ecdsa-verify-rust = ecdsa_verify/rust
+bls-verify-rust = bls-verify/rust
 
 binary-native = binary/rust/native
 prime-native = prime/rust/native
@@ -220,3 +221,13 @@ run-ecdsa-verify:
 	cd ${ecdsa-verify-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+
+run-bls-verify:
+	@echo "Running BLS verify benchmark..."
+	# cd ${bls-verify-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${bls-verify-rust}/native_sp1/script; cargo run --release -- --execute > cycles_wo_precompiles.txt
+	cd ${bls-verify-rust}/native_sp1/script;SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove > prove_wo_precompiles.log
+	# cd ${bls-verify-rust}/wasm; wasm-pack build
+	# cd ${bls-verify-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	# cd ${bls-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	# cd ${bls-verify-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
