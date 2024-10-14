@@ -56,11 +56,6 @@ fn main() {
             .run()
             .expect("failed to generate proof");
 
-        proof
-            .save("proof-with-pis.bin")
-            .expect("saving proof failed");
-
-
         println!("Successfully generated proof!");
 
         proof

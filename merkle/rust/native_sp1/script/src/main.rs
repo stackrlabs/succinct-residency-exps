@@ -52,16 +52,12 @@ fn main() {
             .run()
             .expect("failed to generate proof");
 
-
-        proof
-        .save("proof-with-pis.bin")
-        .expect("saving proof failed");
-    
         println!("Successfully generated proof!");
 
         proof
         .save("proof-with-pis.bin")
         .expect("saving proof failed");
+
         let deserialized_proof = SP1ProofWithPublicValues::load("proof-with-pis.bin").expect("loading proof failed");
         println!("deserialized_proof.public_values: {:?}", deserialized_proof.public_values);
         println!("deserialized_proof.stdin: {:?}", deserialized_proof.stdin);
