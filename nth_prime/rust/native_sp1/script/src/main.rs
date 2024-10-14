@@ -1,10 +1,10 @@
 //! A simple script to generate and verify the proof of a given program.
 
-use sp1_sdk::{ProverClient, SP1Stdin};
 use clap::Parser;
+use serde_json::Value;
+use sp1_sdk::{ProverClient, SP1Stdin, SP1ProofWithPublicValues};
 use std::fs::File;
 use std::io::BufReader;
-use serde_json::Value;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 /// The arguments for the command.
@@ -49,10 +49,15 @@ fn main() {
         // Generate the proof
         let proof = client
             .prove(&pk, stdin)
+            .compressed()
             .run()
             .expect("failed to generate proof");
 
         println!("Successfully generated proof!");
+
+        proof
+            .save("proof-with-pis.bin")
+            .expect("saving proof failed");
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");

@@ -9,8 +9,8 @@ pub fn main() {
     let wasm = sp1_zkvm::io::read::<Vec<u8>>();
     let input = sp1_zkvm::io::read::<u32>();
 
-    let engine = Engine::default();
     println!("cycle-tracker-start: instantiate wasm");
+    let engine = Engine::default();
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
     println!("cycle-tracker-end: instantiate wasm");
 
