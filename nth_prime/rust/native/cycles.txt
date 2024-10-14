@@ -1,0 +1,3 @@
+Input n read from JSON: 100
+The 100th prime is 541.
+Time elapsed: 25.291µs

@@ -1,0 +1,10 @@
+[package]
+name = "nth_prime-native_risc_zero-methods-guest"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+risc0-zkvm = { version = "1.1.2", default-features = false, features = ['std'] }
+wasm = { path = "../../../wasm" }
