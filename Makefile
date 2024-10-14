@@ -7,6 +7,7 @@ all: rust-native rust-sp1 rust-wasm-sp1 rust-risc-zero rust-wasm-risc-zero go-wa
 binary-rust = binary/rust
 prime-rust = prime/rust
 merkle-rust = merkle/rust
+merkle-proof-rust = merkle_proof/rust
 tsp-rust = tsp/rust
 eth-verify-rust = eth_verify/rust
 nth-prime-rust = nth_prime/rust
@@ -102,6 +103,10 @@ prove-risc-zero:
 	cd ${keccak-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 	cd ${keccak-rust}/wasm; wasm-pack build
 	cd ${keccak-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
+	@echo "Proving RISC Zero benchmarks [merkle_proof]..."
+	cd ${merkle-proof-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${merkle-proof-rust}/wasm; wasm-pack build
+	cd ${merkle-proof-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
 
 rust-jolt:
 	@echo "Running Rust Jolt benchmark..."
@@ -149,3 +154,14 @@ keccak:
 	cd ${keccak-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${keccak-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${keccak-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+
+merkle-proof:
+	@echo "Running Merkle Proof Generation benchmark..."
+	cd ${merkle-proof-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${merkle-proof-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${merkle-proof-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-proof-rust}/native_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${merkle-proof-rust}/wasm; wasm-pack build
+	cd ${merkle-proof-rust}/wasm_jolt; cargo run --release > cycles.txt
+	cd ${merkle-proof-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${merkle-proof-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt

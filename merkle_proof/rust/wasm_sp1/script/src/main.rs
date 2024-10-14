@@ -23,18 +23,22 @@ fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
 
+    // Read in wasm file from disk
+    let wasm = include_bytes!("../../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
+
     // Read the JSON file
-    let file = File::open("../../../../inputs/keccak.json").expect("Failed to open input file");
+    let file = File::open("../../../../inputs/merkle_proof.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     // Extract the number from the JSON
-    let input = json["num_iterations"].as_u64().expect("Failed to parse num_iterations from JSON") as u32;
-    println!("Input num_iterations read from JSON: {}", input);
+    let input = json["numLeaves"].as_u64().expect("Failed to parse numLeaves from JSON") as u32;
+    println!("Input numLeaves read from JSON: {}", input);
 
     let args = Args::parse();
     // Setup the prover client.
     let client = ProverClient::new();
     let mut stdin = SP1Stdin::new();
+    stdin.write(&wasm);
     stdin.write(&input);
 
     if args.execute {
@@ -59,7 +63,7 @@ fn main() {
         proof
         .save("proof-with-pis.bin")
         .expect("saving proof failed");
-
+        
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
         println!("Successfully verified proof!");
