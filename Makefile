@@ -12,6 +12,7 @@ tsp-rust = tsp/rust
 eth-verify-rust = eth_verify/rust
 nth-prime-rust = nth_prime/rust
 keccak-rust = keccak/rust
+poseidon-rust = poseidon/rust
 
 binary-native = binary/rust/native
 prime-native = prime/rust/native
@@ -107,6 +108,10 @@ prove-risc-zero:
 	cd ${merkle-proof-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 	cd ${merkle-proof-rust}/wasm; wasm-pack build
 	cd ${merkle-proof-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
+	@echo "Proving RISC Zero benchmarks [poseidon]..."
+	cd ${poseidon-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${poseidon-rust}/wasm; wasm-pack build
+	cd ${poseidon-rust}/wasm_risc_zero/; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release) &> prove.log
 
 rust-jolt:
 	@echo "Running Rust Jolt benchmark..."
@@ -165,3 +170,14 @@ merkle-proof:
 	cd ${merkle-proof-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${merkle-proof-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-proof-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+
+poseidon:
+	@echo "Running Poseidon Hash benchmark..."
+	cd ${poseidon-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${poseidon-rust}/native_jolt; cargo run --release > cycles.txt
+	cd ${poseidon-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${poseidon-rust}/native_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${poseidon-rust}/wasm; wasm-pack build
+	cd ${poseidon-rust}/wasm_jolt; cargo run --release > cycles.txt
+	cd ${poseidon-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${poseidon-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
