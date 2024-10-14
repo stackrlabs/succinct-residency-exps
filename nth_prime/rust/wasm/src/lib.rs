@@ -1,6 +1,6 @@
 /// Compute the nth prime number where n is 1-indexed (i.e. p1 = 2, p2 = 3).
 #[no_mangle]
-fn nth_prime(n: u32) -> u64 {
+pub fn nth_prime(n: u64) -> u64 {
     if n == 0 {
         return 0;
     }
