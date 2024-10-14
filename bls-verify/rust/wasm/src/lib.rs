@@ -7,38 +7,28 @@ use hkdf::Hkdf;
 use pairing::MultiMillerLoop;
 use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericArray, Sha256};
 use thiserror::Error;
+use std::io;
 
 #[no_mangle]
-pub fn bls_aggregate(num_signers: u32) -> u32 {
+pub fn bls_verify(num_signers: u32, aggregated_signature: &[u8]) -> u32 {
     let private_keys: Vec<_> = (0..num_signers)
         .map(|i| PrivateKey::new(&[i as u8; 32]))
         .collect();
-
-    for pk in &private_keys {
-        println!("pk: {:?}", pk.public_key());
-    }
-
     let message = "message".as_bytes().to_vec();
-    // sign messages
-    let sigs = private_keys
-        .iter()
-        .map(|pk| pk.sign(&message))
-        .collect::<Vec<Signature>>();
 
-    let aggregated_signature = aggregate(&sigs).expect("failed to aggregate");
-    println!("aggregated_signature: {:?}", aggregated_signature);
+    let aggregated_signature = Signature::from_bytes(aggregated_signature).expect("failed to decode aggregated signature");
 
-    let hashes = vec![hash(&message), hash(&message)];
+    let hashes = (0..num_signers).map(|_| hash(&message)).collect::<Vec<_>>();
 
     let public_keys = private_keys
             .iter()
-            .map(|pk| pk.public_key())
-            .collect::<Vec<_>>();
-        assert!(
-            verify(&aggregated_signature, &hashes, &public_keys),
+        .map(|pk| pk.public_key())
+        .collect::<Vec<_>>();
+
+    assert!(
+        verify(&aggregated_signature, &hashes, &public_keys),
             "failed to verify"
         );
-
     1
 }   
 
@@ -50,6 +40,50 @@ impl From<G2Projective> for Signature {
         Signature(val.into())
     }
 }
+impl From<Signature> for G2Projective {
+    fn from(val: Signature) -> Self {
+        val.0.into()
+    }
+}
+
+impl From<G2Affine> for Signature {
+    fn from(val: G2Affine) -> Self {
+        Signature(val)
+    }
+}
+
+impl From<Signature> for G2Affine {
+    fn from(val: Signature) -> Self {
+        val.0
+    }
+}
+
+const G2_COMPRESSED_SIZE: usize = 96;
+
+impl Serialize for Signature {
+    fn write_bytes(&self, dest: &mut impl io::Write) -> io::Result<()> {
+        dest.write_all(&self.0.to_compressed())?;
+
+        Ok(())
+    }
+
+    fn from_bytes(raw: &[u8]) -> Result<Self, Error> {
+        let g2 = g2_from_slice(raw)?;
+        Ok(g2.into())
+    }
+}
+
+fn g2_from_slice(raw: &[u8]) -> Result<G2Affine, Error> {
+    if raw.len() != G2_COMPRESSED_SIZE {
+        return Err(Error::SizeMismatch);
+    }
+
+    let mut res = [0u8; G2_COMPRESSED_SIZE];
+    res.copy_from_slice(raw);
+
+    Option::from(G2Affine::from_compressed(&res)).ok_or(Error::GroupDecode)
+}
+
 
 /// Aggregate signatures by multiplying them together.
 /// Calculated by `signature = \sum_{i = 0}^n signature_i`.
@@ -94,6 +128,8 @@ impl PrivateKey {
 }
 
 const CSUITE: &[u8] = b"BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_NUL_";
+pub(crate) const G1_COMPRESSED_SIZE: usize = 48;
+
 
 pub fn hash(msg: &[u8]) -> G2Projective {
     <G2Projective as HashToCurve<ExpandMsgXmd<sha2::Sha256>>>::hash_to_curve(msg, CSUITE)
@@ -132,6 +168,44 @@ impl PublicKey {
         verify_messages(&sig, &[message.as_ref()], &[*self])
     }
 }
+
+pub trait Serialize: ::std::fmt::Debug + Sized {
+    /// Writes the key to the given writer.
+    fn write_bytes(&self, dest: &mut impl io::Write) -> io::Result<()>;
+
+    /// Recreate the key from bytes in the same form as `write_bytes` produced.
+    fn from_bytes(raw: &[u8]) -> Result<Self, Error>;
+
+    fn as_bytes(&self) -> Vec<u8> {
+        let mut res = Vec::with_capacity(8 * 4);
+        self.write_bytes(&mut res).expect("preallocated");
+        res
+    }
+}
+
+impl Serialize for PublicKey {
+    fn write_bytes(&self, dest: &mut impl io::Write) -> io::Result<()> {
+        let t = self.0.to_affine();
+        let tmp = t.to_compressed();
+        dest.write_all(tmp.as_ref())?;
+
+        Ok(())
+    }
+
+    fn from_bytes(raw: &[u8]) -> Result<Self, Error> {
+        if raw.len() != G1_COMPRESSED_SIZE {
+            return Err(Error::SizeMismatch);
+        }
+
+        let mut res = [0u8; G1_COMPRESSED_SIZE];
+        res.as_mut().copy_from_slice(raw);
+        let affine: G1Affine =
+            Option::from(G1Affine::from_compressed(&res)).ok_or(Error::GroupDecode)?;
+
+        Ok(PublicKey(affine.into()))
+    }
+}
+
 
 /// Verifies that the signature is the actual aggregated signature of messages - pubkeys.
 /// Calculated by `e(g1, signature) == \prod_{i = 0}^n e(pk_i, hash_i)`.
