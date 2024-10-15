@@ -17,7 +17,7 @@ pub fn bls_verify(num_signers: u32, aggregated_signature: &[u8]) -> u32 {
 
     let aggregated_signature = Signature::from_bytes(aggregated_signature).expect("failed to decode aggregated signature");
 
-    let hashes = (0..num_signers).map(|_| hash(&message)).collect::<Vec<_>>();
+    let hash = hash(&message);
 
     let public_keys = private_keys
             .iter()
@@ -25,7 +25,7 @@ pub fn bls_verify(num_signers: u32, aggregated_signature: &[u8]) -> u32 {
         .collect::<Vec<_>>();
 
     assert!(
-        verify(&aggregated_signature, &hashes, &public_keys),
+        verify(&aggregated_signature, &vec![hash; num_signers as usize], &public_keys),
             "failed to verify"
         );
     1
