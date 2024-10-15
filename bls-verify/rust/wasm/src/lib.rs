@@ -9,7 +9,6 @@ use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericAr
 use thiserror::Error;
 use std::io;
 
-#[no_mangle]
 pub fn bls_verify(num_signers: u32, aggregated_signature: &[u8]) -> u32 {
     let private_keys: Vec<_> = (0..num_signers)
         .map(|i| PrivateKey::new(&[i as u8; 32]))
@@ -30,7 +29,21 @@ pub fn bls_verify(num_signers: u32, aggregated_signature: &[u8]) -> u32 {
             "failed to verify"
         );
     1
-}   
+}
+
+#[no_mangle]
+pub fn bls_verify_wasm(num_signers: u32, data_ptr: *const i32, count: i32) -> u32 {
+    let aggregated_signature = read_aggregated_signature(data_ptr, count);
+    bls_verify(num_signers, &aggregated_signature)
+}
+
+// Reads list from linear memory
+fn read_aggregated_signature(data_ptr: *const i32, count: i32) -> Vec<u8> {
+    use core::slice;
+    let ptr = data_ptr as *const u8;
+    let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, count as usize).to_vec() };
+    data
+}
 
 #[derive(Debug)]
 pub struct Signature(G2Affine);
