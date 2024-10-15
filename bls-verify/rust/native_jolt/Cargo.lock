@@ -1285,6 +1285,7 @@ dependencies = [
 name = "guest"
 version = "0.1.0"
 dependencies = [
+ "hex",
  "jolt-sdk",
  "wasm",
 ]
@@ -3507,7 +3508,10 @@ name = "wasm"
 version = "0.1.0"
 dependencies = [
  "bls12_381",
+ "group",
+ "hex",
  "hkdf",
+ "pairing",
  "sha2 0.9.9",
  "thiserror",
  "wasm-bindgen",
