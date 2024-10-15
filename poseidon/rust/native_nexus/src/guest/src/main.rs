@@ -1,11 +1,12 @@
 #![cfg_attr(target_arch = "riscv32", no_std, no_main)]
+
 extern crate alloc;
 use alloc::vec::Vec;
-use ark_std::println;
-use ark_std::str::FromStr;
+use alloc::str::FromStr;
+use alloc::string::ToString;
 use ark_bn254::Fr;
 use poseidon_ark::Poseidon;
-use nexus_rt::read_private_input;
+use nexus_rt::{read_private_input, println};
 
 // Reimplemented here and not using Wasm package because of no_std
 fn poseidon_hash(arr_len: u32) -> u32 {
@@ -24,7 +25,6 @@ fn poseidon_hash(arr_len: u32) -> u32 {
 fn poseidon_hash_exec(n: u32) -> u32 {
     poseidon_hash(n)
 }
-
 
 #[nexus_rt::main]
 fn main() {

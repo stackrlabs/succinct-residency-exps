@@ -1107,8 +1107,10 @@ dependencies = [
 name = "guest"
 version = "0.1.0"
 dependencies = [
- "ark-std",
+ "crypto-common",
+ "hex",
  "nexus-rt",
+ "postcard",
  "sha2",
 ]
 
