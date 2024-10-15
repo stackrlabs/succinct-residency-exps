@@ -9,10 +9,10 @@ warning: unused import: `GUEST_CODE_FOR_MERKELIZATION_ID`
   = note: `#[warn(unused_imports)]` on by default
 
 warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` to apply 1 suggestion)
-    Finished `release` profile [optimized + debuginfo] target(s) in 1m 17s
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 29s
      Running `target/release/host`
 Output: 1
 
-real	3m14.187s
-user	0m0.262s
-sys	0m0.175s
+real	3m39.979s
+user	0m0.282s
+sys	0m0.173s

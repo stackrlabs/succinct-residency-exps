@@ -48,7 +48,7 @@ fn main() {
         // Generate the proof
         let proof = client
             .prove(&pk, stdin)
-            .compressed()
+            .groth16()
             .run()
             .expect("failed to generate proof");
 
