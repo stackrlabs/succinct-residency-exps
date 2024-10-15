@@ -1,0 +1,7 @@
+Input: 1
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 86
+poseidon_hash cycles: 309321
+total cycles: 310636
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Output: 1
