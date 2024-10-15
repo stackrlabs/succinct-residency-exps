@@ -224,13 +224,13 @@ run-ecdsa-verify:
 
 run-bls-verify:
 	@echo "Running BLS verify benchmark..."
-	# cd ${bls-verify-rust}/native; cargo run --release -- --execute > cycles.txt
-	# cd ${bls-verify-rust}/native_sp1/script; cargo run --release -- --execute > cycles.txt
-	# cd ${bls-verify-rust}/native_sp1/script;SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove > prove.log
-	# cd ${bls-verify-rust}/wasm; wasm-pack build
-	# cd ${bls-verify-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
-	# cd ${bls-verify-rust}/wasm_sp1/script;SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove > prove.log
+	cd ${bls-verify-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${bls-verify-rust}/native_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${bls-verify-rust}/native_sp1/script;SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove > prove.log
+	cd ${bls-verify-rust}/wasm; wasm-pack build
+	cd ${bls-verify-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${bls-verify-rust}/wasm_sp1/script;SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove > prove.log
 	cd ${bls-verify-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
-	# cd ${bls-verify-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
-	# cd ${bls-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
+	cd ${bls-verify-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${bls-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	
