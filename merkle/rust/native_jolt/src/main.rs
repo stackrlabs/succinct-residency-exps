@@ -1,6 +1,8 @@
 use serde_json::Value;
 use std::fs::File;
 use std::io::BufReader;
+use jolt::Serializable;
+
 pub fn main() {
     // Read the JSON file
     let file = File::open("../../../inputs/merkle.json").expect("Failed to open input file");
@@ -18,6 +20,9 @@ pub fn main() {
     // let (prove_merkelize_wrapper, verify_merkelize_wrapper) = guest::build_merkelize_wrapper();
     // let (output, proof) = prove_merkelize_wrapper(num_leaves);
     // let is_valid = verify_merkelize_wrapper(proof);
+    // proof
+    //     .save_to_file("proof.bin")
+    //     .expect("Failed to save proof to file");
 
     // println!("output: {}", hex::encode(output));
     // println!("valid: {}", is_valid);

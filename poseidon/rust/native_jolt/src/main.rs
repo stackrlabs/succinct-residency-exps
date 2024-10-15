@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::BufReader;
 use serde_json::Value;
+use jolt::Serializable;
 
 pub fn main() {
     // Read the input JSON file
@@ -19,8 +20,11 @@ pub fn main() {
 
     // let (prove_poseidon_hash_wrapper, verify_poseidon_hash_wrapper) = guest::build_poseidon_hash_wrapper();
     // let (output, proof) = prove_poseidon_hash_wrapper(input);
-    // let is_valid = verify_poseidon_hash_wrapper(proof);
+    // proof
+    //     .save_to_file("proof.bin")
+    //     .expect("Failed to save proof to file");
 
+    // let is_valid = verify_poseidon_hash_wrapper(proof);
     // println!("output: {:?}", output);
     // println!("valid: {}", is_valid);
 }
