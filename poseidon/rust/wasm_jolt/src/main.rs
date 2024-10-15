@@ -9,8 +9,8 @@ pub fn main() {
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
     // Extract the number from the JSON
-    let input = json["arrayLength"].as_u64().expect("Failed to parse arrayLength from JSON") as u32;
-    println!("Input arrayLength read from JSON: {}", input);
+    let input = json["num_iterations"].as_u64().expect("Failed to parse num_iterations from JSON") as u32;
+    println!("Input num_iterations read from JSON: {}", input);
     // Call the poseidon_hash_wasm_wrapper function which is jolt::provable
     let start = std::time::Instant::now();
     let summary = guest::analyze_poseidon_hash_wasm_wrapper(input, &wasm);

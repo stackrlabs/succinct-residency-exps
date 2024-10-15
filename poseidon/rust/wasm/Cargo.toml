@@ -9,6 +9,5 @@ crate-type = ["cdylib", "lib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
-poseidon-ark = { git = "https://github.com/arnaucube/poseidon-ark" }
-ark-bn254 = "0.4.0"
-ark-std = "0.4.0"
+starknet-crypto = { version = "0.7.2", default-features = false, features = ["alloc"] }
+starknet-types-core = { version = "0.1.6", default-features = false, features = ["alloc"] }
