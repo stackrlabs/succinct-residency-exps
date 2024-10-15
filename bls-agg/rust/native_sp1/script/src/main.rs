@@ -1,10 +1,10 @@
 //! A simple script to generate and verify the proof of a given program.
 
-use sp1_sdk::{ProverClient, SP1Stdin, SP1ProofWithPublicValues};
 use clap::Parser;
+use serde_json::Value;
+use sp1_sdk::{ProverClient, SP1ProofWithPublicValues, SP1Stdin};
 use std::fs::File;
 use std::io::BufReader;
-use serde_json::Value;
 
 const ELF: &[u8] = include_bytes!("../../program/elf/riscv32im-succinct-zkvm-elf");
 
@@ -28,7 +28,9 @@ fn main() {
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
 
-    let input_value = json["numSigners"].as_i64().expect("Failed to parse value from JSON") as u32;
+    let input_value = json["numSigners"]
+        .as_i64()
+        .expect("Failed to parse value from JSON") as u32;
     println!("Input value: {}", input_value);
     let args = Args::parse();
     // Setup the prover client.
@@ -37,7 +39,7 @@ fn main() {
     stdin.write(&input_value);
 
     if args.execute {
-    // Execute the program
+        // Execute the program
         let (mut output, report) = client.execute(ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
         let result = output.read::<u32>();
@@ -52,20 +54,8 @@ fn main() {
             .run()
             .expect("failed to generate proof");
 
-
-        proof
-        .save("proof-with-pis.bin")
-        .expect("saving proof failed");
-    
-        println!("Successfully generated proof!");
-
-        proof
-        .save("proof-with-pis.bin")
-        .expect("saving proof failed");
-        let deserialized_proof = SP1ProofWithPublicValues::load("proof-with-pis.bin").expect("loading proof failed");
-        println!("deserialized_proof.public_values: {:?}", deserialized_proof.public_values);
-        println!("deserialized_proof.stdin: {:?}", deserialized_proof.stdin);
-        println!("deserialized_proof.sp1_version: {:?}", deserialized_proof.sp1_version);
+        let proof_bytes = proof.bytes();
+        println!("Proof Size: {}", proof_bytes.len());
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");

@@ -1,5 +1,5 @@
 [package]
-name = "guest_code_for_merkelization"
+name = "guest_code_for_bls_agg"
 version = "0.1.0"
 edition = "2021"
 
