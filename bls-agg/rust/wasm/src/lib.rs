@@ -5,20 +5,10 @@ use bls12_381::{
 use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericArray, Sha256};
 use hkdf::Hkdf;
 use thiserror::Error;
+use std::io;
 
 #[no_mangle]
-pub fn bls_aggregate(num_signers: u32) -> u32 {
-    let private_keys: Vec<_> = (0..num_signers)
-            .map(|i| PrivateKey::new(&[i as u8; 32]))
-            .collect();
-
-        let message = "message".as_bytes().to_vec();
-        // sign messages
-        let sigs = private_keys
-            .iter()
-            .map(|pk| pk.sign(&message))
-            .collect::<Vec<Signature>>();
-
+pub fn bls_aggregate(sigs: Vec<Signature>) -> u32 {
         let aggregated_signature = aggregate(&sigs).expect("failed to aggregate");
         println!("aggregated_signature: {:?}", aggregated_signature);
         1
@@ -31,6 +21,63 @@ impl From<G2Projective> for Signature {
     fn from(val: G2Projective) -> Self {
         Signature(val.into())
     }
+}
+impl From<Signature> for G2Projective {
+    fn from(val: Signature) -> Self {
+        val.0.into()
+    }
+}
+
+impl From<G2Affine> for Signature {
+    fn from(val: G2Affine) -> Self {
+        Signature(val)
+    }
+}
+
+impl From<Signature> for G2Affine {
+    fn from(val: Signature) -> Self {
+        val.0
+    }
+}
+
+pub trait Serialize: ::std::fmt::Debug + Sized {
+    /// Writes the key to the given writer.
+    fn write_bytes(&self, dest: &mut impl io::Write) -> io::Result<()>;
+
+    /// Recreate the key from bytes in the same form as `write_bytes` produced.
+    fn from_bytes(raw: &[u8]) -> Result<Self, Error>;
+
+    fn as_bytes(&self) -> Vec<u8> {
+        let mut res = Vec::with_capacity(8 * 4);
+        self.write_bytes(&mut res).expect("preallocated");
+        res
+    }
+}
+
+const G2_COMPRESSED_SIZE: usize = 96;
+
+impl Serialize for Signature {
+    fn write_bytes(&self, dest: &mut impl io::Write) -> io::Result<()> {
+        dest.write_all(&self.0.to_compressed())?;
+
+        Ok(())
+    }
+
+    fn from_bytes(raw: &[u8]) -> Result<Self, Error> {
+        let g2 = g2_from_slice(raw)?;
+        Ok(g2.into())
+    }
+}
+
+fn g2_from_slice(raw: &[u8]) -> Result<G2Affine, Error> {
+    if raw.len() != G2_COMPRESSED_SIZE {
+        return Err(Error::SizeMismatch);
+    }
+
+    let mut res = [0u8; G2_COMPRESSED_SIZE];
+    res.copy_from_slice(raw);
+
+    Option::from(G2Affine::from_compressed(&res)).ok_or(Error::GroupDecode)
 }
 
 /// Aggregate signatures by multiplying them together.

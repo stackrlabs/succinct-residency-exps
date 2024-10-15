@@ -1,29 +1,10 @@
-Input value: 2
-[2m2024-10-11T23:10:18.299447Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201744    
-[2m2024-10-11T23:10:18.300500Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-11T23:10:18.843501Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x21024c    
-[2m2024-10-11T23:10:19.382948Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x20ddd8    
-[2m2024-10-11T23:10:19.903848Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x2150b0    
-[2m2024-10-11T23:10:20.422615Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x20e048    
-[2m2024-10-11T23:10:20.940444Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x20e6c0    
-[2m2024-10-11T23:10:21.458550Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x216f08    
-[2m2024-10-11T23:10:21.976166Z[0m [32m INFO[0m [1mexecute[0m: clk = 70000000 pc = 0x215e34    
-[2m2024-10-11T23:10:22.493583Z[0m [32m INFO[0m [1mexecute[0m: clk = 80000000 pc = 0x20e204    
-[2m2024-10-11T23:10:23.011342Z[0m [32m INFO[0m [1mexecute[0m: clk = 90000000 pc = 0x20de84    
-[2m2024-10-11T23:10:23.529330Z[0m [32m INFO[0m [1mexecute[0m: clk = 100000000 pc = 0x20dda0    
-[2m2024-10-11T23:10:24.048482Z[0m [32m INFO[0m [1mexecute[0m: clk = 110000000 pc = 0x21d864    
-[2m2024-10-11T23:10:24.593293Z[0m [32m INFO[0m [1mexecute[0m: clk = 120000000 pc = 0x20df30    
-[2m2024-10-11T23:10:25.134953Z[0m [32m INFO[0m [1mexecute[0m: clk = 130000000 pc = 0x20dc78    
-[2m2024-10-11T23:10:25.659888Z[0m [32m INFO[0m [1mexecute[0m: clk = 140000000 pc = 0x20de30    
-[2m2024-10-11T23:10:26.179651Z[0m [32m INFO[0m [1mexecute[0m: clk = 150000000 pc = 0x20dbcc    
-[2m2024-10-11T23:10:26.698369Z[0m [32m INFO[0m [1mexecute[0m: clk = 160000000 pc = 0x20dbc8    
-[2m2024-10-11T23:10:27.216824Z[0m [32m INFO[0m [1mexecute[0m: clk = 170000000 pc = 0x20de34    
-[2m2024-10-11T23:10:27.735683Z[0m [32m INFO[0m [1mexecute[0m: clk = 180000000 pc = 0x201464    
-[2m2024-10-11T23:10:28.256816Z[0m [32m INFO[0m [1mexecute[0m: clk = 190000000 pc = 0x20e204    
-[2m2024-10-11T23:10:28.775501Z[0m [32m INFO[0m [1mexecute[0m: clk = 200000000 pc = 0x201474    
-[2m2024-10-11T23:10:29.294104Z[0m [32m INFO[0m [1mexecute[0m: clk = 210000000 pc = 0x215d84    
-[2m2024-10-11T23:10:29.812860Z[0m [32m INFO[0m [1mexecute[0m: clk = 220000000 pc = 0x20d75c    
+Number of signers: 2
+[2m2024-10-15T08:36:52.443917Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201f00    
+[2m2024-10-15T08:36:52.444218Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
+[2m2024-10-15T08:36:53.014251Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x215044    
+[2m2024-10-15T08:36:53.196261Z[0m [32m INFO[0m [1mexecute[0m: └╴13,105,891 cycles    
+[2m2024-10-15T08:36:53.196308Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
 stdout: aggregated_signature: Signature(G2Affine { x: 0x00abc29d88c196991745975c9206b8f56ff120b70df72ce36024da3382e398b47189cf1e9e6e998212e8ba5ab2dc79e2 + 0x0056bb0d3fb4f892290380e62d0603e0af6bd5db8e4f405876ff397e473ace7310b3ff8509aeffb47da06e0e298d6327*u, y: 0x07512e3a97c6de7b86fd6b3be4b2a1a6732f34cdd4838d309f45f4a3dbca35ccf1821ef6814c20389c870fb4acac4937 + 0x11e4f26ddead8f98686b80580c8653bdc1ecac03f505159387c6cf1feaeb6be625c9c1a850ab134d3e2b770a8a9ee705*u, infinity: Choice(0) })
-[2m2024-10-11T23:10:30.085556Z[0m [32m INFO[0m [1mexecute[0m: └╴225,094,959 cycles    
-[2m2024-10-11T23:10:30.090277Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m11.8s [3mtime.idle[0m[2m=[0m23.2µs
+[2m2024-10-15T08:36:53.347152Z[0m [32m INFO[0m [1mexecute[0m: └╴124,476 cycles    
+[2m2024-10-15T08:36:53.357668Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m923ms [3mtime.idle[0m[2m=[0m18.5µs
 Program executed successfully.
