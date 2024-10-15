@@ -2,7 +2,7 @@
 // The ELF is used for proving and the ID is used for verification.
 use bincode;
 use methods::ECDSA_VERIFY_NATIVE_RISC_ZERO_METHODS_GUEST_ELF;
-use risc0_zkvm::{default_prover, ExecutorEnv, ProverOpts};
+use risc0_zkvm::{default_prover, ExecutorEnv, ProverOpts, VerifierContext};
 use serde_json::Value;
 use std::fs;
 use std::fs::File;
@@ -36,8 +36,9 @@ fn main() {
     // Proof information by proving the specified ELF binary.
     // This struct contains the receipt along with statistics about execution of the guest
     let prove_info = prover
-        .prove_with_opts(
+        .prove_with_ctx(
             env,
+            &VerifierContext::default(),
             ECDSA_VERIFY_NATIVE_RISC_ZERO_METHODS_GUEST_ELF,
             &ProverOpts::groth16(),
         )
