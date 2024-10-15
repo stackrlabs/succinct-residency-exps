@@ -1,18 +1,61 @@
-   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/native_risc_zero/methods)
-   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/native_risc_zero/host)
-warning: unused import: `GUEST_CODE_FOR_MERKELIZATION_ID`
- --> host/src/main.rs:3:49
+    Updating crates.io index
+     Locking 2 packages to latest compatible versions
+      Adding half v1.8.3 (latest: v2.4.1)
+      Adding serde_cbor v0.11.2
+   Compiling serde v1.0.210
+   Compiling half v1.8.3
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/native_risc_zero/methods)
+   Compiling bytes v1.7.2
+   Compiling risc0-zkp v1.1.2
+   Compiling serde_json v1.0.128
+   Compiling camino v1.1.9
+   Compiling semver v1.0.23
+   Compiling cargo-platform v0.1.8
+   Compiling serde_urlencoded v0.7.1
+   Compiling serde_cbor v0.11.2
+   Compiling http v1.1.0
+   Compiling tokio v1.40.0
+   Compiling prost v0.13.3
+   Compiling bincode v1.3.3
+   Compiling cargo_metadata v0.18.1
+   Compiling http-body v1.0.1
+   Compiling risc0-binfmt v1.1.2
+   Compiling http-body-util v0.1.2
+   Compiling risc0-circuit-recursion v1.1.2
+   Compiling wasm v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/wasm)
+   Compiling risc0-build v1.1.2
+   Compiling risc0-circuit-rv32im v1.1.2
+   Compiling risc0-groth16 v1.1.2
+   Compiling hyper v1.5.0
+   Compiling tokio-rustls v0.26.0
+   Compiling tokio-util v0.7.12
+   Compiling hyper-util v0.1.9
+   Compiling hyper-rustls v0.27.3
+   Compiling reqwest v0.12.8
+   Compiling bonsai-sdk v1.1.2
+   Compiling risc0-zkvm v1.1.2
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/native_risc_zero/host)
+warning: unused import: `GUEST_CODE_FOR_BLS_VERIFY_ID`
+ --> host/src/main.rs:3:46
   |
-3 | use methods::{GUEST_CODE_FOR_MERKELIZATION_ELF, GUEST_CODE_FOR_MERKELIZATION_ID};
-  |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3 | use methods::{GUEST_CODE_FOR_BLS_VERIFY_ELF, GUEST_CODE_FOR_BLS_VERIFY_ID};
+  |                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   |
   = note: `#[warn(unused_imports)]` on by default
 
-warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` to apply 1 suggestion)
-    Finished `release` profile [optimized + debuginfo] target(s) in 1m 17s
+warning: unused imports: `PublicKey` and `Signature`
+  --> host/src/main.rs:11:24
+   |
+11 | use wasm::{PrivateKey, PublicKey, Serialize, Signature};
+   |                        ^^^^^^^^^             ^^^^^^^^^
+
+warning: `host` (bin "host") generated 2 warnings (run `cargo fix --bin "host"` to apply 2 suggestions)
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 45s
      Running `target/release/host`
+Input value: 2
+Aggregate signature: a056bb0d3fb4f892290380e62d0603e0af6bd5db8e4f405876ff397e473ace7310b3ff8509aeffb47da06e0e298d632700abc29d88c196991745975c9206b8f56ff120b70df72ce36024da3382e398b47189cf1e9e6e998212e8ba5ab2dc79e2
 Output: 1
 
-real	3m14.187s
-user	0m0.262s
-sys	0m0.175s
+real	3m51.965s
+user	0m0.648s
+sys	0m0.326s
