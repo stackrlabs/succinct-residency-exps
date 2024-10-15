@@ -9,33 +9,29 @@ use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericAr
 use thiserror::Error;
 use std::io;
 
-pub fn bls_verify(num_signers: u32, aggregated_signature: &[u8]) -> u32 {
-    let private_keys: Vec<_> = (0..num_signers)
-        .map(|i| PrivateKey::new(&[i as u8; 32]))
-        .collect();
+pub fn bls_verify(aggregated_signature: &[u8], public_keys: Vec<Vec<u8>>) -> u32 {
     let message = "message".as_bytes().to_vec();
 
     let aggregated_signature = Signature::from_bytes(aggregated_signature).expect("failed to decode aggregated signature");
 
-    let hash = hash(&message);
+    let hash = hash(&message); 
 
-    let public_keys = private_keys
-            .iter()
-        .map(|pk| pk.public_key())
+    let public_keys = public_keys.iter()
+        .map(|pk| PublicKey::from_bytes(pk).expect("failed to decode public key"))
         .collect::<Vec<_>>();
 
     assert!(
-        verify(&aggregated_signature, &vec![hash; num_signers as usize], &public_keys),
+        verify(&aggregated_signature, &vec![hash; public_keys.len() as usize], &public_keys),
             "failed to verify"
         );
     1
 }
 
-#[no_mangle]
-pub fn bls_verify_wasm(num_signers: u32, data_ptr: *const i32, count: i32) -> u32 {
-    let aggregated_signature = read_aggregated_signature(data_ptr, count);
-    bls_verify(num_signers, &aggregated_signature)
-}
+// #[no_mangle]
+// pub fn bls_verify_wasm(num_signers: u32, data_ptr: *const i32, count: i32) -> u32 {
+//     let aggregated_signature = read_aggregated_signature(data_ptr, count);
+//     bls_verify(num_signers, &aggregated_signature, public_keys)
+// }
 
 // Reads list from linear memory
 fn read_aggregated_signature(data_ptr: *const i32, count: i32) -> Vec<u8> {
