@@ -16,5 +16,7 @@ thiserror = "1.0.64"
 hex = "0.4.3"
 group = "0.13.0"
 pairing = "0.23.0"
+serde_cbor = "0.11.2"
+serde = { version = "1.0.210", features = ["derive"] }
 
 
