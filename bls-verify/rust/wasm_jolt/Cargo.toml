@@ -16,7 +16,7 @@ jolt = { package = "jolt-sdk", git = "https://github.com/a16z/jolt", features = 
 guest = { path = "./guest" }
 serde_json = "1.0.128"
 hex = "0.4.3"
-
+wasm = { path = "../wasm" }
 [patch.crates-io]
 ark-ff = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
 ark-ec = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
