@@ -1,30 +1,11 @@
-Input value: 2
-[2m2024-10-15T22:23:47.533550Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x20210c    
-[2m2024-10-15T22:23:47.534359Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
-[2m2024-10-15T22:23:48.096372Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x21272c    
-[2m2024-10-15T22:23:48.647213Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x2509a4    
-[2m2024-10-15T22:23:49.178817Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x24dd9c    
-[2m2024-10-15T22:23:49.733198Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x201e44    
-[2m2024-10-15T22:23:50.286776Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x24d914    
-[2m2024-10-15T22:23:50.825316Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x201e1c    
-[2m2024-10-15T22:23:51.117660Z[0m [32m INFO[0m [1mexecute[0m: └╴65,377,581 cycles    
-[2m2024-10-15T22:23:51.117735Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-15T22:23:51.379479Z[0m [32m INFO[0m [1mexecute[0m: clk = 70000000 pc = 0x24f300    
-[2m2024-10-15T22:23:51.924685Z[0m [32m INFO[0m [1mexecute[0m: clk = 80000000 pc = 0x24dbec    
-[2m2024-10-15T22:23:52.456776Z[0m [32m INFO[0m [1mexecute[0m: clk = 90000000 pc = 0x24d9f0    
-[2m2024-10-15T22:23:52.990751Z[0m [32m INFO[0m [1mexecute[0m: clk = 100000000 pc = 0x24e2c0    
-[2m2024-10-15T22:23:53.538108Z[0m [32m INFO[0m [1mexecute[0m: clk = 110000000 pc = 0x2508f0    
-[2m2024-10-15T22:23:54.078844Z[0m [32m INFO[0m [1mexecute[0m: clk = 120000000 pc = 0x2289b8    
-[2m2024-10-15T22:23:54.629393Z[0m [32m INFO[0m [1mexecute[0m: clk = 130000000 pc = 0x24deb4    
-[2m2024-10-15T22:23:55.175939Z[0m [32m INFO[0m [1mexecute[0m: clk = 140000000 pc = 0x226804    
-[2m2024-10-15T22:23:55.825391Z[0m [32m INFO[0m [1mexecute[0m: clk = 150000000 pc = 0x226a0c    
-[2m2024-10-15T22:23:56.377651Z[0m [32m INFO[0m [1mexecute[0m: clk = 160000000 pc = 0x24e2a4    
-[2m2024-10-15T22:23:56.936472Z[0m [32m INFO[0m [1mexecute[0m: clk = 170000000 pc = 0x254814    
-[2m2024-10-15T22:23:57.710776Z[0m [32m INFO[0m [1mexecute[0m: clk = 180000000 pc = 0x2266d8    
-[2m2024-10-15T22:23:58.317026Z[0m [32m INFO[0m [1mexecute[0m: clk = 190000000 pc = 0x24fe50    
-[2m2024-10-15T22:23:58.901655Z[0m [32m INFO[0m [1mexecute[0m: clk = 200000000 pc = 0x239df8    
-[2m2024-10-15T22:23:59.452674Z[0m [32m INFO[0m [1mexecute[0m: clk = 210000000 pc = 0x255f34    
-[2m2024-10-15T22:24:00.020421Z[0m [32m INFO[0m [1mexecute[0m: clk = 220000000 pc = 0x226cfc    
-[2m2024-10-15T22:24:00.138776Z[0m [32m INFO[0m [1mexecute[0m: └╴156,801,674 cycles    
-[2m2024-10-15T22:24:00.155131Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m12.6s [3mtime.idle[0m[2m=[0m155µs
+Input value: 16
+[2m2024-10-15T23:25:36.503274Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x202170    
+[2m2024-10-15T23:25:36.504136Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
+[2m2024-10-15T23:25:37.056950Z[0m [32m INFO[0m [1mexecute[0m: └╴7,759,767 cycles    
+[2m2024-10-15T23:25:37.057034Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-15T23:25:37.957361Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x201e8c    
+[2m2024-10-15T23:25:41.383432Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x201e8c    
+[2m2024-10-15T23:25:44.629619Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x201eb4    
+[2m2024-10-15T23:25:46.086299Z[0m [32m INFO[0m [1mexecute[0m: └╴30,622,838 cycles    
+[2m2024-10-15T23:25:46.284725Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m9.80s [3mtime.idle[0m[2m=[0m21.5µs
 Program executed successfully.

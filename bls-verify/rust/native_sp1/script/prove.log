@@ -1,39 +1,20 @@
-Input value: 2
-[2m2024-10-15T22:28:23.130176Z[0m [32m INFO[0m Client circuit version: v2.0.0    
-[2m2024-10-15T22:28:36.378545Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m11.0ms [3mtime.idle[0m[2m=[0m10.9µs
-[2m2024-10-15T22:28:36.415308Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x20210c    
-[2m2024-10-15T22:28:36.415942Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
-[2m2024-10-15T22:28:37.092380Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x21272c    
-[2m2024-10-15T22:28:37.655132Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x2509a4    
-[2m2024-10-15T22:28:38.189391Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x24dd9c    
-[2m2024-10-15T22:28:38.739288Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x201e44    
-[2m2024-10-15T22:28:39.288692Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x24d914    
-[2m2024-10-15T22:28:39.817450Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x201e1c    
-[2m2024-10-15T22:28:40.101246Z[0m [32m INFO[0m [1mexecute[0m: └╴65,377,581 cycles    
-[2m2024-10-15T22:28:40.101295Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-15T22:28:40.359669Z[0m [32m INFO[0m [1mexecute[0m: clk = 70000000 pc = 0x24f300    
-[2m2024-10-15T22:28:40.905873Z[0m [32m INFO[0m [1mexecute[0m: clk = 80000000 pc = 0x24dbec    
-[2m2024-10-15T22:28:41.437482Z[0m [32m INFO[0m [1mexecute[0m: clk = 90000000 pc = 0x24d9f0    
-[2m2024-10-15T22:28:41.969001Z[0m [32m INFO[0m [1mexecute[0m: clk = 100000000 pc = 0x24e2c0    
-[2m2024-10-15T22:28:42.514423Z[0m [32m INFO[0m [1mexecute[0m: clk = 110000000 pc = 0x2508f0    
-[2m2024-10-15T22:28:43.053609Z[0m [32m INFO[0m [1mexecute[0m: clk = 120000000 pc = 0x2289b8    
-[2m2024-10-15T22:28:43.587089Z[0m [32m INFO[0m [1mexecute[0m: clk = 130000000 pc = 0x24deb4    
-[2m2024-10-15T22:28:44.122908Z[0m [32m INFO[0m [1mexecute[0m: clk = 140000000 pc = 0x226804    
-[2m2024-10-15T22:28:44.665522Z[0m [32m INFO[0m [1mexecute[0m: clk = 150000000 pc = 0x226a0c    
-[2m2024-10-15T22:28:45.196748Z[0m [32m INFO[0m [1mexecute[0m: clk = 160000000 pc = 0x24e2a4    
-[2m2024-10-15T22:28:45.727339Z[0m [32m INFO[0m [1mexecute[0m: clk = 170000000 pc = 0x254814    
-[2m2024-10-15T22:28:46.268218Z[0m [32m INFO[0m [1mexecute[0m: clk = 180000000 pc = 0x2266d8    
-[2m2024-10-15T22:28:46.813851Z[0m [32m INFO[0m [1mexecute[0m: clk = 190000000 pc = 0x24fe50    
-[2m2024-10-15T22:28:47.358863Z[0m [32m INFO[0m [1mexecute[0m: clk = 200000000 pc = 0x239df8    
-[2m2024-10-15T22:28:47.918551Z[0m [32m INFO[0m [1mexecute[0m: clk = 210000000 pc = 0x255f34    
-[2m2024-10-15T22:28:48.488344Z[0m [32m INFO[0m [1mexecute[0m: clk = 220000000 pc = 0x226cfc    
-[2m2024-10-15T22:28:48.606819Z[0m [32m INFO[0m [1mexecute[0m: └╴156,801,674 cycles    
-[2m2024-10-15T22:28:48.621725Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m12.2s [3mtime.idle[0m[2m=[0m2.08µs
-[2m2024-10-15T22:28:48.621767Z[0m [32m INFO[0m Simulation complete, cycles: 222188438    
-[2m2024-10-15T22:28:51.218013Z[0m [32m INFO[0m Created proofrequest_01ja94rnb7ffyrnemcegwc1tzw    
-[2m2024-10-15T22:28:51.218087Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja94rnb7ffyrnemcegwc1tzw    
-[2m2024-10-15T22:28:53.540443Z[0m [32m INFO[0m Proof request claimed, proving...    
-[2m2024-10-15T22:35:42.649437Z[0m [32m INFO[0m Proof request fulfilled    
+Input value: 16
+[2m2024-10-15T23:28:02.998006Z[0m [32m INFO[0m Client circuit version: v2.0.0    
+[2m2024-10-15T23:28:23.807388Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m10.1ms [3mtime.idle[0m[2m=[0m6.33µs
+[2m2024-10-15T23:28:23.830413Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x202170    
+[2m2024-10-15T23:28:23.831855Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
+[2m2024-10-15T23:28:24.415864Z[0m [32m INFO[0m [1mexecute[0m: └╴7,759,767 cycles    
+[2m2024-10-15T23:28:24.415933Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-15T23:28:25.494958Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x201e8c    
+[2m2024-10-15T23:28:29.938030Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x201e8c    
+[2m2024-10-15T23:28:32.970836Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x201eb4    
+[2m2024-10-15T23:28:34.564162Z[0m [32m INFO[0m [1mexecute[0m: └╴30,622,838 cycles    
+[2m2024-10-15T23:28:34.787912Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m11.0s [3mtime.idle[0m[2m=[0m5.33µs
+[2m2024-10-15T23:28:34.787969Z[0m [32m INFO[0m Simulation complete, cycles: 38403702    
+[2m2024-10-15T23:28:36.870402Z[0m [32m INFO[0m Created proofrequest_01ja9863ewepzrne6k4c9mmwdg    
+[2m2024-10-15T23:28:36.870455Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja9863ewepzrne6k4c9mmwdg    
+[2m2024-10-15T23:28:39.136330Z[0m [32m INFO[0m Proof request claimed, proving...    
+[2m2024-10-15T23:32:44.586626Z[0m [32m INFO[0m Proof request fulfilled    
 Successfully generated proof!
 Proof Size: 260
 [sp1] circuit artifacts already seem to exist at /Users/prudhvirampey/.sp1/circuits/v2.0.0. if you want to re-download them, delete the directory

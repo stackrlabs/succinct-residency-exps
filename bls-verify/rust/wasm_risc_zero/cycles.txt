@@ -1,8 +1,4 @@
    Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/wasm_risc_zero/methods)
-   Compiling thread_local v1.1.8
-   Compiling risc0-zkvm v1.1.2
-   Compiling wasm v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/wasm)
-   Compiling tracing-subscriber v0.3.18
    Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/wasm_risc_zero/host)
 warning: unused import: `GUEST_CODE_FOR_BLS_VERIFY_ID`
  --> host/src/main.rs:5:46
@@ -19,15 +15,15 @@ warning: unused imports: `PublicKey` and `Signature`
    |                        ^^^^^^^^^             ^^^^^^^^^
 
 warning: `host` (bin "host") generated 2 warnings (run `cargo fix --bin "host"` to apply 2 suggestions)
-    Finished `release` profile [optimized + debuginfo] target(s) in 1m 30s
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 20s
      Running `target/release/host`
-Input value: 2
-Aggregate signature: a056bb0d3fb4f892290380e62d0603e0af6bd5db8e4f405876ff397e473ace7310b3ff8509aeffb47da06e0e298d632700abc29d88c196991745975c9206b8f56ff120b70df72ce36024da3382e398b47189cf1e9e6e998212e8ba5ab2dc79e2
+Input value: 16
+Aggregate signature: 993d5ce0ada4fc15ff0a3c956a9c4533cafa94b97b5ef2e413db284f31ee5068d599ad925ae213ede473a5f3a81dc00c172435e799943e6686eb1815149f9031fea2af1b113478d6bc10a8c4a38fda35131da7c758b4ea494f04426363be3c24
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 32687809
-instantiate wasm cycles: 48747349
-bls_verify cycles: 8922689639
+input load cycles: 32739847
+instantiate wasm cycles: 48823857
+bls_verify cycles: 33520897603
 bls_verify - 1
-total cycles: 9004128166
+total cycles: 33602464716
 WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
 Merkelized: 1

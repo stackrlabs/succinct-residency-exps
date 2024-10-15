@@ -1,9 +1,28 @@
-Input value: 2
-Aggregate signature: a056bb0d3fb4f892290380e62d0603e0af6bd5db8e4f405876ff397e473ace7310b3ff8509aeffb47da06e0e298d632700abc29d88c196991745975c9206b8f56ff120b70df72ce36024da3382e398b47189cf1e9e6e998212e8ba5ab2dc79e2
-Output: 1
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/native_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-verify/rust/native_risc_zero/host)
+warning: unused import: `GUEST_CODE_FOR_BLS_VERIFY_ID`
+ --> host/src/main.rs:3:46
+  |
+3 | use methods::{GUEST_CODE_FOR_BLS_VERIFY_ELF, GUEST_CODE_FOR_BLS_VERIFY_ID};
+  |                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `PublicKey` and `Signature`
+  --> host/src/main.rs:11:24
+   |
+11 | use wasm::{PrivateKey, PublicKey, Serialize, Signature};
+   |                        ^^^^^^^^^             ^^^^^^^^^
+
+warning: `host` (bin "host") generated 2 warnings (run `cargo fix --bin "host"` to apply 2 suggestions)
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 10s
+     Running `target/release/host`
+Input value: 16
+Aggregate signature: 993d5ce0ada4fc15ff0a3c956a9c4533cafa94b97b5ef2e413db284f31ee5068d599ad925ae213ede473a5f3a81dc00c172435e799943e6686eb1815149f9031fea2af1b113478d6bc10a8c4a38fda35131da7c758b4ea494f04426363be3c24
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 14812
-deserialize cycles: 68946198
-bls verify cycles: 165588453
-total cycles: 234551514
+input load cycles: 66794
+deserialize cycles: 157630495
+bls verify cycles: 721768841
+total cycles: 879468232
 WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Output: 1
