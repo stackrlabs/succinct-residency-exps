@@ -9,19 +9,9 @@ use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericAr
 use thiserror::Error;
 use std::io;
 
-pub fn bls_verify(aggregated_signature: &[u8], public_keys: Vec<Vec<u8>>) -> u32 {
-    let message = "message".as_bytes().to_vec();
-
-    let aggregated_signature = Signature::from_bytes(aggregated_signature).expect("failed to decode aggregated signature");
-
-    let hash = hash(&message); 
-
-    let public_keys = public_keys.iter()
-        .map(|pk| PublicKey::from_bytes(pk).expect("failed to decode public key"))
-        .collect::<Vec<_>>();
-
+pub fn bls_verify(aggregated_signature: Signature, public_keys: Vec<PublicKey>, msg_hash: G2Projective) -> u32 {
     assert!(
-        verify(&aggregated_signature, &vec![hash; public_keys.len() as usize], &public_keys),
+        verify(&aggregated_signature, &vec![msg_hash; public_keys.len() as usize], &public_keys),
             "failed to verify"
         );
     1

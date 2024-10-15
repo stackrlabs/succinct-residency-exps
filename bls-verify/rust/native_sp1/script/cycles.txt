@@ -1,8 +1,9 @@
 Input value: 2
-[2m2024-10-14T23:28:50.918290Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201ab8    
-[2m2024-10-14T23:28:50.919872Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-14T23:28:51.519460Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x2017e0    
-[2m2024-10-14T23:28:52.900416Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x2017d0    
-[2m2024-10-14T23:28:53.054417Z[0m [32m INFO[0m [1mexecute[0m: └╴21,963,492 cycles    
-[2m2024-10-14T23:28:53.128318Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m2.22s [3mtime.idle[0m[2m=[0m18.3µs
+[2m2024-10-15T21:01:04.857405Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x202170    
+[2m2024-10-15T21:01:04.859102Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
+[2m2024-10-15T21:01:05.120407Z[0m [32m INFO[0m [1mexecute[0m: └╴7,712,582 cycles    
+[2m2024-10-15T21:01:05.120447Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-15T21:01:05.536709Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x201e90    
+[2m2024-10-15T21:01:05.819615Z[0m [32m INFO[0m [1mexecute[0m: └╴7,099,436 cycles    
+[2m2024-10-15T21:01:05.851293Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m1.00s [3mtime.idle[0m[2m=[0m11.2µs
 Program executed successfully.

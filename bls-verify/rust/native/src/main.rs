@@ -1,7 +1,7 @@
 use serde_json::Value;
 use std::fs::File;
 use std::io::BufReader;
-use wasm::bls_verify;
+use wasm::{bls_verify, PrivateKey, PublicKey, Serialize, hash, Signature};
 
 fn main() {
     // Read the JSON file
@@ -16,11 +16,24 @@ fn main() {
     let aggregate_signature = json["aggregateSignature"]
         .as_str()
         .expect("Failed to parse value from JSON");
+    let private_keys: Vec<PrivateKey> = (0..input_value)
+        .map(|i| PrivateKey::new(&[i as u8; 32]))
+        .collect();
+
+    let public_keys = private_keys
+        .iter()
+        .map(|pk| pk.public_key().as_bytes().to_vec())
+        .collect::<Vec<_>>();
+    let public_keys = public_keys
+        .iter()
+        .map(|pk| PublicKey::from_bytes(pk).expect("failed to decode public key"))
+        .collect::<Vec<_>>();
+    let aggregated_signature =
+        Signature::from_bytes(&hex::decode(aggregate_signature).unwrap()).expect("failed to decode aggregated signature");
+    let message = "message".as_bytes().to_vec();
+    let hash = hash(&message);
     let start = std::time::Instant::now();
-    bls_verify(
-        input_value,
-        &hex::decode(aggregate_signature).expect("Failed to decode hex string"),
-    );
+    bls_verify(aggregated_signature, public_keys, hash);
     let duration = start.elapsed();
     println!("Verification success");
     println!("Time elapsed: {:?}", duration);
