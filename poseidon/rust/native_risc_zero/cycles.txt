@@ -1,9 +1,7 @@
 Input: 1
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
 input load cycles: 86
-Array Length: 1
-Hash: BigInt([4246089682525741340, 16787073134136431626, 7751240297988333319, 3029139130954387650])
-poseidon_hash cycles: 2887875016
-total cycles: 2887876411
+poseidon_hash cycles: 309321
+total cycles: 310636
 WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
 Output: 1

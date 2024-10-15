@@ -23,9 +23,9 @@ fn main() {
     let file = File::open("../../../inputs/poseidon.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
-    let input = json["arrayLength"]
+    let input = json["num_iterations"]
         .as_u64()
-        .expect("Failed to parse arrayLength from JSON") as u32;
+        .expect("Failed to parse num_iterations from JSON") as u32;
     println!("Input: {}", input);
 
     let env = ExecutorEnv::builder()

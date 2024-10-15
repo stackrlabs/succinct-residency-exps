@@ -1,23 +1,19 @@
 #![cfg_attr(target_arch = "riscv32", no_std, no_main)]
 
 extern crate alloc;
-use alloc::vec::Vec;
 use alloc::str::FromStr;
-use alloc::string::ToString;
-use ark_bn254::Fr;
-use poseidon_ark::Poseidon;
-use nexus_rt::{read_private_input, println};
+use starknet_crypto::poseidon_hash_single;
+use starknet_types_core::felt::Felt;
+use nexus_rt::read_private_input;
 
 // Reimplemented here and not using Wasm package because of no_std
-fn poseidon_hash(arr_len: u32) -> u32 {
-    let mut input_arr: Vec<Fr> = Vec::with_capacity(arr_len as usize);
-    for i in 0..arr_len as usize {
-        input_arr.push(Fr::from_str(&i.to_string()).unwrap());
+fn poseidon_hash(n: u32) -> u32 {
+    let felt = Felt::from_str("1").unwrap();
+    let expected_hash = "0x06d226d4c804cd74567f5ac59c6a4af1fe2a6eced19fb7560a9124579877da25";
+    for _ in 1..=n {
+        let hash = poseidon_hash_single(felt).to_fixed_hex_string();
+        assert_eq!(hash, expected_hash);
     }
-    let poseidon = Poseidon::new();
-    let hash = poseidon.hash(input_arr.clone()).unwrap();
-    println!("Array Length: {:?}", arr_len);
-    println!("Hash: {:?}", hash);
     1
 }
 

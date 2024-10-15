@@ -1,16 +1,16 @@
-use ark_bn254::Fr;
-use ark_std::str::FromStr;
-use poseidon_ark::Poseidon;
+extern crate alloc;
+use alloc::str::FromStr;
+use starknet_crypto::poseidon_hash_single;
+use starknet_types_core::felt::Felt;
 
+/// Ref: https://github.com/xJonathanLEI/starknet-rs/blob/master/starknet-crypto/benches/poseidon_hash.rs
 #[no_mangle]
-pub fn poseidon_hash(arr_len: u32) -> u32 {
-    let mut input_arr: Vec<Fr> = Vec::with_capacity(arr_len as usize);
-    for i in 0..arr_len as usize {
-        input_arr.push(Fr::from_str(&i.to_string()).unwrap());
+pub fn poseidon_hash(n: u32) -> u32 {
+    let felt = Felt::from_str("1").unwrap();
+    let expected_hash = "0x06d226d4c804cd74567f5ac59c6a4af1fe2a6eced19fb7560a9124579877da25";
+    for _ in 1..=n {
+        let hash = poseidon_hash_single(felt).to_fixed_hex_string();
+        assert_eq!(hash, expected_hash);
     }
-    let poseidon = Poseidon::new();
-    let hash = poseidon.hash(input_arr.clone()).unwrap();
-    println!("Array Length: {:?}", arr_len);
-    println!("Hash: {:?}", hash);
     1
 }
