@@ -3,7 +3,6 @@
 extern crate alloc;
 use alloc::vec;
 use alloc::vec::Vec;
-use alloc::string::String;
 use sha2::{Digest, Sha256};
 use hex;
 use nexus_rt::{read_private_input, println};
@@ -53,26 +52,6 @@ impl MerkleTree {
         }
         self.tree_levels.last().unwrap()[0]
     }
-
-    pub fn get_proof(&self, index: usize) -> Vec<[u8; 32]> {
-        let mut proof = Vec::new();
-        let mut idx = index;
-
-        for level in &self.tree_levels {
-            if level.len() <= 1 {
-                break;
-            }
-
-            let sibling_index = if idx % 2 == 0 { idx + 1 } else { idx - 1 };
-            if sibling_index < level.len() {
-                proof.push(level[sibling_index]);
-            }
-
-            idx /= 2;
-        }
-
-        proof
-    }
 }
 
 fn sha256_hash(data: &[u8]) -> [u8; 32] {
@@ -82,26 +61,23 @@ fn sha256_hash(data: &[u8]) -> [u8; 32] {
     result.into()
 }
 
-fn generate_merkle_proof(leaves_base_2: u32) -> u32 {
+fn merkelize(leaves_base_2: u32) -> u32 {
     let total_leaves = 2_usize.pow(leaves_base_2);
     let leaves = vec![[0u8; 32]; total_leaves];
     let tree = MerkleTree::new(leaves);
     let root = hex::encode(tree.get_root());
-    let leaf_idx: usize = 1;
-    let proof = tree.get_proof(leaf_idx).iter().map(|hash| hex::encode(hash)).collect::<Vec<String>>();
-    println!("Merkle tree with {} leaves has root {:?}", total_leaves, root);
-    println!("Proof for leaf at index {} is {:?}", leaf_idx, proof);
+    println!("Merkle root: {}", root);
     1
 }
 
 #[nexus_rt::profile]
-fn generate_merkle_proof_exec(n: u32) -> u32 {
-    generate_merkle_proof(n)
+fn merkelize_exec(n: u32) -> u32 {
+    merkelize(n)
 }
 
 #[nexus_rt::main]
 fn main() {
     let n = read_private_input::<u32>().expect("failed to read input");
-    let result = generate_merkle_proof_exec(n);
+    let result = merkelize_exec(n);
     assert_eq!(1, result);
 }
