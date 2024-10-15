@@ -1,0 +1,148 @@
+   Compiling proc-macro2 v1.0.87
+   Compiling libc v0.2.159
+   Compiling generic-array v0.14.7
+   Compiling syn v1.0.109
+   Compiling serde v1.0.210
+   Compiling paste v1.0.15
+   Compiling typenum v1.17.0
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling proc-macro-error v1.0.4
+   Compiling quote v1.0.37
+   Compiling toml_edit v0.22.22
+   Compiling syn v2.0.79
+   Compiling borsh v1.5.1
+   Compiling num-traits v0.2.19
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.6
+   Compiling digest v0.10.7
+   Compiling cc v1.1.28
+   Compiling proc-macro-crate v3.2.0
+   Compiling num-integer v0.1.46
+   Compiling cpufeatures v0.2.14
+   Compiling anyhow v1.0.89
+   Compiling slab v0.4.9
+   Compiling num-bigint v0.4.6
+   Compiling ahash v0.8.11
+   Compiling core-foundation v0.9.4
+   Compiling ring v0.17.8
+   Compiling sha2 v0.10.8
+   Compiling blake2 v0.10.6
+   Compiling malloc_buf v0.0.6
+   Compiling socket2 v0.5.7
+   Compiling mio v1.0.2
+   Compiling core-graphics-types v0.1.3
+   Compiling objc v0.2.7
+   Compiling ark-serialize-derive v0.4.2
+   Compiling ark-ff-macros v0.4.2
+   Compiling ark-ff-asm v0.4.2
+   Compiling derivative v2.2.0
+   Compiling getrandom v0.2.15
+   Compiling serde_derive v1.0.210
+   Compiling tracing-attributes v0.1.27
+   Compiling zerocopy-derive v0.7.35
+   Compiling foreign-types-macros v0.2.3
+   Compiling bytemuck_derive v1.8.0
+   Compiling syn_derive v0.1.8
+   Compiling zerocopy v0.7.35
+   Compiling zeroize_derive v1.4.2
+   Compiling tracing v0.1.40
+   Compiling borsh-derive v1.5.1
+   Compiling stability v0.2.1
+   Compiling zeroize v1.8.1
+   Compiling ppv-lite86 v0.2.20
+   Compiling thiserror-impl v1.0.64
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling bytemuck v1.18.0
+   Compiling foreign-types v0.5.0
+   Compiling futures-util v0.3.31
+   Compiling ark-std v0.4.0
+   Compiling ark-serialize v0.4.2
+   Compiling risc0-core v1.1.2
+   Compiling metal v0.29.0
+   Compiling ark-ff v0.4.2
+   Compiling hashbrown v0.13.2
+   Compiling risc0-zkvm-platform v1.1.2
+   Compiling risc0-zkp v1.1.2
+   Compiling rustls v0.23.14
+   Compiling tinyvec v1.8.0
+   Compiling bytes v1.7.2
+   Compiling rustls-webpki v0.102.8
+   Compiling tokio v1.40.0
+   Compiling http v1.1.0
+   Compiling http-body v1.0.1
+   Compiling futures-channel v0.3.31
+   Compiling semver v1.0.23
+   Compiling camino v1.1.9
+   Compiling rustix v0.38.37
+   Compiling thiserror v1.0.64
+   Compiling serde_json v1.0.128
+   Compiling errno v0.3.9
+   Compiling dirs-sys v0.4.1
+   Compiling ark-poly v0.4.2
+   Compiling ark-relations v0.4.0
+   Compiling form_urlencoded v1.2.1
+   Compiling hyper v1.4.1
+   Compiling ark-ec v0.4.2
+   Compiling unicode-normalization v0.1.24
+   Compiling cargo-platform v0.1.8
+   Compiling aho-corasick v1.1.3
+   Compiling risc0-binfmt v1.1.2
+   Compiling idna v0.5.0
+   Compiling regex-automata v0.4.8
+   Compiling tokio-rustls v0.26.0
+   Compiling tempfile v3.13.0
+   Compiling hyper-util v0.1.9
+   Compiling cargo_metadata v0.18.1
+   Compiling ark-snark v0.4.0
+   Compiling dirs v5.0.1
+   Compiling risc0-build v1.1.2
+   Compiling hyper-rustls v0.27.3
+   Compiling ark-crypto-primitives v0.4.0
+   Compiling regex v1.11.0
+   Compiling url v2.5.2
+   Compiling serde_urlencoded v0.7.1
+   Compiling tokio-util v0.7.12
+   Compiling http-body-util v0.1.2
+   Compiling rustls-pemfile v2.2.0
+   Compiling risc0-circuit-recursion v1.1.2
+   Compiling duplicate v1.0.0
+   Compiling reqwest v0.12.8
+   Compiling regex-automata v0.1.10
+   Compiling lazy-regex-proc_macros v3.3.0
+   Compiling ark-groth16 v0.4.0
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/wasm_risc_zero/methods)
+   Compiling prost-derive v0.13.3
+   Compiling ark-bn254 v0.4.0
+   Compiling maybe-async v0.2.10
+   Compiling rrs-lib v0.1.0
+   Compiling bonsai-sdk v1.1.2
+   Compiling nu-ansi-term v0.46.0
+   Compiling prost v0.13.3
+   Compiling risc0-groth16 v1.1.2
+   Compiling lazy-regex v3.3.0
+   Compiling matchers v0.1.0
+   Compiling risc0-circuit-rv32im v1.1.2
+   Compiling bincode v1.3.3
+   Compiling tracing-subscriber v0.3.18
+   Compiling risc0-zkvm v1.1.2
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/bls-agg/rust/wasm_risc_zero/host)
+warning: unused import: `GUEST_CODE_FOR_MERKEL_TREE_ID`
+ --> host/src/main.rs:3:47
+  |
+3 | use methods::{GUEST_CODE_FOR_MERKEL_TREE_ELF, GUEST_CODE_FOR_MERKEL_TREE_ID};
+  |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `host` (bin "host") generated 1 warning (run `cargo fix --bin "host"` to apply 1 suggestion)
+    Finished `dev` profile [optimized + debuginfo] target(s) in 2m 56s
+     Running `target/debug/host`
+Input value: 2
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 12272106
+instantiate wasm cycles: 17021464
+bls_aggregate cycles: 9007829233
+total cycles: 9037125045
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Merkelized: 1

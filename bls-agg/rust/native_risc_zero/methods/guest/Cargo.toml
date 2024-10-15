@@ -1,0 +1,13 @@
+[package]
+name = "guest_code_for_bls_agg"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+risc0-zkvm = { version = "1.1.2", default-features = false, features = ['std'] }
+wasm = { path = "../../../wasm" }
+
+[patch.crates-io]
+sha2 = { git = "https://github.com/risc0/RustCrypto-hashes", tag = "sha2-v0.10.8-risczero.0" }

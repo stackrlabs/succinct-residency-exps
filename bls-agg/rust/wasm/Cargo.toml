@@ -1,0 +1,17 @@
+[package]
+name = "wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "wasm"
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+bls12_381 = { version = "0.8.0", features = ["experimental"] }
+sha2 = "0.9.8"
+hkdf = "0.11"
+thiserror = "1.0.64"
+
+
