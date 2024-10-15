@@ -1,0 +1,19 @@
+Input value: 2
+[2m2024-10-14T23:29:00.439521Z[0m [32m INFO[0m Client circuit version: v2.0.0    
+[2m2024-10-14T23:29:11.485043Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m9.03ms [3mtime.idle[0m[2m=[0m6.96µs
+[2m2024-10-14T23:29:11.508357Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201ab8    
+[2m2024-10-14T23:29:11.509009Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-14T23:29:12.131993Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x2017e0    
+[2m2024-10-14T23:29:13.522916Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x2017d0    
+[2m2024-10-14T23:29:13.673950Z[0m [32m INFO[0m [1mexecute[0m: └╴21,963,492 cycles    
+[2m2024-10-14T23:29:13.748328Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m2.26s [3mtime.idle[0m[2m=[0m1.88µs
+[2m2024-10-14T23:29:13.748392Z[0m [32m INFO[0m Simulation complete, cycles: 21969993    
+[2m2024-10-14T23:29:15.780677Z[0m [32m INFO[0m Created proofrequest_01ja6ntjgpf2ybt6rqxefzxrpv    
+[2m2024-10-14T23:29:15.780826Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja6ntjgpf2ybt6rqxefzxrpv    
+[2m2024-10-14T23:29:18.094283Z[0m [32m INFO[0m Proof request claimed, proving...    
+[2m2024-10-14T23:33:35.518913Z[0m [32m INFO[0m Proof request fulfilled    
+Successfully generated proof!
+deserialized_proof.public_values: SP1PublicValues { buffer: Buffer { data: [1, 0, 0, 0], ptr: 0 } }
+deserialized_proof.stdin: SP1Stdin { buffer: [[2, 0, 0, 0], [96, 0, 0, 0, 0, 0, 0, 0, 160, 86, 187, 13, 63, 180, 248, 146, 41, 3, 128, 230, 45, 6, 3, 224, 175, 107, 213, 219, 142, 79, 64, 88, 118, 255, 57, 126, 71, 58, 206, 115, 16, 179, 255, 133, 9, 174, 255, 180, 125, 160, 110, 14, 41, 141, 99, 39, 0, 171, 194, 157, 136, 193, 150, 153, 23, 69, 151, 92, 146, 6, 184, 245, 111, 241, 32, 183, 13, 247, 44, 227, 96, 36, 218, 51, 130, 227, 152, 180, 113, 137, 207, 30, 158, 110, 153, 130, 18, 232, 186, 90, 178, 220, 121, 226]], ptr: 0, proofs: [] }
+deserialized_proof.sp1_version: "v2.0.0"
+[sp1] circuit artifacts already seem to exist at /Users/prudhvirampey/.sp1/circuits/v2.0.0. if you want to re-download them, delete the directory
