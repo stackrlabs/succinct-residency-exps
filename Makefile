@@ -161,7 +161,7 @@ nth-prime:
 	cd ${nth-prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${nth-prime-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
 
-keccak:
+run-keccak:
 	@echo "Running keccak benchmark..."
 	cd ${keccak-rust}/native; cargo run --release -- --execute > cycles.txt
 	cd ${keccak-rust}/native_jolt; cargo run --release > cycles.txt
@@ -183,7 +183,7 @@ merkle-proof:
 	cd ${merkle-proof-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-proof-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
 
-poseidon:
+run-poseidon:
 	@echo "Running Poseidon Hash benchmark..."
 	cd ${poseidon-rust}/native; cargo run --release -- --execute > cycles.txt
 	cd ${poseidon-rust}/native_jolt; cargo run --release > cycles.txt

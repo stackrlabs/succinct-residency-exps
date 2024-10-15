@@ -14,4 +14,3 @@ pub fn poseidon_hash(arr_len: u32) -> u32 {
     println!("Hash: {:?}", hash);
     1
 }
-
