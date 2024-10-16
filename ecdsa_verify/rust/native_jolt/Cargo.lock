@@ -49,7 +49,7 @@ dependencies = [
  "bytes",
  "cfg-if",
  "const-hex",
- "derive_more 0.99.18",
+ "derive_more",
  "hex-literal",
  "itoa",
  "k256",
@@ -58,24 +58,6 @@ dependencies = [
  "rand 0.8.5",
  "ruint",
  "serde",
- "tiny-keccak",
-]
-
-[[package]]
-name = "alloy-primitives"
-version = "0.8.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "38f35429a652765189c1c5092870d8360ee7b7769b09b06d89ebaefd34676446"
-dependencies = [
- "bytes",
- "cfg-if",
- "const-hex",
- "derive_more 1.0.0",
- "hex-literal",
- "itoa",
- "k256",
- "paste",
- "ruint",
  "tiny-keccak",
 ]
 
@@ -155,7 +137,7 @@ version = "0.7.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a91ca40fa20793ae9c3841b83e74569d1cc9af29a2f5237314fd3452d51e38c7"
 dependencies = [
- "alloy-primitives 0.7.7",
+ "alloy-primitives",
  "alloy-sol-macro",
  "const-hex",
  "serde",
@@ -498,7 +480,7 @@ dependencies = [
  "binius_utils",
  "bytemuck",
  "cfg-if",
- "derive_more 0.99.18",
+ "derive_more",
  "p3-util",
  "rand 0.8.5",
  "rayon",
@@ -877,27 +859,6 @@ dependencies = [
  "quote",
  "rustc_version 0.4.1",
  "syn 2.0.79",
-]
-
-[[package]]
-name = "derive_more"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4a9b99b9cbbe49445b21764dc0625032a89b145a2642e67603e1c936f5458d05"
-dependencies = [
- "derive_more-impl",
-]
-
-[[package]]
-name = "derive_more-impl"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb7330aeadfbe296029522e6c40f315320aba36fc43a5b3632f3795348f3bd22"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.79",
- "unicode-xid",
 ]
 
 [[package]]
@@ -1652,7 +1613,7 @@ name = "jolt-core"
 version = "0.1.0"
 source = "git+https://github.com/a16z/jolt#2e9002d74753d02a8f4ef442184acbeafc220b0d"
 dependencies = [
- "alloy-primitives 0.7.7",
+ "alloy-primitives",
  "alloy-rs",
  "alloy-sol-macro",
  "alloy-sol-types",
@@ -2661,7 +2622,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "58c4eb8a81997cf040a091d1f7e1938aeab6749d3a0dfa73af43cdc32393483d"
 dependencies = [
  "byteorder",
- "derive_more 0.99.18",
+ "derive_more",
  "twox-hash",
 ]
 
@@ -3388,12 +3349,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7dd6e30e90baa6f72411720665d41d89b9a3d039dc45b8faea1ddd07f617f6af"
 
 [[package]]
-name = "unicode-xid"
-version = "0.2.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ebc1c04c71510c7f702b52b7c350734c9ff1295c464a03335b00bb84fc54f853"
-
-[[package]]
 name = "untrusted"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3468,9 +3423,10 @@ checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
 name = "wasm"
 version = "0.1.0"
 dependencies = [
- "alloy-primitives 0.8.8",
- "ark-std 0.4.0",
+ "crypto-common",
+ "hex-literal",
  "k256",
+ "sha3",
  "wasm-bindgen",
 ]
 
