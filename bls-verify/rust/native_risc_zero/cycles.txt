@@ -15,14 +15,14 @@ warning: unused imports: `PublicKey` and `Signature`
    |                        ^^^^^^^^^             ^^^^^^^^^
 
 warning: `host` (bin "host") generated 2 warnings (run `cargo fix --bin "host"` to apply 2 suggestions)
-    Finished `release` profile [optimized + debuginfo] target(s) in 1m 52s
+    Finished `release` profile [optimized + debuginfo] target(s) in 1m 13s
      Running `target/release/host`
-Input value: 64
-Aggregate signature: ada366c0e77483c80bf834952232b8aca77fccaf9a11e8aaf1f7257b9fbcee9e02304dbc105dd493631159ecce7da1aa08fc0e69c42ae0ff86f2b61bc58f4a4f6e19d9b2a474e9bbb90b6ec656a1a0e38c239056bd53ef419945bd891bee82a0
+Input value: 128
+Aggregate signature: b1497805bf62e7a1032a10a54cb768f23e4b51c31305e45140d63870ee7fbb5e2e41843a3a931457dd310a13cbb371e901c32f6f934f5ff82dbfef715b5ebde194dbc8d4ae009272142f59510ce667e1697339803c7e365cd9f3cf5b7a7fb29a
 WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 245018
-deserialize cycles: 461690679
-bls verify cycles: 2628673016
-total cycles: 3090610823
+input load cycles: 482650
+deserialize cycles: 867104243
+bls verify cycles: 5171211905
+total cycles: 6038800999
 WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
 Output: 1
