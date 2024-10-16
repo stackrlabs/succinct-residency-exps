@@ -1,20 +1,24 @@
-Input value: 16
-[2m2024-10-15T23:28:02.998006Z[0m [32m INFO[0m Client circuit version: v2.0.0    
-[2m2024-10-15T23:28:23.807388Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m10.1ms [3mtime.idle[0m[2m=[0m6.33µs
-[2m2024-10-15T23:28:23.830413Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x202170    
-[2m2024-10-15T23:28:23.831855Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
-[2m2024-10-15T23:28:24.415864Z[0m [32m INFO[0m [1mexecute[0m: └╴7,759,767 cycles    
-[2m2024-10-15T23:28:24.415933Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-15T23:28:25.494958Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x201e8c    
-[2m2024-10-15T23:28:29.938030Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x201e8c    
-[2m2024-10-15T23:28:32.970836Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x201eb4    
-[2m2024-10-15T23:28:34.564162Z[0m [32m INFO[0m [1mexecute[0m: └╴30,622,838 cycles    
-[2m2024-10-15T23:28:34.787912Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m11.0s [3mtime.idle[0m[2m=[0m5.33µs
-[2m2024-10-15T23:28:34.787969Z[0m [32m INFO[0m Simulation complete, cycles: 38403702    
-[2m2024-10-15T23:28:36.870402Z[0m [32m INFO[0m Created proofrequest_01ja9863ewepzrne6k4c9mmwdg    
-[2m2024-10-15T23:28:36.870455Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja9863ewepzrne6k4c9mmwdg    
-[2m2024-10-15T23:28:39.136330Z[0m [32m INFO[0m Proof request claimed, proving...    
-[2m2024-10-15T23:32:44.586626Z[0m [32m INFO[0m Proof request fulfilled    
-Successfully generated proof!
-Proof Size: 260
-[sp1] circuit artifacts already seem to exist at /Users/prudhvirampey/.sp1/circuits/v2.0.0. if you want to re-download them, delete the directory
+Input value: 64
+[2m2024-10-15T23:44:04.886175Z[0m [32m INFO[0m Client circuit version: v2.0.0    
+[2m2024-10-15T23:44:28.959643Z[0m [33m WARN[0m [1mnetwork_prover[0m: close [3mtime.busy[0m[2m=[0m10.7ms [3mtime.idle[0m[2m=[0m5.62µs
+[2m2024-10-15T23:44:28.984855Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x202170    
+[2m2024-10-15T23:44:28.988483Z[0m [32m INFO[0m [1mexecute[0m: ┌╴deserialization    
+[2m2024-10-15T23:44:29.637836Z[0m [32m INFO[0m [1mexecute[0m: └╴7,921,243 cycles    
+[2m2024-10-15T23:44:29.637934Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-10-15T23:44:30.852858Z[0m [32m INFO[0m [1mexecute[0m: clk = 10000000 pc = 0x201ea0    
+[2m2024-10-15T23:44:34.901861Z[0m [32m INFO[0m [1mexecute[0m: clk = 20000000 pc = 0x20d23c    
+[2m2024-10-15T23:44:38.871233Z[0m [32m INFO[0m [1mexecute[0m: clk = 30000000 pc = 0x202268    
+[2m2024-10-15T23:44:42.685397Z[0m [32m INFO[0m [1mexecute[0m: clk = 40000000 pc = 0x201e9c    
+[2m2024-10-15T23:44:46.428616Z[0m [32m INFO[0m [1mexecute[0m: clk = 50000000 pc = 0x201ea8    
+[2m2024-10-15T23:44:50.490649Z[0m [32m INFO[0m [1mexecute[0m: clk = 60000000 pc = 0x201e88    
+[2m2024-10-15T23:44:54.859808Z[0m [32m INFO[0m [1mexecute[0m: clk = 70000000 pc = 0x201e9c    
+[2m2024-10-15T23:44:59.736894Z[0m [32m INFO[0m [1mexecute[0m: clk = 80000000 pc = 0x202040    
+[2m2024-10-15T23:45:04.456601Z[0m [32m INFO[0m [1mexecute[0m: clk = 90000000 pc = 0x211488    
+[2m2024-10-15T23:45:08.796638Z[0m [32m INFO[0m [1mexecute[0m: clk = 100000000 pc = 0x201e7c    
+[2m2024-10-15T23:45:14.088193Z[0m [32m INFO[0m [1mexecute[0m: clk = 110000000 pc = 0x201ea0    
+[2m2024-10-15T23:45:16.728892Z[0m [32m INFO[0m [1mexecute[0m: └╴111,274,502 cycles    
+[2m2024-10-15T23:45:18.246288Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m49.3s [3mtime.idle[0m[2m=[0m6.46µs
+[2m2024-10-15T23:45:18.246376Z[0m [32m INFO[0m Simulation complete, cycles: 119257690    
+[2m2024-10-15T23:45:20.167014Z[0m [32m INFO[0m Created proofrequest_01ja994qc8exzv0874m2mpe580    
+[2m2024-10-15T23:45:20.167068Z[0m [32m INFO[0m View in explorer: https://explorer.succinct.xyz/proofrequest_01ja994qc8exzv0874m2mpe580    
+[2m2024-10-15T23:45:24.924487Z[0m [32m INFO[0m Proof request claimed, proving...    
