@@ -10,6 +10,6 @@ wasm = { path = "../../wasm" }
 sp1-derive = "2.0.0"
 
 # https://docs.succinct.xyz/writing-programs/patched-crates.html
-# [patch.crates-io]
-# ecdsa-core = { git = "https://github.com/sp1-patches/signatures", package = "ecdsa", branch = "patch-ecdsa-v0.16.9" }
-# tiny-keccak = { git = "https://github.com/sp1-patches/tiny-keccak", branch = "patch-v2.0.2" }
+[patch.crates-io]
+ecdsa-core = { git = "https://github.com/sp1-patches/signatures", package = "ecdsa", branch = "patch-ecdsa-v0.16.9" }
+tiny-keccak = { git = "https://github.com/sp1-patches/tiny-keccak", branch = "patch-v2.0.2" }

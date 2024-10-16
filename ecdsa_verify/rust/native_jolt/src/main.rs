@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::BufReader;
 use serde_json::Value;
+use jolt::Serializable;
 
 pub fn main() {
     // Read the input JSON file
@@ -19,6 +20,9 @@ pub fn main() {
 
     // let (prove_ecdsa_verify_n_wrapper, verify_ecdsa_verify_n_wrapper) = guest::build_ecdsa_verify_n_wrapper();
     // let (output, proof) = prove_ecdsa_verify_n_wrapper(input);
+
+    // proof.save_to_file("ecdsa_verify_proof.bin").expect("Failed to save proof to file");
+
     // let is_valid = verify_ecdsa_verify_n_wrapper(proof);
 
     // println!("output: {:?}", output);
