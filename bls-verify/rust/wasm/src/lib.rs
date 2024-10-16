@@ -9,36 +9,45 @@ use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericAr
 use thiserror::Error;
 use std::io;
 
-pub fn bls_verify(aggregated_signature: &[u8], public_keys: Vec<Vec<u8>>) -> u32 {
-    let message = "message".as_bytes().to_vec();
-
-    let aggregated_signature = Signature::from_bytes(aggregated_signature).expect("failed to decode aggregated signature");
-
-    let hash = hash(&message); 
-
-    let public_keys = public_keys.iter()
-        .map(|pk| PublicKey::from_bytes(pk).expect("failed to decode public key"))
-        .collect::<Vec<_>>();
-
+pub fn bls_verify(aggregated_signature: Signature, public_keys: Vec<PublicKey>, msg_hash: G2Projective) -> u32 {
     assert!(
-        verify(&aggregated_signature, &vec![hash; public_keys.len() as usize], &public_keys),
+        verify(&aggregated_signature, &vec![msg_hash; public_keys.len() as usize], &public_keys),
             "failed to verify"
         );
     1
 }
 
-// #[no_mangle]
-// pub fn bls_verify_wasm(num_signers: u32, data_ptr: *const i32, count: i32) -> u32 {
-//     let aggregated_signature = read_aggregated_signature(data_ptr, count);
-//     bls_verify(num_signers, &aggregated_signature, public_keys)
-// }
+#[no_mangle]
+pub fn bls_verify_wasm(data_ptr: *const i32, count: i32) -> u32 {
+    // Read inputs from linear memory
+    let inputs = read_inputs(data_ptr, count);
+    // Decode public keys
+    let public_keys = inputs.public_keys
+    .iter()
+    .map(|pk| PublicKey::from_bytes(pk).expect("failed to decode public key"))
+    .collect::<Vec<_>>();
 
+    let aggregated_signature =
+    Signature::from_bytes(&inputs.aggregated_signature).expect("failed to decode aggregated signature");
+    // Decode message hash
+    let message = "message".as_bytes().to_vec();
+    let hash = hash(&message);
+    bls_verify(aggregated_signature, public_keys, hash)
+}
+
+#[derive(Debug, serde::Deserialize, serde::Serialize)]
+pub struct Inputs {
+    pub aggregated_signature: Vec<u8>,
+    pub public_keys: Vec<Vec<u8>>,
+}
 // Reads list from linear memory
-fn read_aggregated_signature(data_ptr: *const i32, count: i32) -> Vec<u8> {
+fn read_inputs(data_ptr: *const i32, count: i32) -> Inputs {
     use core::slice;
     let ptr = data_ptr as *const u8;
     let data: Vec<u8> = unsafe { slice::from_raw_parts(ptr, count as usize).to_vec() };
-    data
+    use serde_cbor::from_slice;
+    let inputs: Inputs = from_slice(&data).expect("Failed to deserialize inputs");
+    inputs
 }
 
 #[derive(Debug)]
