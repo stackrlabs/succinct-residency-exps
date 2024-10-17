@@ -1,2 +1,0 @@
-Input value: 1000
-summary: 13807459
