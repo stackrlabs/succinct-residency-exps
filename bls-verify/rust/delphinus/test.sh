@@ -6,7 +6,7 @@ set -x
 rm -rf output
 mkdir output
 
-ZKWASM_DIR="../../../../zkWasm" # needs pre-installed
+ZKWASM_DIR="../../../zkWasm" # needs pre-installed
 ZKWASM_CLI=$ZKWASM_DIR/target/release/zkwasm-cli
 ZKWASM_PARAMS=$ZKWASM_DIR/params
 
