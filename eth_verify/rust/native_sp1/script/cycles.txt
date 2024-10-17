@@ -1,9 +1,0 @@
-[2m2024-10-09T19:07:53.035490Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x2060c0    
-[2m2024-10-09T19:07:53.035594Z[0m [32m INFO[0m [1mexecute[0m: ┌╴input    
-[2m2024-10-09T19:07:53.036116Z[0m [32m INFO[0m [1mexecute[0m: └╴17,884 cycles    
-[2m2024-10-09T19:07:53.036132Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
-[2m2024-10-09T19:07:53.165279Z[0m [32m INFO[0m [1mexecute[0m: └╴194,605 cycles    
-stdout: Block verification: true
-[2m2024-10-09T19:07:53.169126Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m142ms [3mtime.idle[0m[2m=[0m2.75µs
-Program executed successfully.
-block verification: true

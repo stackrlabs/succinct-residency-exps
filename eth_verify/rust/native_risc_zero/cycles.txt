@@ -1,5 +1,0 @@
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-txn root cycles: 133346
-header hash verification cycles: 110489
-total cycles: 271089
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.

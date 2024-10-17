@@ -1,2 +1,0 @@
-Input graph length: 2
-Trace length: 5913543

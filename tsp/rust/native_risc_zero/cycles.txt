@@ -1,6 +1,0 @@
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 18539
-TSP result: 238
-TSP cycles: 69129506
-Total cycles: 69149389
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.

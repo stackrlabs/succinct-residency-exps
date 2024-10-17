@@ -1,8 +1,0 @@
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 32713955
-Size of encoded graph: 3046
-instantiate wasm cycles: 44518658
-verify_block_wasm cycles: 515802045
-verify_block_wasm 1
-total cycles: 593037872
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
