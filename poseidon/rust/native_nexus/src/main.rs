@@ -20,11 +20,11 @@ fn generate_pp_and_compile() -> (PP, Nova<Local>) {
 }
  
 fn prove_execution(pp: &PP, prover: Nova<Local>) -> nexus_sdk::nova::seq::Proof {
-    let file = File::open("../../../inputs/merkle_proof.json").expect("Failed to open input file");
+    let file = File::open("../../../inputs/poseidon.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     // Extract the number from the JSON
-    let input = json["numLeaves"].as_u64().expect("Failed to parse numLeaves from JSON") as Input;
+    let input = json["num_iterations"].as_u64().expect("Failed to parse numLeaves from JSON") as Input;
     println!("Input numLeaves read from JSON: {}", input);
     prover.prove_with_input::<Input>(pp, &input).expect("failed to prove program")
 }
@@ -32,7 +32,7 @@ fn prove_execution(pp: &PP, prover: Nova<Local>) -> nexus_sdk::nova::seq::Proof 
 fn verify_execution(pp: &PP, proof: &nexus_sdk::nova::seq::Proof) {
     proof.verify(pp).expect("failed to verify proof");
 }
- 
+
 fn main() {
     use std::time::Instant;
  
