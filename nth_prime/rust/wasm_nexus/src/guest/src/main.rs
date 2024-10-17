@@ -5,7 +5,7 @@ use nexus_rt::{read_private_input};
 use wasmi::{Engine, Linker, Module, Store};
 
 #[nexus_rt::profile]
-fn nth_prime_exec(n: u32) -> u64 {
+fn nth_prime_exec(n: u32, wasm: &[u8]) -> u64 {
     let engine = Engine::default();
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
 

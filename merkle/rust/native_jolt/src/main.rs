@@ -13,16 +13,24 @@ pub fn main() {
         .as_i64()
         .expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", num_leaves);
-    
-    let summary = guest::analyze_merkelize_wrapper(num_leaves);
-    println!("Trace length: {:?}", summary.trace_len());
 
-    // let (prove_merkelize_wrapper, verify_merkelize_wrapper) = guest::build_merkelize_wrapper();
-    // let (output, proof) = prove_merkelize_wrapper(num_leaves);
-    // let is_valid = verify_merkelize_wrapper(proof);
-    // proof
-    //     .save_to_file("proof.bin")
-    //     .expect("Failed to save proof to file");
+    // let start = std::time::Instant::now();
+    // let summary = guest::analyze_merkelize_wrapper(num_leaves);
+
+    // let duration = start.elapsed();
+    // println!("Trace length: {:?}", summary.trace_len());
+    // println!("Time elapsed: {:?}", duration);
+    
+    let (prove_merkelize_wrapper, verify_merkelize_wrapper) = guest::build_merkelize_wrapper();
+    let start = std::time::Instant::now();
+    let (output, proof) = prove_merkelize_wrapper(num_leaves);
+    let duration = start.elapsed();
+    println!("Time taken to prove execution: {:.2} seconds", duration.as_secs_f64());
+    proof
+        .save_to_file("proof.bin")
+        .expect("Failed to save proof to file");
+
+    let is_valid = verify_merkelize_wrapper(proof);
 
     // println!("output: {}", hex::encode(output));
     // println!("valid: {}", is_valid);

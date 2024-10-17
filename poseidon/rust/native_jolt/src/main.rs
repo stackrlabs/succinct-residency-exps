@@ -19,7 +19,11 @@ pub fn main() {
     println!("Time elapsed: {:?}", duration);
 
     // let (prove_poseidon_hash_wrapper, verify_poseidon_hash_wrapper) = guest::build_poseidon_hash_wrapper();
+    // let start = std::time::Instant::now();
     // let (output, proof) = prove_poseidon_hash_wrapper(input);
+    // let duration = start.elapsed();
+    // println!("Time elapsed: {:?}", duration);
+
     // proof
     //     .save_to_file("proof.bin")
     //     .expect("Failed to save proof to file");
