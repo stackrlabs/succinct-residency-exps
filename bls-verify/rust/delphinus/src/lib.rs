@@ -43,11 +43,14 @@ pub fn zkmain() {
         .iter()
         .map(|pk| PublicKey::from_bytes(pk).expect("failed to decode public key"))
         .collect::<Vec<_>>();
+
+    // refer to inputs/bls_verify_*.json
     let aggregated_signature =
-        Signature::from_bytes(&hex::decode("a056bb0d3fb4f892290380e62d0603e0af6bd5db8e4f405876ff397e473ace7310b3ff8509aeffb47da06e0e298d632700abc29d88c196991745975c9206b8f56ff120b70df72ce36024da3382e398b47189cf1e9e6e998212e8ba5ab2dc79e2").unwrap()).expect("failed to decode aggregated signature");
+        Signature::from_bytes(&hex::decode("b1497805bf62e7a1032a10a54cb768f23e4b51c31305e45140d63870ee7fbb5e2e41843a3a931457dd310a13cbb371e901c32f6f934f5ff82dbfef715b5ebde194dbc8d4ae009272142f59510ce667e1697339803c7e365cd9f3cf5b7a7fb29a").unwrap()).expect("failed to decode aggregated signature");
     let message = "message".as_bytes().to_vec();
-    let hash = hash(&message);
-    bls_verify(aggregated_signature, public_keys, hash);
+
+    let hashed_msg = hash(&message);
+    bls_verify(aggregated_signature, public_keys, hashed_msg);
     dbg!("done\n");
 }
 
