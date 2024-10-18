@@ -1,13 +1,15 @@
 #![cfg_attr(target_arch = "riscv32", no_std, no_main)]
 
+extern crate alloc;
+
 use bls12_381::{
     hash_to_curve::{ExpandMsgXmd, HashToCurve, HashToField},
     G2Affine, G2Projective, Scalar,
 };
 use hkdf::Hkdf;
-use nexus_rt::print;
+use nexus_rt::println;
 use sha2::{digest::generic_array::typenum::U48, digest::generic_array::GenericArray, Sha256};
-use thiserror::Error;
+use alloc::vec::Vec;
 
 pub fn bls_aggregate(num_signers: u32) -> u32 {
     let private_keys: Vec<_> = (0..num_signers)
@@ -37,9 +39,10 @@ impl From<G2Projective> for Signature {
 
 /// Aggregate signatures by multiplying them together.
 /// Calculated by `signature = \sum_{i = 0}^n signature_i`.
-pub fn aggregate(signatures: &[Signature]) -> Result<Signature, Error> {
+#[nexus_rt::profile]
+pub fn aggregate(signatures: &[Signature]) -> Result<Signature, ()> {
     if signatures.is_empty() {
-        return Err(Error::ZeroSizedInput);
+        return Err(());
     }
 
     let res = signatures
@@ -95,26 +98,8 @@ fn key_gen<T: AsRef<[u8]>>(data: T) -> Scalar {
     Scalar::from_okm(&result)
 }
 
-#[derive(Debug, Error)]
-pub enum Error {
-    #[error("Size mismatch")]
-    SizeMismatch,
-    #[error("Io error: {0}")]
-    Io(#[from] std::io::Error),
-    #[error("Group decode error")]
-    GroupDecode,
-    #[error("Curve decode error")]
-    CurveDecode,
-    #[error("Prime field decode error")]
-    FieldDecode,
-    #[error("Invalid Private Key")]
-    InvalidPrivateKey,
-    #[error("Zero sized input")]
-    ZeroSizedInput,
-}
-
 #[nexus_rt::main]
 fn main() {
-    let n = read_private_input::<u32>().expect("failed to read input");
-    bls_aggregate(n);
+    // let n = read_private_input::<u32>().expect("failed to read input");
+    bls_aggregate(2);
 }
