@@ -100,6 +100,6 @@ fn key_gen<T: AsRef<[u8]>>(data: T) -> Scalar {
 
 #[nexus_rt::main]
 fn main() {
-    // let n = read_private_input::<u32>().expect("failed to read input");
-    bls_aggregate(2);
+    let n = read_private_input::<u32>().expect("failed to read input");
+    bls_aggregate(n);
 }

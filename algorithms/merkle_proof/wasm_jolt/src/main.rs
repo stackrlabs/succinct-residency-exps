@@ -9,8 +9,8 @@ pub fn main() {
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     let wasm = include_bytes!("../../wasm/target/wasm32-unknown-unknown/release/wasm.wasm").to_vec();
     // Extract the number from the JSON
-    let input = json["numLeaves"].as_u64().expect("Failed to parse numLeaves from JSON") as u32;
-    println!("Input numLeaves read from JSON: {}", input);
+    let input = json["numLeavesBase2"].as_u64().expect("Failed to parse numLeavesBase2 from JSON") as u32;
+    println!("Input numLeavesBase2 read from JSON: {}", input);
     // Call the merkle_proof_wasm_wrapper function which is jolt::provable
     let start = std::time::Instant::now();
     let summary = guest::analyze_merkle_proof_wasm_wrapper(input, &wasm);

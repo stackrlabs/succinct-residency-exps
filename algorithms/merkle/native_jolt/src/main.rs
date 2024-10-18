@@ -9,7 +9,7 @@ pub fn main() {
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
 
-    let num_leaves = json["numLeaves"]
+    let num_leaves = json["numLeavesBase2"]
         .as_i64()
         .expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", num_leaves);

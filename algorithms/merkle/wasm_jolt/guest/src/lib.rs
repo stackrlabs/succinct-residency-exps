@@ -2,7 +2,7 @@
 
 use wasmi::{Engine, Linker, Module, Store};
 
-#[jolt::provable(stack_size = 100000, memory_size = 10000000, max_input_size = 10000000)]
+#[jolt::provable(stack_size = 100_000, memory_size = 10_000_000, max_input_size = 10_000_000)]
 pub fn merkelize(num_leaves: i32, wasm: &[u8]) -> i32 {
     // init Wasm
     let engine = Engine::default();

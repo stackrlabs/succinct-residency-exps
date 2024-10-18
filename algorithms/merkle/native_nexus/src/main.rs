@@ -24,8 +24,8 @@ fn prove_execution(pp: &PP, prover: Nova<Local>) -> nexus_sdk::nova::seq::Proof 
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
     // Extract the number from the JSON
-    let input = json["numLeaves"].as_u64().expect("Failed to parse numLeaves from JSON") as Input;
-    println!("Input numLeaves read from JSON: {}", input);
+    let input = json["numLeavesBase2"].as_u64().expect("Failed to parse numLeavesBase2 from JSON") as Input;
+    println!("Input numLeavesBase2 read from JSON: {}", input);
     prover.prove_with_input::<Input>(pp, &input).expect("failed to prove program")
 }
  

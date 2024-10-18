@@ -10,7 +10,7 @@ fn main() {
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
 
-    let input_value = json["numLeaves"].as_i64().expect("Failed to parse value from JSON") as i32;
+    let input_value = json["numLeavesBase2"].as_i64().expect("Failed to parse value from JSON") as i32;
     println!("Input value: {}", input_value);
     let start = std::time::Instant::now();
     merkelize(input_value);

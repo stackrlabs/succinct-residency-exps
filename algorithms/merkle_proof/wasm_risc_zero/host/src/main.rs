@@ -23,9 +23,9 @@ fn main() {
     let file = File::open("../../../inputs/merkle_proof.json").expect("Failed to open input file");
     let reader = BufReader::new(file);
     let json: Value = serde_json::from_reader(reader).expect("Failed to parse JSON");
-    let input = json["numLeaves"]
+    let input = json["numLeavesBase2"]
         .as_u64()
-        .expect("Failed to parse numLeaves from JSON") as u32;
+        .expect("Failed to parse numLeavesBase2 from JSON") as u32;
     println!("Input: {}", input);
 
     let env = ExecutorEnv::builder()
