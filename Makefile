@@ -11,6 +11,17 @@ bls-agg-rust = algorithms/bls-agg
 ecdsa-verify-rust = algorithms/ecdsa_verify
 bls-verify-rust = algorithms/bls-verify
 
+all:
+	@echo "Running all benchmarks..."
+	make run-nth-prime
+	make run-merklize
+	make run-merkle-proof
+	make run-keccak
+	make run-poseidon
+	make run-bls-aggregate
+	make run-ecdsa-verify
+	make run-bls-verify
+
 run-merklize:
 	@echo "Running Merkle benchmark..."
 	cd ${merkle-rust}/native; cargo run --release -- --execute > cycles.txt
@@ -67,14 +78,14 @@ run-poseidon:
 
 run-bls-aggregate:
 	@echo "Running BLS aggregate benchmark..."
-	# cd ${bls-agg-rust}/native; cargo run --release -- --execute > cycles.txt
-	# cd ${bls-agg-rust}/native_sp1/script; cargo run --release -- --execute > cycles.txt
-	# cd $(bls-agg-rust)/native_sp1/script; SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove &> prove.log
-	# cd ${bls-agg-rust}/wasm; wasm-pack build
-	# cd ${bls-agg-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
-	# cd ${bls-agg-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
+	cd ${bls-agg-rust}/native; cargo run --release -- --execute > cycles.txt
+	cd ${bls-agg-rust}/native_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd $(bls-agg-rust)/native_sp1/script; SP1_PROVER=network SP1_PRIVATE_KEY=${SP1_PRIVATE_KEY} RUST_LOG=info cargo run --release -- --prove &> prove.log
+	cd ${bls-agg-rust}/wasm; wasm-pack build
+	cd ${bls-agg-rust}/wasm_sp1/script; cargo run --release -- --execute > cycles.txt
+	cd ${bls-agg-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${bls-agg-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
-	# cd ${bls-agg-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${bls-agg-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 
 run-ecdsa-verify:
 	@echo "Running ECDSA Verify benchmark..."
