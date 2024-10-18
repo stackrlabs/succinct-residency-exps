@@ -1132,11 +1132,11 @@ name = "guest"
 version = "0.1.0"
 dependencies = [
  "bls12_381",
+ "digest 0.9.0",
  "hkdf",
  "nexus-rt",
  "postcard",
  "sha2 0.9.9",
- "thiserror",
 ]
 
 [[package]]
