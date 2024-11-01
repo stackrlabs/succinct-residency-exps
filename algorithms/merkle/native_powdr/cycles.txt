@@ -1,0 +1,29 @@
+warning: unused import: `PublicKey`
+ --> src/main.rs:5:12
+  |
+5 | use wasm::{PublicKey, PrivateKey, Serialize};
+  |            ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `native_powdr` (bin "native_powdr") generated 1 warning (run `cargo fix --bin "native_powdr"` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 0.89s
+     Running `target/release/native_powdr`
+Input value: 2
+Compiling guest program...
+warning: dropping unsupported crate type `cdylib` for target `riscv32im-risc0-zkvm-elf`
+
+warning: `wasm` (lib) generated 1 warning
+warning: unused import: `write`
+ --> src/main.rs:2:37
+  |
+2 | use powdr_riscv_runtime::io::{read, write};
+  |                                     ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `powdr-guest` (bin "powdr-guest") generated 1 warning (run `cargo fix --bin "powdr-guest"` to apply 1 suggestion)
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.18s
+Running powdr-riscv executor in fast mode...
+Fast executor took: 88.738324666s
+Trace length: 227233329
