@@ -103,6 +103,7 @@ run-ecdsa-verify:
 	cd ${ecdsa-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
 	cd ${ecdsa-verify-rust}/native_powdr; cargo run -r &> cycles.txt
+
 run-bls-verify:
 	@echo "Running BLS verify benchmark..."
 	cd ${bls-verify-rust}/native; cargo run --release -- --execute > cycles.txt
@@ -114,3 +115,4 @@ run-bls-verify:
 	cd ${bls-verify-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${bls-verify-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 	cd ${bls-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
+	cd ${bls-verify-rust}/native_powdr; cargo run -r &> cycles.txt
