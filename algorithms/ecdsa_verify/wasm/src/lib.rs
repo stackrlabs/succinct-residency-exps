@@ -1,7 +1,8 @@
 #![no_std]
 
 use hex;
-use k256::ecdsa::{signature::Verifier, Signature, VerifyingKey};
+use k256::ecdsa::{signature::hazmat::PrehashVerifier, Signature, VerifyingKey, RecoveryId};
+use sha2::{Sha256, Digest, digest::FixedOutput};
 
 /// Source: https://github.com/risc0/risc0/blob/release-1.1/examples/ecdsa/methods/guest/src/bin/ecdsa_verify.rs
 #[no_mangle]
@@ -17,8 +18,15 @@ pub fn ecdsa_verify_n(n: u32) -> u32 {
         VerifyingKey::from_sec1_bytes(&verifying_key_bytes).expect("could not parse verifying key");
     let msg = b"Hello, zkVM";
 
+    let recid = RecoveryId::try_from(0u8).expect("could not convert to recovery id");
+
     for _ in 1..=n {
-        assert!(verifying_key.verify(msg, &sig).is_ok());
+        let recovered_key = VerifyingKey::recover_from_digest(
+            Sha256::new_with_prefix(msg),
+            &sig,
+            recid
+        ).expect("could not recover key");
+        assert!(recovered_key == verifying_key);
     }
     1
 }

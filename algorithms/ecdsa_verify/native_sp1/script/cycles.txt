@@ -1,0 +1,8 @@
+Input num_iterations read from JSON: 1
+[2m2024-11-01T03:25:10.685030Z[0m [32m INFO[0m [1mexecute[0m: clk = 0 pc = 0x201bb0    
+[2m2024-11-01T03:25:10.685293Z[0m [32m INFO[0m [1mexecute[0m: ┌╴execution    
+[2m2024-11-01T03:25:10.760007Z[0m [32m INFO[0m [1mexecute[0m: └╴271,879 cycles    
+stdout: ecdsa_verify_n result: 1
+[2m2024-11-01T03:25:10.762130Z[0m [32m INFO[0m [1mexecute[0m: close [3mtime.busy[0m[2m=[0m83.0ms [3mtime.idle[0m[2m=[0m2.33µs
+Program executed successfully.
+res: 1

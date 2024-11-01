@@ -1,0 +1,11 @@
+   Compiling methods v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/algorithms/ecdsa_verify/native_risc_zero/methods)
+   Compiling host v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/algorithms/ecdsa_verify/native_risc_zero/host)
+    Finished `release` profile [optimized + debuginfo] target(s) in 41.22s
+     Running `target/release/host`
+Input: 1
+WARNING: proving in dev mode. This will not generate valid, secure proofs.
+input load cycles: 87
+ecdsa_verify cycles: 923079
+total cycles: 924422
+WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
+Output: 1
