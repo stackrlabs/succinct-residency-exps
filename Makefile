@@ -66,6 +66,7 @@ run-merkle-proof:
 	cd ${merkle-proof-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${merkle-proof-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-proof-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${merkle-proof-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-poseidon:
 	@echo "Running Poseidon Hash benchmark..."
