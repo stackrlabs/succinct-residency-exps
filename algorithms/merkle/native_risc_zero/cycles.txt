@@ -1,6 +1,0 @@
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 86
-Merkle root: "86e76e201c2ead88b8bded0b23912e431a1babc89ef151e505438622350bd991"
-merklization cycles: 20638677
-total cycles: 20640017
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.

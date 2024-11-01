@@ -1,3 +1,0 @@
-Input n read from JSON: 100
-Trace length: 14166
-Time elapsed: 305.686375ms

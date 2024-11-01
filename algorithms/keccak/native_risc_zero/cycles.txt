@@ -1,7 +1,0 @@
-Input: 1
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 86
-keccak cycles: 28340
-total cycles: 29651
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
-Output: 1
