@@ -78,6 +78,7 @@ run-poseidon:
 	cd ${poseidon-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${poseidon-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${poseidon-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${poseidon-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-bls-aggregate:
 	@echo "Running BLS aggregate benchmark..."
@@ -89,6 +90,7 @@ run-bls-aggregate:
 	cd ${bls-agg-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${bls-agg-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${bls-agg-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${bls-agg-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-ecdsa-verify:
 	@echo "Running ECDSA Verify benchmark..."
