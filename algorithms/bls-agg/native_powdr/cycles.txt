@@ -1,0 +1,103 @@
+   Compiling native_powdr v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/algorithms/bls-agg/native_powdr)
+    Finished `release` profile [optimized] target(s) in 2.86s
+     Running `target/release/native_powdr`
+Input value: 2
+Compiling guest program...
+    Updating crates.io index
+     Locking 21 packages to latest compatible versions
+      Adding bitvec v1.0.1
+ Downgrading block-buffer v0.10.4 -> v0.9.0 (latest: v0.10.4)
+      Adding bls12_381 v0.8.0
+      Adding crypto-mac v0.11.1
+ Downgrading digest v0.10.7 -> v0.9.0 (latest: v0.10.7)
+      Adding ff v0.13.0
+      Adding funty v2.0.0
+      Adding group v0.13.0
+      Adding hkdf v0.11.0 (latest: v0.12.4)
+ Downgrading hmac v0.12.1 -> v0.11.0 (latest: v0.12.1)
+      Adding opaque-debug v0.3.1
+      Adding pairing v0.23.0
+      Adding radium v0.7.0 (latest: v1.1.0)
+      Adding rand_core v0.6.4
+ Downgrading sha2 v0.10.8 -> v0.9.9 (latest: v0.10.8)
+ Downgrading subtle v2.6.1 -> v2.4.1 (latest: v2.6.1)
+    Updating syn v2.0.85 -> v2.0.86
+      Adding tap v1.0.1
+      Adding thiserror v1.0.66
+      Adding thiserror-impl v1.0.66
+      Adding wyz v0.5.1 (latest: v0.6.1)
+    Blocking waiting for file lock on package cache
+ Downloading crates ...
+  Downloaded thiserror v1.0.66
+  Downloaded thiserror-impl v1.0.66
+  Downloaded syn v2.0.86
+    Blocking waiting for file lock on package cache
+   Compiling generic-array v0.14.7
+   Compiling radium v0.7.0
+   Compiling compiler_builtins v0.1.114
+   Compiling libc v0.2.155
+   Compiling proc-macro2 v1.0.89
+   Compiling wasm-bindgen-shared v0.2.95
+   Compiling thiserror v1.0.66
+   Compiling quote v1.0.37
+   Compiling syn v2.0.86
+   Compiling alloc v0.0.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc)
+   Compiling cfg-if v1.0.0
+   Compiling rustc-demangle v0.1.24
+   Compiling unwind v0.0.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/unwind)
+   Compiling rustc-std-workspace-alloc v1.99.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/rustc-std-workspace-alloc)
+   Compiling panic_unwind v0.0.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/panic_unwind)
+   Compiling panic_abort v0.0.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/panic_abort)
+   Compiling wasm-bindgen-backend v0.2.95
+   Compiling hashbrown v0.14.5
+   Compiling std_detect v0.1.5 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/stdarch/crates/std_detect)
+   Compiling std v0.0.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/std)
+   Compiling serde_derive v1.0.214
+   Compiling thiserror-impl v1.0.66
+   Compiling wasm-bindgen-macro-support v0.2.95
+   Compiling wasm-bindgen-macro v0.2.95
+   Compiling proc_macro v0.0.0 (/Users/prudhvirampey/.rustup/toolchains/nightly-2024-08-01-aarch64-apple-darwin/lib/rustlib/src/rust/library/proc_macro)
+   Compiling typenum v1.17.0
+   Compiling subtle v2.4.1
+   Compiling tap v1.0.1
+   Compiling funty v2.0.0
+   Compiling rand_core v0.6.4
+   Compiling wyz v0.5.1
+   Compiling once_cell v1.20.2
+   Compiling half v1.8.3
+   Compiling serde v1.0.214
+   Compiling opaque-debug v0.3.1
+   Compiling wasm-bindgen v0.2.95
+   Compiling powdr-riscv-syscalls v0.1.0 (https://github.com/powdr-labs/powdr?tag=v0.1.0#1b271835)
+   Compiling bitvec v1.0.1
+   Compiling digest v0.9.0
+   Compiling crypto-mac v0.11.1
+   Compiling block-buffer v0.9.0
+   Compiling hmac v0.11.0
+   Compiling sha2 v0.9.9
+   Compiling hkdf v0.11.0
+   Compiling ff v0.13.0
+   Compiling group v0.13.0
+   Compiling serde_cbor v0.11.2
+   Compiling pairing v0.23.0
+   Compiling bls12_381 v0.8.0
+   Compiling powdr-riscv-runtime v0.1.0-alpha.2 (https://github.com/powdr-labs/powdr?tag=v0.1.0#1b271835)
+   Compiling wasm v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/algorithms/bls-agg/wasm)
+warning: dropping unsupported crate type `cdylib` for target `riscv32im-risc0-zkvm-elf`
+
+warning: `wasm` (lib) generated 1 warning
+   Compiling powdr-guest v0.1.0 (/Users/prudhvirampey/Documents/stackrlabs/succinct-residency-exps/algorithms/bls-agg/native_powdr/guest)
+warning: unused import: `write`
+ --> src/main.rs:2:37
+  |
+2 | use powdr_riscv_runtime::io::{read, write};
+  |                                     ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `powdr-guest` (bin "powdr-guest") generated 1 warning (run `cargo fix --bin "powdr-guest"` to apply 1 suggestion)
+    Finished `release` profile [optimized + debuginfo] target(s) in 34.18s
+Running powdr-riscv executor in fast mode...
+aggregated_signature: Signature(G2Affine { x: 0x00abc29d88c196991745975c9206b8f56ff120b70df72ce36024da3382e398b47189cf1e9e6e998212e8ba5ab2dc79e2 + 0x0056bb0d3fb4f892290380e62d0603e0af6bd5db8e4f405876ff397e473ace7310b3ff8509aeffb47da06e0e298d6327*u, y: 0x07512e3a97c6de7b86fd6b3be4b2a1a6732f34cdd4838d309f45f4a3dbca35ccf1821ef6814c20389c870fb4acac4937 + 0x11e4f26ddead8f98686b80580c8653bdc1ecac03f505159387c6cf1feaeb6be625c9c1a850ab134d3e2b770a8a9ee705*u, infinity: Choice(0) })
+Fast executor took: 85.34291075s
+Trace length: 227252381

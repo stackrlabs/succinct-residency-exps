@@ -102,7 +102,7 @@ run-ecdsa-verify:
 	cd ${ecdsa-verify-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
-
+	cd ${ecdsa-verify-rust}/native_powdr; cargo run -r &> cycles.txt
 run-bls-verify:
 	@echo "Running BLS verify benchmark..."
 	cd ${bls-verify-rust}/native; cargo run --release -- --execute > cycles.txt
