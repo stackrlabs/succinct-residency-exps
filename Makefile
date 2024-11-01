@@ -42,6 +42,7 @@ run-nth-prime:
 	cd ${nth-prime-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${nth-prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${nth-prime-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${nth-prime-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-keccak:
 	@echo "Running keccak benchmark..."
@@ -53,6 +54,7 @@ run-keccak:
 	cd ${keccak-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${keccak-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${keccak-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${keccak-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-merkle-proof:
 	@echo "Running Merkle Proof Generation benchmark..."
