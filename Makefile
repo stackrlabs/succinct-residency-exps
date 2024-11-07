@@ -42,6 +42,7 @@ run-nth-prime:
 	cd ${nth-prime-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${nth-prime-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${nth-prime-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${nth-prime-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-keccak:
 	@echo "Running keccak benchmark..."
@@ -53,6 +54,7 @@ run-keccak:
 	cd ${keccak-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${keccak-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${keccak-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${keccak-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-merkle-proof:
 	@echo "Running Merkle Proof Generation benchmark..."
@@ -64,6 +66,7 @@ run-merkle-proof:
 	cd ${merkle-proof-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${merkle-proof-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${merkle-proof-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${merkle-proof-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-poseidon:
 	@echo "Running Poseidon Hash benchmark..."
@@ -75,6 +78,7 @@ run-poseidon:
 	cd ${poseidon-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${poseidon-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${poseidon-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${poseidon-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-bls-aggregate:
 	@echo "Running BLS aggregate benchmark..."
@@ -86,6 +90,7 @@ run-bls-aggregate:
 	cd ${bls-agg-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${bls-agg-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${bls-agg-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
+	cd ${bls-agg-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-ecdsa-verify:
 	@echo "Running ECDSA Verify benchmark..."
@@ -97,6 +102,7 @@ run-ecdsa-verify:
 	cd ${ecdsa-verify-rust}/wasm_jolt; cargo run --release > cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run &> cycles.txt
 	cd ${ecdsa-verify-rust}/wasm_sp1/script; SP1_PROVER=network cargo run --release > cycles.txt
+	cd ${ecdsa-verify-rust}/native_powdr; cargo run -r &> cycles.txt
 
 run-bls-verify:
 	@echo "Running BLS verify benchmark..."
@@ -109,3 +115,4 @@ run-bls-verify:
 	cd ${bls-verify-rust}/native_risc_zero; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
 	cd ${bls-verify-rust}/native_risc_zero; (time BONSAI_API_KEY=${BONSAI_API_KEY} BONSAI_API_URL=${BONSAI_API_URL} RUST_LOG="[executor]=info" RISC0_DEV_MODE=0 cargo run --release) &> prove.log
 	cd ${bls-verify-rust}/wasm_risc_zero/; RUST_LOG="[executor]=info" RISC0_DEV_MODE=1 cargo run --release &> cycles.txt
+	cd ${bls-verify-rust}/native_powdr; cargo run -r &> cycles.txt

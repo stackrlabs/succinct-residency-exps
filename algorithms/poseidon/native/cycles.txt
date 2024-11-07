@@ -1,2 +1,0 @@
-Input num_iterations read from JSON: 1
-Time elapsed: 19.416µs

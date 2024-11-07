@@ -1,3 +1,0 @@
-Input value: 128
-Verification success
-Time elapsed: 97.387375ms

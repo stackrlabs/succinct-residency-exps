@@ -1,7 +1,0 @@
-Input value: 10
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 4215948
-instantiate wasm cycles: 5992722
-merkelize cycles: 399999181
-total cycles: 410209990
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.

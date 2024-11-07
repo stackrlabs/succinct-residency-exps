@@ -1,3 +1,0 @@
-Input num_iterations read from JSON: 1
-Trace length: 5422939
-Time elapsed: 41.173071667s

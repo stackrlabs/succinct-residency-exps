@@ -1,9 +1,0 @@
-Input: 1
-WARNING: proving in dev mode. This will not generate valid, secure proofs.
-input load cycles: 2740314
-instantiate wasm cycles: 3779026
-keccak_n cycles: 1275021
-keccak_n result: 1
-total cycles: 7797530
-WARNING: Proving in dev mode does not generate a valid receipt. Receipts generated from this process are invalid and should never be used in production.
-Output: 1
